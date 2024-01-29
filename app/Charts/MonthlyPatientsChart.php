@@ -26,10 +26,10 @@ class MonthlyPatientsChart
             $totalPasienPerempuan[] = $totalPasien->where('gender', 'Perempuan')->count();
         }
         return $this->chart->lineChart()
-            ->setTitle('Data Pasien')
-            ->setSubtitle('Total pasien yang sudah diperiksa tahun ' . $tahun)
-            ->addData('Laki-Laki', $totalPasienLakiLaki)
-            ->addData('Perempuan', $totalPasienPerempuan)
+            ->setTitle('Estadistica de Pacientes')
+            ->setSubtitle('Total de pacientes atendidos en el año ' . $tahun)
+            ->addData('Masculino', $totalPasienLakiLaki)
+            ->addData('Femenino', $totalPasienPerempuan)
             ->setXAxis($dataBulan)
             ->setFontFamily('Poppins')
             ->setFontColor('#566a7f')

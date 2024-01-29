@@ -31,14 +31,14 @@
       <div class="card-header d-flex align-items-center justify-content-between" style="margin-bottom: -0.7rem;">
         <div class="justify-content-start">
           <button type="button" class="btn btn-xs btn-dark fw-bold p-2 buttonAddPatientQueue" data-bs-toggle="modal" data-bs-target="#formModalAdminAddPatientQueue">
-            <i class='bx bx-receipt fs-6'></i>&nbsp;AMBIL ANTRIAN
+            <i class='bx bx-receipt fs-6'></i>&nbsp;COGER LA LINEA
           </button>
         </div>
         <div class="justify-content-end">
           <!-- Search -->
           <form action="/admin/antrian/search">
             <div class="input-group">
-              <input type="search" class="form-control" name="q" id="search" style="border: 1px solid #d9dee3;" value="{{ request('q') }}" placeholder="Cari data pasien..." autocomplete="off" />
+              <input type="search" class="form-control" name="q" id="search" style="border: 1px solid #d9dee3;" value="{{ request('q') }}" placeholder="Búsqueda de datos de pacientes" autocomplete="off" />
             </div>
           </form>
           <!-- /Search -->
@@ -50,14 +50,14 @@
             <table class="table table-striped">
               <thead class="table-dark">
                 <tr>
-                  <th class="text-white">Nama Lengkap</th>
-                  <th class="text-white">No Antrian</th>
-                  <th class="text-white">Alamat</th>
-                  <th class="text-white text-center">Umur</th>
-                  <th class="text-white">Jenis Kelamin</th>
-                  <th class="text-white">Dibuat pada tanggal</th>
-                  <th class="text-white">Status Pemeriksaan</th>
-                  <th class="text-white text-center">Aksi</th>
+                  <th class="text-white">NOMBRE Y APELLIDO</th>
+                  <th class="text-white">SIN COLA</th>
+                  <th class="text-white">DIRECCIÓN</th>
+                  <th class="text-white text-center">EDAD</th>
+                  <th class="text-white">GENERO</th>
+                  <th class="text-white">FECHA REGISTRO</th>
+                  <th class="text-white">ESTADO DE RESULTADOS</th>
+                  <th class="text-white text-center">ACCIÓN</th>
                 </tr>
               </thead>
               <tbody class="table-border-bottom-0">
@@ -82,7 +82,7 @@
                 @endforeach
                 @if($patients->isEmpty())
                 <tr>
-                  <td colspan="100" class="text-center">Data pasien tidak ditemukan dengan keyword pencarian: <b>"{{request('q')}}"</b></td>
+                  <td colspan="100" class="text-center">No se han encontrado datos de pacientes con la palabra clave de búsqueda: <b>"{{request('q')}}"</b></td>
                 </tr>
                 @endif
               </tbody>
@@ -106,13 +106,13 @@
       @csrf
       <div class="modal-content">
         <div class="modal-header d-flex justify-content-between">
-          <h5 class="modal-title text-primary fw-bold">Ambil Antrian&nbsp;<i class='bx bx-receipt fs-5' style="margin-bottom: 1px;"></i></h5>
+          <h5 class="modal-title text-primary fw-bold">Tomar cola&nbsp;<i class='bx bx-receipt fs-5' style="margin-bottom: 1px;"></i></h5>
           <button type="button" class="btn p-0 dropdown-toggle hide-arrow cancelModalTakePatientQueue" data-bs-dismiss="modal"><i class="bx bx-x-circle text-danger fs-4" data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="auto" title="Tutup"></i></button>
         </div>
         <div class="modal-body">
           <div class="row">
             <div class="col mb-2 mb-lg-3">
-              <label for="nama_lengkap_patient" class="form-label required-label">Nama Lengkap</label>
+              <label for="nama_lengkap_patient" class="form-label required-label">NOMBRE Y APELLIDO</label>
               <input type="text" id="nama_lengkap_patient" name="name" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror" placeholder="Masukkan nama pasien" autocomplete="off" required>
               @error('name')
               <div class="invalid-feedback" style="margin-bottom: -3px;">
@@ -123,7 +123,7 @@
           </div>
           <div class="row">
             <div class="col mb-2 mb-lg-3">
-              <label for="address" class="form-label required-label">Alamat</label>
+              <label for="address" class="form-label required-label">DIRECCIÓN</label>
               <textarea class="form-control @error('address') is-invalid @enderror" id="address" name="address" autocomplete="off" placeholder="Masukkan alamat pasien. (max 255 karakter)" rows="4" required>{{ old('address') }}</textarea>
               @error('address')
               <div class="invalid-feedback" style="margin-bottom: -3px;">
@@ -134,7 +134,7 @@
           </div>
           <div class="row g-2">
             <div class="col">
-              <label for="gender_patient" class="form-label required-label">Jenis Kelamin</label>
+              <label for="gender_patient" class="form-label required-label">GENERO</label>
               <select class="form-select @error('gender') is-invalid @enderror" name="gender" id="gender_patient" style="cursor: pointer;" required>
                 <option value="" disabled selected>Pilih Jenis Kelamin</option>
                 <option id="laki-laki" @if(old('gender')=='Laki-Laki' ) selected @endif value="Laki-Laki">Laki-Laki</option>
@@ -147,7 +147,7 @@
               @enderror
             </div>
             <div class="col">
-              <label for="old" class="form-label required-label">Umur</label>
+              <label for="old" class="form-label required-label">EDAD</label>
               <input type="text" id="old" name="old" value="{{ old('old') }}" class="form-control @error('old') is-invalid @enderror" autocomplete="off" placeholder="Masukkan umur pasien" required>
               @error('old')
               <div class="invalid-feedback" style="margin-bottom: -3px;">
@@ -158,8 +158,8 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-danger cancelModalTakePatientQueue" data-bs-dismiss="modal"><i class='bx bx-share fs-6' style="margin-bottom: 3px;"></i>&nbsp;Batal</button>
-          <button type="submit" class="btn btn-primary"><i class='bx bx-receipt fs-6' style="margin-bottom: 3px;"></i>&nbsp;Submit</button>
+          <button type="button" class="btn btn-outline-danger cancelModalTakePatientQueue" data-bs-dismiss="modal"><i class='bx bx-share fs-6' style="margin-bottom: 3px;"></i>&nbsp;CANCELAR</button>
+          <button type="submit" class="btn btn-primary"><i class='bx bx-receipt fs-6' style="margin-bottom: 3px;"></i>&nbsp;INGRESAR</button>
         </div>
       </div>
     </form>
@@ -174,15 +174,15 @@
       @csrf
       <div class="modal-content">
         <div class="modal-header d-flex justify-content-between">
-          <h5 class="modal-title text-primary fw-bold">Konfirmasi&nbsp;<i class='bx bx-check-shield fs-5' style="margin-bottom: 3px;"></i></h5>
+          <h5 class="modal-title text-primary fw-bold">CONFIRMACION&nbsp;<i class='bx bx-check-shield fs-5' style="margin-bottom: 3px;"></i></h5>
           <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-dismiss="modal"><i class="bx bx-x-circle text-danger fs-4" data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="auto" title="Tutup"></i></button>
         </div>
         <div class="modal-body" style="margin-top: -10px;">
           <div class="col-sm fs-6 namaPatientConfirm"></div>
         </div>
         <div class="modal-footer" style="margin-top: -5px;">
-          <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"><i class='bx bx-share fs-6' style="margin-bottom: 3px;"></i>&nbsp;Tidak</button>
-          <button type="submit" class="btn btn-primary"><i class='bx bx-user-check' style="margin-bottom: 3px;"></i>&nbsp;Konfirmasi!</button>
+          <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"><i class='bx bx-share fs-6' style="margin-bottom: 3px;"></i>&nbsp;NO</button>
+          <button type="submit" class="btn btn-primary"><i class='bx bx-user-check' style="margin-bottom: 3px;"></i>&nbsp;CONFIRMAR!</button>
         </div>
       </div>
     </form>
@@ -197,15 +197,15 @@
       @csrf
       <div class="modal-content">
         <div class="modal-header d-flex justify-content-between">
-          <h5 class="modal-title text-primary fw-bold">Konfirmasi&nbsp;<i class='bx bx-check-shield fs-5' style="margin-bottom: 3px;"></i></h5>
+          <h5 class="modal-title text-primary fw-bold">CONFIRMACION&nbsp;<i class='bx bx-check-shield fs-5' style="margin-bottom: 3px;"></i></h5>
           <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-dismiss="modal"><i class="bx bx-x-circle text-danger fs-4" data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="auto" title="Tutup"></i></button>
         </div>
         <div class="modal-body" style="margin-top: -10px;">
           <div class="col-sm fs-6 namaPatientSkip"></div>
         </div>
         <div class="modal-footer" style="margin-top: -5px;">
-          <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"><i class='bx bx-share fs-6' style="margin-bottom: 3px;"></i>&nbsp;Tidak</button>
-          <button type="submit" class="btn btn-primary"><i class='bx bx-archive-in fs-6' style="margin-bottom: 3px;"></i>&nbsp;Lewati!</button>
+          <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"><i class='bx bx-share fs-6' style="margin-bottom: 3px;"></i>&nbsp;NO</button>
+          <button type="submit" class="btn btn-primary"><i class='bx bx-archive-in fs-6' style="margin-bottom: 3px;"></i>&nbsp;IR A</button>
         </div>
       </div>
     </form>

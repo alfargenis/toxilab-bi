@@ -21,7 +21,7 @@
             </div>
           </div>
           <div class="col-md-8">
-            <h6 class="text-muted mt-3 mt-lg-0 fw-bold mb-2">Pasien Hari ini</h6>
+            <h6 class="text-muted mt-3 mt-lg-0 fw-bold mb-2">Paciente del día</h6>
             <h6 class="mb-0 fw-bold">{{ $patientsToday }}</h6>
           </div>
         </div>
@@ -38,7 +38,7 @@
             </div>
           </div>
           <div class="col-md-8">
-            <h6 class="text-muted mt-3 mt-lg-0 mb-2 fw-bold">Pasien Kemarin</h6>
+            <h6 class="text-muted mt-3 mt-lg-0 mb-2 fw-bold">El paciente de ayer</h6>
             <h6 class="mb-0 fw-bold">{{ $patientsYesterday }}</h6>
           </div>
         </div>
@@ -56,7 +56,7 @@
             </div>
           </div>
           <div class="col-md-8">
-            <h6 class="text-muted mt-3 mt-lg-0 mb-2 fw-bold">Pasien Bulan ini</h6>
+            <h6 class="text-muted mt-3 mt-lg-0 mb-2 fw-bold">Paciente del mes</h6>
             <h6 class="mb-0 fw-bold">{{ $patientsMonthly }}</h6>
           </div>
         </div>
@@ -75,7 +75,7 @@
             </div>
           </div>
           <div class="col-md-8">
-            <h6 class="text-muted mt-3 mt-lg-0 mb-2 fw-bold">Total Pasien</h6>
+            <h6 class="text-muted mt-3 mt-lg-0 mb-2 fw-bold">Total Pacientes</h6>
             <h6 class="mb-0 fw-bold">{{ $totalPatient }}</h6>
           </div>
         </div>
@@ -89,8 +89,8 @@
     <div class="card h-100">
       <div class="card-header">
         <div>
-          <h5 class="card-title m-0 me-2 fw-bold mb-2" style="font-family: poppins; font-size:1rem;">Data Antrian</h5>
-          <small class="text-muted" style="font-family: poppins; font-size:12px; color:rgb(86, 106, 127) !important;">Berikut daftar nomor antrian pasien hari ini</small>
+          <h5 class="card-title m-0 me-2 fw-bold mb-2" style="font-family: poppins; font-size:1rem;">Cola de Datos</h5>
+          <small class="text-muted" style="font-family: poppins; font-size:12px; color:rgb(86, 106, 127) !important;">Cola de pacientes de hoy</small>
         </div>
       </div>
       <div class="card-body">
@@ -98,7 +98,7 @@
         <div class="d-flex justify-content-between align-items-center mb-3">
           <div class="d-flex flex-column align-items-center gap-1">
             <h2 class="mb-2 fw-bold" style="color:#566a7f;">{{ $numberQueueNow->queueNumber->number }}</h2>
-            <span>Nomor Antrian Sekarang</span>
+            <span>Número de cola actual</span>
           </div>
           <div id="usersChart" data-laki-laki="{{ $totalLakiLaki }}" data-perempuan="{{ $totalPerempuan }}"></div>
         </div>

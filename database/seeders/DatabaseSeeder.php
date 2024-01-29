@@ -26,45 +26,45 @@ class DatabaseSeeder extends Seeder
             'address' => 'Puerto Ordaz, Estado Bolivar, Venezuela'
         ]);
 
-        Patient::factory(1250)->create('es_ES');
+        Patient::factory(1250)->create();
 
         Patient::create([
-            'name' => 'Stevia Putri',
-            'Address' => 'Jl. Anak Muda No.9 Jepara',
-            'old' => 19,
-            'gender' => 'Perempuan',
+            'name' => fake()->name(),
+            'Address' => fake()->addres(),
+            'old' => fake()->numberBetween(15, 50),
+            'gender' => fake()->randomElement(['Masculino', 'Femenino']),
             'queue_number_id' => 5
         ]);
 
         Patient::create([
-            'name' => 'Park Junho',
-            'Address' => 'Jl. Gangnam No.112 Korea Selatan',
-            'old' => 26,
-            'gender' => 'Laki-Laki',
+            'name' => fake()->name(),
+            'Address' => fake()->addres(),
+            'old' => fake()->numberBetween(15, 50),
+            'gender' => fake()->randomElement(['Masculino', 'Femenino']),
             'queue_number_id' => 4
         ]);
 
         Patient::create([
-            'name' => 'Andi Ardiansyah',
-            'Address' => 'Jl. Raya No.22 Tangerang Selatan',
-            'old' => 21,
-            'gender' => 'Laki-Laki',
+            'name' => fake()->name(),
+            'Address' => fake()->addres(),
+            'old' => fake()->numberBetween(15, 50),
+            'gender' => fake()->randomElement(['Masculino', 'Femenino']),
             'queue_number_id' => 3
         ]);
 
         Patient::create([
-            'name' => 'Anatasya Marcheria',
-            'Address' => 'Jl. Mawar No.13 Jakarta Pusat',
-            'old' => 21,
-            'gender' => 'Perempuan',
+            'name' => fake()->name(),
+            'Address' => fake()->addres(),
+            'old' => fake()->numberBetween(15, 50),
+            'gender' => fake()->randomElement(['Masculino', 'Femenino']),
             'queue_number_id' => 2
         ]);
 
         Patient::create([
-            'name' => 'Gresya Gabriella',
-            'Address' => 'Jl. Pemuda No.88 Jakarta Selatan',
-            'old' => 26,
-            'gender' => 'Perempuan',
+            'name' => fake()->name(),
+            'Address' => fake()->addres(),
+            'old' => fake()->numberBetween(15, 50),
+            'gender' => fake()->randomElement(['Masculino', 'Femenino']),
             'queue_number_id' => 1
         ]);
 
