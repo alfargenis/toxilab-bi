@@ -17,16 +17,16 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         Application::create([
-            'name_app' => 'BubbleClinic',
-            'description_app' => 'BubbleClinic adalah klinik kesehatan terbaik & terpercaya nomor satu di Dunia.',
+            'name_app' => 'BIP-LAB',
+            'description_app' => 'Power BI para Toxi-Lab',
             'open_days' => '1',
             'close_days' => "5",
             'open_time' => '18:15',
             'close_time' => '21:00',
-            'address' => 'Jalan blablabla..'
+            'address' => 'Puerto Ordaz, Estado Bolivar, Venezuela'
         ]);
 
-        Patient::factory(1250)->create();
+        Patient::factory(1250)->create('es_ES');
 
         Patient::create([
             'name' => 'Stevia Putri',
@@ -85,12 +85,21 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::create([
-            'name' => 'Bubble',
-            'email' => 'bubble@gmail.com',
+            'name' => 'Argenis Rodriguez',
+            'email' => 'estefreric@gmail.com',
             'username' => 'admin',
-            'image' => 'profil-images/1.jpeg',
+            'image' => 'profil-images/man.jpeg',
             'is_admin' => 1,
-            'gender' => 'Laki-Laki',
+            'gender' => 'Masculino',
+            'password' => bcrypt('@Admin123')
+        ]);
+        User::create([
+            'name' => 'Ali Rodriguez',
+            'email' => 'alirodriguez067@gmail.com ',
+            'username' => 'admin2',
+            'image' => 'profil-images/man.jpeg',
+            'is_admin' => 2,
+            'gender' => 'Masculino',
             'password' => bcrypt('@Admin123')
         ]);
     }

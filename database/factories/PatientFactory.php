@@ -25,8 +25,8 @@ class PatientFactory extends Factory
             'name' => fake()->name,
             'address' => fake()->address,
             'old' => fake()->numberBetween(15, 50),
-            'gender' => fake()->randomElement(['Laki-Laki', 'Perempuan']),
-            'status_pemeriksaan' => "Sudah Diperiksa",
+            'gender' => fake()->randomElement(['Masculino', 'Femenino']),
+            'status_pemeriksaan' => "Ya comprobado",
             'created_at' => $createdAt,
             'updated_at' => $createdAt,
         ];
