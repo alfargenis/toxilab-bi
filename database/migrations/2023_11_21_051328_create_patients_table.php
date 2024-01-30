@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('old');
             $table->string('gender');
             $table->string('late_queue_number')->nullable();
-            $table->string('status_pemeriksaan')->default('Belum Diperiksa');
+            $table->string('status_pemeriksaan')->default('AUN NO CONFIRMADO');
             $table->timestamps();
         });
     }

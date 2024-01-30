@@ -29,40 +29,40 @@ class DatabaseSeeder extends Seeder
         Patient::factory(1250)->create();
 
         Patient::create([
-            'name' => fake()->name(),
-            'Address' => fake()->addres(),
+            'name' => fake()->name,
+            'Address' => fake()->address,
             'old' => fake()->numberBetween(15, 50),
             'gender' => fake()->randomElement(['Masculino', 'Femenino']),
             'queue_number_id' => 5
         ]);
 
         Patient::create([
-            'name' => fake()->name(),
-            'Address' => fake()->addres(),
+            'name' => fake()->name,
+            'Address' => fake()->address,
             'old' => fake()->numberBetween(15, 50),
             'gender' => fake()->randomElement(['Masculino', 'Femenino']),
             'queue_number_id' => 4
         ]);
 
         Patient::create([
-            'name' => fake()->name(),
-            'Address' => fake()->addres(),
+            'name' => fake()->name,
+            'Address' => fake()->address,
             'old' => fake()->numberBetween(15, 50),
             'gender' => fake()->randomElement(['Masculino', 'Femenino']),
             'queue_number_id' => 3
         ]);
 
         Patient::create([
-            'name' => fake()->name(),
-            'Address' => fake()->addres(),
+            'name' => fake()->name,
+            'Address' => fake()->address,
             'old' => fake()->numberBetween(15, 50),
             'gender' => fake()->randomElement(['Masculino', 'Femenino']),
             'queue_number_id' => 2
         ]);
 
         Patient::create([
-            'name' => fake()->name(),
-            'Address' => fake()->addres(),
+            'name' => fake()->name,
+            'Address' => fake()->address,
             'old' => fake()->numberBetween(15, 50),
             'gender' => fake()->randomElement(['Masculino', 'Femenino']),
             'queue_number_id' => 1

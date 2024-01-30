@@ -19,7 +19,7 @@ class ResetQueueNumbers extends Command
 
         // Update queue_number_id di model Patient menjadi null
         Patient::whereNotNull('queue_number_id')->update(['queue_number_id' => null]);
-        Patient::where('status_pemeriksaan', 'Belum Diperiksa')->delete();
+        Patient::where('status_pemeriksaan', 'AUN NO CONFIRMADO')->delete();
         $this->info('QueueNumbers reset and Patient queue_number_id updated.');
     }
 }

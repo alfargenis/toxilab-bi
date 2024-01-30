@@ -90,14 +90,14 @@
                 @php
                 $currentTime = now();
                 $hour = $currentTime->hour;
-                if ($hour >= 5 && $hour < 11) { $greeting='Argenis Pagi' ; } elseif ($hour>= 11 && $hour < 15) { $greeting='Argenis Siang' ; } elseif ($hour>= 15 && $hour < 18) { $greeting='Argenis Sore' ; } else { $greeting='Argenis Malam' ; } @endphp<h5>{{ $greeting }},&nbsp;<strong>{{ auth()->user()->name }}@if(auth()->user()->is_admin)&nbsp;<i class='bx bxs-badge-check text-primary' style="font-size: 1rem; margin-bottom:2px;" data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="auto" title="Administrator"></i>@endif</strong></h5>
+                if ($hour >= 5 && $hour < 11) { $greeting='Admin' ; } elseif ($hour>= 11 && $hour < 15) { $greeting='Admin' ; } elseif ($hour>= 15 && $hour < 18) { $greeting='Admin' ; } else { $greeting='Admin' ; } @endphp<h5>{{ $greeting }},&nbsp;<strong>{{ auth()->user()->name }}@if(auth()->user()->is_admin)&nbsp;<i class='bx bxs-badge-check text-primary' style="font-size: 1rem; margin-bottom:2px;" data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="auto" title="Administrator"></i>@endif</strong></h5>
               </div>
             </div>
             <ul class="navbar-nav flex-row ms-auto">
               <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                   <div class="avatar avatar-online">
-                    <img src="@if(Storage::disk('public')->exists('profil-images')) {{ asset('storage/'. auth()->user()->image) }} @else {{ asset('assets/img/profil-images-default/1.jpeg') }} @endif" alt="foto profil" class="w-px-40 h-auto rounded-circle" />
+                    <img src="@if(Storage::disk('public')->exists('profil-images')) {{ asset('storage/'. auth()->user()->image) }} @else {{ asset('assets/img/profil-images-default/man.jpeg') }} @endif" alt="foto profil" class="w-px-40 h-auto rounded-circle" />
                   </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
@@ -106,7 +106,7 @@
                       <div class="d-flex">
                         <div class="flex-shrink-0 me-3">
                           <div class="avatar avatar-online">
-                            <img src="@if(Storage::disk('public')->exists('profil-images')) {{ asset('storage/'. auth()->user()->image) }} @else {{ asset('assets/img/profil-images-default/1.jpeg') }} @endif" alt="foto profil" class="w-px-40 h-auto rounded-circle" />
+                            <img src="@if(Storage::disk('public')->exists('profil-images')) {{ asset('storage/'. auth()->user()->image) }} @else {{ asset('assets/img/profil-images-default/man.jpeg') }} @endif" alt="foto profil" class="w-px-40 h-auto rounded-circle" />
                           </div>
                         </div>
                         <div class="flex-grow-1">

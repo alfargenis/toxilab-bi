@@ -35,4 +35,42 @@ class MonthlyPatientsChart
             ->setFontColor('#566a7f')
             ->setColors(['#696cff', '#ff6384']);
     }
+
+    //pruebaaaaaaaaaaaaaaaaaaa
+    public function buildAgeChart(): \ArielMejiaDev\LarapexCharts\DonutChart
+    {
+        // Obtener datos de edades
+        $ageData = [
+            // Aquí debes proporcionar los datos de las edades de los pacientes
+            // Puedes obtener estos datos según tus necesidades
+            // Ejemplo: ['Menores de 18', 30], ['18-30', 50], ['31-50', 20], ['Mayores de 50', 10]
+        ];
+
+        return $this->chart->donutChart()
+            ->setTitle('Distribución de Edades de Pacientes')
+            ->addData($ageData)
+            ->setLabels(['Menores de 18', '18-30', '31-50', 'Mayores de 50'])
+            ->setFontFamily('Poppins')
+            ->setFontColor('#566a7f')
+            ->setColors(['#4caf50', '#ffeb3b', '#ff9800', '#f44336']);
+    }
+
+    public function buildPatientsTodayChart(): \ArielMejiaDev\LarapexCharts\PieChart
+    {
+        // Obtener datos de pacientes del día
+        $patientsTodayData = [
+            // Aquí debes proporcionar los datos de los pacientes del día
+            // Puedes obtener estos datos según tus necesidades
+            // Ejemplo: ['Atendidos', 80], ['No atendidos', 20]
+        ];
+
+        return $this->chart->pieChart()
+            ->setTitle('Estado de Pacientes del Día')
+            ->addData($patientsTodayData)
+            ->setLabels(['Atendidos', 'No atendidos'])
+            ->setFontFamily('Poppins')
+            ->setFontColor('#566a7f')
+            ->setColors(['#2196f3', '#f44336']);
+    }
 }
+
