@@ -8,6 +8,7 @@ use App\Models\Application;
 use App\Models\User;
 use App\Models\Patient;
 use App\Models\QueueNumber;
+use App\Models\reactivos;
 
 class DatabaseSeeder extends Seeder
 {
@@ -27,6 +28,48 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Patient::factory(1250)->create();
+
+        reactivos::factory(50)->create();
+
+        Patient::create([
+            'name' => fake()->name,
+            'Address' => fake()->address,
+            'old' => fake()->numberBetween(15, 50),
+            'gender' => fake()->randomElement(['Masculino', 'Femenino']),
+            'queue_number_id' => 10
+        ]);
+
+        Patient::create([
+            'name' => fake()->name,
+            'Address' => fake()->address,
+            'old' => fake()->numberBetween(15, 50),
+            'gender' => fake()->randomElement(['Masculino', 'Femenino']),
+            'queue_number_id' => 9
+        ]);
+
+        Patient::create([
+            'name' => fake()->name,
+            'Address' => fake()->address,
+            'old' => fake()->numberBetween(15, 50),
+            'gender' => fake()->randomElement(['Masculino', 'Femenino']),
+            'queue_number_id' => 8
+        ]);
+
+        Patient::create([
+            'name' => fake()->name,
+            'Address' => fake()->address,
+            'old' => fake()->numberBetween(15, 50),
+            'gender' => fake()->randomElement(['Masculino', 'Femenino']),
+            'queue_number_id' => 7
+        ]);
+
+        Patient::create([
+            'name' => fake()->name,
+            'Address' => fake()->address,
+            'old' => fake()->numberBetween(15, 50),
+            'gender' => fake()->randomElement(['Masculino', 'Femenino']),
+            'queue_number_id' => 6
+        ]);
 
         Patient::create([
             'name' => fake()->name,
@@ -82,6 +125,21 @@ class DatabaseSeeder extends Seeder
         ]);
         QueueNumber::create([
             'number' => 5
+        ]);
+        QueueNumber::create([
+            'number' => 6
+        ]);
+        QueueNumber::create([
+            'number' => 7
+        ]);
+        QueueNumber::create([
+            'number' => 8
+        ]);
+        QueueNumber::create([
+            'number' => 9
+        ]);
+        QueueNumber::create([
+            'number' => 10
         ]);
 
         User::create([

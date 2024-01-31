@@ -8,13 +8,13 @@ use App\Models\Patient;
 use App\Models\QueueNumber;
 use Carbon\Carbon;
 
-class ControllerModulo3 extends Controller
+class ControllerCollectionData extends Controller
 {
     public function index()
     {
-        return view('admin.modulo3.index', [
+        return view('admin.collectiondata.index', [
             'app' => Application::all(),
-            'title' => 'Modulo 3'
+            'title' => 'Collection Data'
           ]);
     }
 }

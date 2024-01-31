@@ -8,7 +8,7 @@ use Carbon\Carbon;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Patient>
  */
-class reactivosFactory extends Factory
+class PatientFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -22,11 +22,9 @@ class reactivosFactory extends Factory
 
         $createdAt = fake()->dateTimeBetween($start, $end);
         return [
-            'name' => fake()->name,
-            'address' => fake()->address,
-            'old' => fake()->numberBetween(15, 50),
-            'gender' => fake()->randomElement(['Masculino', 'Femenino']),
-            'status_pemeriksaan' => "Ya comprobado",
+            'name' => fake()->name('antigeno,hiv,marihuana'),
+            'marca' => fake()->marca('siemens,wiener,prueba'),
+            'data' => fake()->numberBetween(2018, 2023),
             'created_at' => $createdAt,
             'updated_at' => $createdAt,
         ];

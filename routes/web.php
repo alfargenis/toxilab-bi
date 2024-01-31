@@ -6,10 +6,9 @@ use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminSettingsController;
 use App\Http\Controllers\AdminDataPasienController;
 use App\Http\Controllers\AdminAntrianPasienController;
-use App\Http\Controllers\AdminDatapruebaController;
+use App\Http\Controllers\ControllerCollectionData;
+use App\Http\Controllers\ControllerDataMarts;
 use App\Http\Controllers\ControllerModulo;
-use App\Http\Controllers\ControllerModulo3;
-use App\Http\Controllers\ControllerModulo1;
 use App\Http\Controllers\ControllerFiles;
 /*
 |--------------------------------------------------------------------------
@@ -39,11 +38,12 @@ Route::get('/admin/dashboard',  [AdminDashboardController::class, 'index'])->mid
 
 //MODULO 0
 Route::get('/admin/modulo0', [ControllerModulo::class, 'index'])->middleware('admin');
-//MODULO 1
-Route::get('/admin/modulo1', [ControllerModulo1::class, 'index'])->middleware('admin');
 
-//MODULO 3
-Route::get('/admin/modulo3', [ControllerModulo3::class, 'index'])->middleware('admin');
+//Data Marts, crear graficas y vistas predeterminadas de una manera mas rapida
+Route::get('/admin/datamarts', [ControllerDataMarts::class, 'index'])->middleware('admin');
+
+//Collection Data, almacena las graficas y reportes creados por cada administrador por separado, con la ventaja de que se puede compartir
+Route::get('/admin/collectiondata', [ControllerCollectionData::class, 'index'])->middleware('admin');
 
 // Importacion de Archivos hacia la base de datos.
 Route::get('/admin/files', [ControllerFiles::class, 'index'])->middleware('admin');

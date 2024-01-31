@@ -8,13 +8,13 @@ use App\Models\Patient;
 use App\Models\QueueNumber;
 use Carbon\Carbon;
 
-class ControllerModulo1 extends Controller
+class ControllerDataMarts extends Controller
 {
     public function index()
     {
-        return view('admin.modulo1.index', [
+        return view('admin.datamarts.index', [
             'app' => Application::all(),
-            'title' => 'Pengaturan'
+            'title' => 'Data Marts'
           ]);
     }
 }
