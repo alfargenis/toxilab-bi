@@ -22,9 +22,7 @@ class reactivosFactory extends Factory
 
         $createdAt = fake()->dateTimeBetween($start, $end);
         return [
-            // 'name' => fake()->name('antigeno','hiv','marihuana'),
             'name' => fake()->randomElement(['antigeno', 'hiv', 'marihuana']),
-            // 'marca' => fake()->marca('siemens','wiener','prueba'),
             'marca' => fake()->randomElement(['siemens', 'wiener', 'prueba']),
             'data' => fake()->numberBetween(2018, 2023),
             'created_at' => $createdAt,
