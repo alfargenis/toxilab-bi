@@ -5,8 +5,8 @@
     <div>INICIO</div>
   </a>
 </li>
-<li class="menu-item {{ Request::is('admin/datamarts*') ? 'active' : '' }}">
-  <a class="menu-link cursor-pointer" onclick="window.location.href='/admin/datamarts'">
+<li class="menu-item {{ Request::is('admin/datamarts/*') ? 'active' : '' }}">
+  <a class="menu-link cursor-pointer" onclick="window.location.href='/admin/datamarts/'">
     <i class="menu-icon tf-icons bx bx-data"></i>
     <div>DATA MARTS</div>
   </a>

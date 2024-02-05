@@ -33,21 +33,19 @@
   }
 </style>
 
-
-
 <div class="row">
-  <div class="col-md-6 mb-4">
-    <button type="button" class="btn card h-100 custom-button">
-      <div class="card-header">
-        <h5 class="card-title m-0 me-2 fw-bold mb-2">
-          <i class="bx bx-line-chart"></i>  Reportes de Cuentas
-        </h5>
-      </div>
-      <div class="card-body">
-        <p>Este módulo proporciona informes detallados sobre las cuentas y su rendimiento financiero.</p>
-      </div>
-    </button>
-  </div>
+<div class="col-md-6 mb-4  {{ Request::is('admin/datamarts/cuentas*') ? 'active' : '' }}" >
+  <button type="button" class="btn card h-100 custom-button" onclick="window.location.href='/admin/datamarts/cuentas'" >
+    <div class="card-header">
+      <h5 class="card-title m-0 me-2 fw-bold mb-2">
+        <i class="bx bx-line-chart"></i>  Reportes de Cuentas
+      </h5>
+    </div>
+    <div class="card-body">
+      <p>Este módulo proporciona informes detallados sobre las cuentas y su rendimiento financiero.</p>
+    </div>
+  </button>
+</div>
 
   <div class="col-md-6 mb-4">
     <button type="button" class="btn card h-100 custom-button">

@@ -61,3 +61,124 @@
     display: none;
   } */
 }
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .container {
+    padding: 10px;
+  }
+
+  .fieldset-container {
+    display: flex;
+    gap: 10px;
+    justify-content: center; /* Alineación centrada */
+  }
+
+  fieldset {
+    flex: 0.5;
+    border: 0.01px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    background-color: white;
+  }
+
+  fieldset div {
+    margin: 5px 0;
+  }
+
+  svg {
+    margin-bottom: 5px;
+  }
+
+  select {
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+  }
+
+  .p2 {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .Button {
+    background-color: transparent;
+    border: none;
+    border-radius: 5px;
+    padding: 1px 10px;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .Button:hover {
+    background-color: transparent;
+  }
+
+  .options {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: calc(100% - 10px); /* Ajustar según sea necesario */
+    top: calc(100% + 5px); /* Ajustar según sea necesario */
+    left: 50%;
+    transform: translateX(-50%);
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  .fieldset1 .options {
+    width: 200%;
+    left: -50%;
+    transform: none;
+    color: inherit;
+    top: calc(120% + 5px); /* Ajustar según sea necesario */
+  }
+
+  fieldset:hover .options {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    opacity: 1;
+  }
+
+  .options button {
+    width: 100%;
+    text-align: left;
+    padding: 8px 12px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    position: relative;
+    color: inherit;
+  }
+
+  .options button:hover {
+    background-color: #f0f0f0;
+  }
+
+  .divider {
+    position: absolute;
+    width: 80%;
+    height: 1px;
+    background-color: #ccc;
+    left: 10%;
+    top: calc(100% + 5px);
+  }

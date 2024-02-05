@@ -17,4 +17,20 @@ class ControllerDataMarts extends Controller
             'title' => 'Data Marts'
           ]);
     }
+
+    public function cuentas()
+    {
+        return view('admin.datamarts.cuentas', [
+            'app' => Application::all(),
+            'title' => 'Data Marts, cuentas predeterminadas'
+          ]);
+    }
+
+    public function mostrar()
+    {
+        // Lógica para obtener la colección de pacientes, por ejemplo:
+        $patients = Patient::all();  // Esto es solo un ejemplo, ajusta según tu lógica real
+        // Pasar la variable $patients a la vista
+        return view('admin.datamarts.cuentas', ['app' => Application::all(),'title' => 'Data Marts, cuentas predeterminadas','patients' => $patients]);
+    }
 }
