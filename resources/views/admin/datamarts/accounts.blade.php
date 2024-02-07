@@ -1,6 +1,6 @@
 @extends('layouts.main.index')
 @section('container')
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <div class="container">
   <div class="mt1 flex align-end flex-wrap flex-row fieldset-container" axis="x" distance="9">
@@ -297,55 +297,61 @@
         @if($patients->isEmpty())
             <p>No hay pacientes disponibles.</p>
         @else
-            <div class="total-cuentas">
-                <i class='bx bxs-user'></i> <!-- Cambia 'bxs-user' por el icono que prefieras -->
-                <div class="total-cuentas-info">
-                    <p>Total de Cuentas:</p>
-                    <p class="total-number">{{ $patients->count() }}</p>
+            <div class="flex-full overflow-hidden total-cuentas" data-testid="visualization-root">
+                <div data-card-key="G__8956" class="flex flex-column flex-full">
+                    <div class="emotion-cxr2yc ezakuv36">
+                        <div class="Card-title absolute top right p1 px2"></div>
+                        <div class="fullscreen-normal-text fullscreen-night-text e18tsabf1 emotion-1o7g4xs e19wb1qy0" data-testid="scalar-container">
+                            <span>
+                                <h1 class="ScalarValue emotion-htny5q ezakuv35" font-size="3.2rem" data-testid="scalar-value">{{ $patients->count() }}</h1>
+                            </span>
+                        </div>
+                        <div data-testid="scalar-title" class="emotion-a6ms3m ezakuv34">
+                            <h3 class="fullscreen-normal-text fullscreen-night-text emotion-1wafvb7 ezakuv33">
+                                <div class="emotion-1sbz69m e19wb1qy0">Total Cuentas</div>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex-full overflow-hidden total-cuentas" data-testid="visualization-root">
+                <div data-card-key="G__8956" class="flex flex-column flex-full">
+                    <div class="emotion-cxr2yc ezakuv36">
+                        <div class="Card-title absolute top right p1 px2"></div>
+                        <div class="fullscreen-normal-text fullscreen-night-text e18tsabf1 emotion-1o7g4xs e19wb1qy0" data-testid="scalar-container">
+                            <span>
+                                <h1 class="ScalarValue emotion-htny5q ezakuv35" font-size="3.2rem" data-testid="scalar-value">{{ $new_accounts_last_30_days }}</h1>
+                            </span>
+                        </div>
+                        <div data-testid="scalar-title" class="emotion-a6ms3m ezakuv34">
+                            <h3 class="fullscreen-normal-text fullscreen-night-text emotion-1wafvb7 ezakuv33">
+                                <div class="emotion-1sbz69m e19wb1qy0">Nuevas Cuentas (Ultimos 30 Dias)</div>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex-full overflow-hidden total-cuentas" data-testid="visualization-root">
+                <div class="flex flex-column flex-full">
+                    <div class="emotion-cxr2yc ezakuv36">
+                        <div class="Card-title absolute top right p1 px2"></div>
+                        <div class="fullscreen-normal-text fullscreen-night-text e18tsabf1 emotion-1o7g4xs e19wb1qy0" data-testid="scalar-container">
+                            <span>
+                            <h1 class="ScalarValue emotion-htny5q ezakuv35" font-size="3.2rem" data-testid="scalar-value"style="color: {{ $changeColor }}">{{ $changeIcon }}{{ $percentage }}%</h1>
+                            </span>
+                        </div>
+                        <div data-testid="scalar-title" class="emotion-a6ms3m ezakuv34">
+                            <h3 class="fullscreen-normal-text fullscreen-night-text emotion-1wafvb7 ezakuv33">
+                                <div class="emotion-1sbz69m e19wb1qy0">Crecimiento de Cuentas (Ultimos 30 Dias)</div>
+                            </h3>
+                        </div>
+                    </div>
                 </div>
             </div>
         @endif
     </div>
 </div>
 
-<style>
-    .panel {
-        /* Agrega estilos para el panel según tus preferencias */
-        background-color: #f2f2f2;
-        border-radius: 10px;
-        padding: 20px;
-        margin: 20px 0;
-    }
-
-    .total-cuentas {
-        display: flex;
-        align-items: center;
-    }
-
-    .total-cuentas i {
-        font-size: 50px; /* Ajusta el tamaño según sea necesario */
-        margin-right: 10px;
-        color: #3490dc; /* Cambia el color según sea necesario */
-    }
-
-    .total-cuentas-info {
-        text-align: center;
-    }
-
-    .total-cuentas-info p {
-        margin: 0;
-        font-size: 18px; /* Ajusta el tamaño según sea necesario */
-        font-weight: bold;
-    }
-
-    .total-number {
-        font-size: 24px; /* Ajusta el tamaño según sea necesario */
-        font-weight: bold;
-        color: #3490dc; /* Cambia el color según sea necesario */
-    }
-</style>
-
-
-
+ <div>{!! $html !!}</div>
 
 @endsection

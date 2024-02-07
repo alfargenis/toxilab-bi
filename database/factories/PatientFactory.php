@@ -17,10 +17,18 @@ class PatientFactory extends Factory
      */
     public function definition(): array
     {
-        $start = Carbon::now()->startOfYear();
-        $end = Carbon::now();
+        // $start = Carbon::now()->startOfYear();
+        // $end = Carbon::now();
 
-        $createdAt = fake()->dateTimeBetween($start, $end);
+        // $createdAt = fake()->dateTimeBetween($start, $end);
+        // Obtener la fecha actual y restar 15 años
+        $startDate = Carbon::now()->subYears(15);
+
+        // Obtener la fecha actual
+        $endDate = Carbon::now();
+
+        // Generar una fecha aleatoria dentro del rango de 15 años
+        $createdAt = $this->faker->dateTimeBetween($startDate, $endDate);
         return [
             'name' => fake()->name,
             'address' => fake()->address,

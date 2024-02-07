@@ -182,3 +182,33 @@ body {
     left: 10%;
     top: calc(100% + 5px);
   }
+  .panel {
+    background-color: transparent;
+    border-radius: 10px;
+    border-color: red;
+    padding: 20px;
+    margin: 20px 0;
+    display: flex; /* Agregamos esta línea para hacer que los elementos estén en línea */
+}
+.total-cuentas {
+    /* Ya no es necesario el display: flex aquí */
+    align-items: center;
+    overflow: hidden; /* Para ocultar el desbordamiento si el contenido es demasiado grande */
+    flex: 1; /* Distribuir el espacio disponible igualmente entre los elementos */
+}
+
+.ScalarValue {
+    font-size: 3.2rem;
+    font-weight: bold;
+    color: #3490dc;
+    margin: 0; /* Elimina el margen predeterminado */
+}
+
+.emotion-1sbz69m {
+    margin: 0; /* Elimina el margen predeterminado */
+}
+canvas .lineChart {
+            max-width: 800px;
+            margin: 20px auto;
+            display: block;
+        }
