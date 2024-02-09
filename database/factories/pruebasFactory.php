@@ -10,7 +10,7 @@ use Faker\Factory as Faker;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Patient>
  */
-class PatientFactory extends Factory
+class pruebasFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -24,11 +24,9 @@ class PatientFactory extends Factory
 
 
     return [
-        'name' => fake()->name,
-        'address' => fake()->address,
-        'old' => fake()->numberBetween(15, 50),
-        'gender' => fake()->randomElement(['Masculino', 'Femenino']),
-        'status_pemeriksaan' => "Ya comprobado",
+        'name' => fake()->unique()->randomElement(['COCAINA','ANTIGENO PROSTACTICO', 'HIV', 'MARIHUANA','COLESTEROLl','TRIGRICERIDOS','HEMATOLOGIA','CREATININA','DENGUE','TSH','T4','T3','BILIRUBINA','CALCIO','HIERRO','UREA']),
+        'precio'=>  fake()->numberBetween(1, 10),
+        'id_cliente' => fake()->numberBetween(1, 20),
         'created_at' => $start,
         'updated_at' => $end,
     ];
