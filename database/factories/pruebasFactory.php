@@ -24,7 +24,7 @@ class pruebasFactory extends Factory
 
 
     return [
-        'name' => fake()->unique()->randomElement(['COCAINA','ANTIGENO PROSTACTICO', 'HIV', 'MARIHUANA','COLESTEROLl','TRIGRICERIDOS','HEMATOLOGIA','CREATININA','DENGUE','TSH','T4','T3','BILIRUBINA','CALCIO','HIERRO','UREA']),
+        'name' => fake()->randomElement(['COCAINA','ANTIGENO PROSTACTICO', 'HIV', 'MARIHUANA','COLESTEROLl','TRIGRICERIDOS','HEMATOLOGIA','CREATININA','DENGUE','TSH','T4','T3','BILIRUBINA','CALCIO','HIERRO','UREA']),
         'precio'=>  fake()->numberBetween(1, 10),
         'id_cliente' => fake()->numberBetween(1, 20),
         'created_at' => $start,

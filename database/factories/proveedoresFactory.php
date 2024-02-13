@@ -23,7 +23,7 @@ class proveedoresFactory extends Factory
         return [
             'name' => fake()->name,
             'email' => fake()->unique()->email,
-            'empresa' => fake()->unique()->randomElement(['DISMELAB', 'SIEMENS', 'REACTILAB']),
+            'empresa' => fake()->randomElement(['DISMELAB', 'SIEMENS', 'REACTILAB']),
             'phone' => fake()->phoneNumber(),
             'created_at' => $createdAt,
             'updated_at' => $createdAt,

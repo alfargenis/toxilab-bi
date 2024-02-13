@@ -32,13 +32,13 @@ class DatabaseSeeder extends Seeder
             'address' => 'Puerto Ordaz, Estado Bolivar, Venezuela'
         ]);
 
-        Patient::factory(1250)->create();
-        proveedores::factory(3)->create();
-        pruebas::factory(16)->create();
-        reactivos::factory(16)->create();
-        especiales::factory(4)->create();
-        hemas::factory(4)->create();
-        orinas::factory(4)->create();
+        Patient::factory(15550)->create();
+        proveedores::factory(8)->create();
+        pruebas::factory(124)->create();
+        reactivos::factory(78)->create();
+        especiales::factory(6)->create();
+        hemas::factory(9)->create();
+        orinas::factory(10)->create();
         
         
 
