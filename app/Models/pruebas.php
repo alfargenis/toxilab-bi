@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class reactivos extends Model
+class pruebas extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
@@ -19,10 +19,8 @@ class reactivos extends Model
     {
         $query->when($keyword, function ($query, $keyword) {
             return $query->where('name', 'like', '%' . $keyword . '%')
-                ->orWhere('marca', 'like', '%' . $keyword . '%')
-                ->orWhere('precio', 'like', '%' . $keyword . '%')
-                ->orWhere('id_proveedor', 'like', '%' . $keyword . '%')
-                ->orWhere('id_prueba', 'like', '%' . $keyword . '%');
+                ->orWhere('id_cliente', 'like', '%' . $keyword . '%')
+                ->orWhere('precio', 'like', '%' . $keyword . '%');
         });
     }
 }

@@ -11,11 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reactivos', function (Blueprint $table) {
+        Schema::create('patients', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('queue_number_id')->nullable();
             $table->string('name');
-            $table->string('marca');
-            $table->integer('data');
+            $table->string('address');
+            $table->integer('old');
+            $table->string('gender');
+            $table->string('status_pemeriksaan')->default('AUN NO CONFIRMADO');
+            $table->string('late_queue_number')->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reacivos');
+        Schema::dropIfExists('patients');
     }
 };

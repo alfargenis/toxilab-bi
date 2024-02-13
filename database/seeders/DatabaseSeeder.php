@@ -7,8 +7,13 @@ use Illuminate\Database\Seeder;
 use App\Models\Application;
 use App\Models\User;
 use App\Models\Patient;
+use App\Models\proveedores;
+use App\Models\pruebas;
+use App\Models\especiales;
 use App\Models\QueueNumber;
 use App\Models\reactivos;
+use App\Models\orinas;
+use App\Models\hemas;
 
 class DatabaseSeeder extends Seeder
 {
@@ -28,8 +33,14 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Patient::factory(1250)->create();
-
-        reactivos::factory(50)->create();
+        proveedores::factory(3)->create();
+        pruebas::factory(16)->create();
+        reactivos::factory(16)->create();
+        especiales::factory(4)->create();
+        hemas::factory(4)->create();
+        orinas::factory(4)->create();
+        
+        
 
         Patient::create([
             'name' => fake()->name,
