@@ -10,6 +10,7 @@ use App\Http\Controllers\ControllerCollectionData;
 use App\Http\Controllers\ControllerDataMarts;
 use App\Http\Controllers\ControllerModulo;
 use App\Http\Controllers\ControllerFiles;
+use App\Http\Controllers\PdfController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -43,6 +44,7 @@ Route::get('/admin/modulo0', [ControllerModulo::class, 'index'])->middleware('ad
 Route::get('/admin/datamarts', [ControllerDataMarts::class, 'index'])->middleware('admin');
 Route::get('/admin/datamarts/accounts', [ControllerDataMarts::class, 'accounts'])->middleware('admin');
 Route::get('/admin/datamarts/accounts', [ControllerDataMarts::class, 'reportaccounts'])->middleware('admin');
+
 
 //Collection Data, almacena las graficas y reportes creados por cada administrador por separado, con la ventaja de que se puede compartir
 Route::get('/admin/collectiondata', [ControllerCollectionData::class, 'index'])->middleware('admin');

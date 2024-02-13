@@ -207,8 +207,11 @@ body {
 .emotion-1sbz69m {
     margin: 0; /* Elimina el margen predeterminado */
 }
-canvas .lineChart {
-            max-width: 800px;
+
+#lineChart {
+            width: 1400px;
+            height: 300px;
             margin: 20px auto;
             display: block;
+            margin-left: 0cm;
         }

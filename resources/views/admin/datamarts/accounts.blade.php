@@ -352,6 +352,9 @@
     </div>
 </div>
 
- <div>{!! $html !!}</div>
+ {!! $html !!}
+
+{!! $mapa !!}
 
 @endsection
+
