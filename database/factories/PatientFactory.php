@@ -20,14 +20,6 @@ class PatientFactory extends Factory
     public function definition(): array
     {
 
-        // $startDate = Carbon::now()->subYears(15);
-
-        // // Obtener la fecha actual
-        // $endDate = Carbon::now();
-
-        // // Generar una fecha aleatoria dentro del rango de 15 años
-        // $createdAt = $this->faker->dateTimeBetween($startDate, $endDate);
-
         // Obtener una instancia de Faker
         $faker = Faker::create();
 
@@ -42,6 +34,7 @@ class PatientFactory extends Factory
 
         return [
             'name' => fake()->name,
+            'ci' => fake()->nationalId(),
             'address' => $address,
             'old' => fake()->numberBetween(15, 50),
             'gender' => fake()->randomElement(['Masculino', 'Femenino']),
@@ -71,7 +64,8 @@ class PatientFactory extends Factory
         } else {
             // Generar una dirección aleatoria para otros estados
             $faker = Faker::create();
-            return $faker->state;
+            $estados = array_diff($faker->states(), ['Bolívar'], $estadosCercanos);
+            return $estados[array_rand($estados)];
         }
     }
 
