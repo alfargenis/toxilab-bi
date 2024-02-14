@@ -27,7 +27,7 @@ class PatientFactory extends Factory
         $estadosCercanos = ['Amazonas', 'Delta Amacuro', 'Anzoátegui', 'Monagas'];
 
         // Generar una dirección basada en los porcentajes especificados
-        $address = $this->generateAddress($estadosCercanos, 70, 20, 10);
+        $address = $this->generateAddress($estadosCercanos, 63, 21, 16);
 
         // Obtener una fecha aleatoria dentro de los últimos 15 años
         $createdAt = $faker->dateTimeBetween('-15 years', 'now');
