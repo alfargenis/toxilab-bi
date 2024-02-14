@@ -105,8 +105,7 @@ class ControllerDataMarts extends Controller
 
         foreach ($patients as $patient) {
             // Extraer el estado de la dirección del paciente
-            $address = $patient->address;
-            $estado = substr($address, strpos($address, "Edo.") + 4);
+            $estado = $patient->address;
 
             // Si ya existe la ciudad en el array, incrementar el contador
             if (isset($estadosPorCiudad[$estado])) {
@@ -117,10 +116,12 @@ class ControllerDataMarts extends Controller
             }
         }
         // Convertir el array a formato JSON para pasarlo al script de JavaScript
-        $estadosPorCiudadJson = json_encode($estadosPorCiudad);
-        echo "<pre>";
-        print_r($estadosPorCiudadJson);
-        echo "</pre>";
+        // Convertir el array a formato JSON escapando los caracteres especiales
+        $estadosPorCiudadJson = json_encode($estadosPorCiudad, JSON_UNESCAPED_UNICODE);
+
+        // echo "<pre>";
+        // print_r($estadosPorCiudadJson);
+        // echo "</pre>";
 
 
         $mapa = <<<HTML
@@ -150,8 +151,8 @@ class ControllerDataMarts extends Controller
                 }).addTo(map);
 
                 // Datos de pacientes por estado (obtenidos desde PHP)
-                var pacientes = "<?php echo $estadosPorCiudadJson; ?>";
-                // var pacientes = '<?php echo json_encode($estadosPorCiudadJson); ?>';
+                var pacientes = {$estadosPorCiudadJson};
+                // var pacientes = '<?php echo json_encode($estadosPorCiudadJson, JSON_UNESCAPED_UNICODE); ?>';
 
                  // Coordenadas de los estados de Venezuela
                 var estados = {
@@ -179,6 +180,9 @@ class ControllerDataMarts extends Controller
                     "Yaracuy": [10.3863, -68.7598],
                     "Zulia": [9.0000, -71.7500]
                 };
+
+                var personasPorEstado = {};
+
                 // Agregar marcadores para cada ubicación de paciente y calcular pacientes por estado
                  Object.keys(pacientes).forEach(function(estado) {
                      var latlng = estados[estado];
@@ -186,33 +190,20 @@ class ControllerDataMarts extends Controller
                       // Si se encuentra la coordenada del estado, agregar marcador al mapa
                           L.marker(latlng).addTo(map)
                         .bindPopup(estado + ': ' + pacientes[estado] + ' pacientes');
+                           // Contabilizar el número total de pacientes por estado
+                        personasPorEstado[estado] = personasPorEstado[estado] ? personasPorEstado[estado] + pacientes[estado] : pacientes[estado];
                          }
-
-
-                // Contador de personas por ciudad
-                var personasPorCiudad = {};
-
-                // Agregar marcadores para cada ubicación de cliente y calcular personas por ciudad
-                clientes.forEach(function(cliente) {
-                    L.marker([cliente.latitud, cliente.longitud]).addTo(map)
-                        .bindPopup(cliente.nombre + '<br>' + cliente.ciudad); // Mostrar nombre del cliente y ciudad en el popup
-
-                    if (personasPorCiudad[cliente.ciudad]) {
-                        personasPorCiudad[cliente.ciudad]++;
-                    } else {
-                        personasPorCiudad[cliente.ciudad] = 1;
-                    }
-                });
+                        });
 
                 // Generar la gráfica de barras
                 var ctx = document.getElementById('barChart').getContext('2d');
                 var barChart = new Chart(ctx, {
                     type: 'bar',
                     data: {
-                        labels: Object.keys(personasPorCiudad), // Obtener las ciudades como etiquetas
+                        labels: Object.keys(personasPorEstado), // Obtener las ciudades como etiquetas
                         datasets: [{
                             label: 'Cantidad de personas por ciudad',
-                            data: Object.values(personasPorCiudad), // Obtener las cantidades de personas por ciudad
+                            data: Object.values(personasPorEstado), // Obtener las cantidades de personas por ciudad
                             backgroundColor: 'rgba(75, 192, 192, 0.2)',
                             borderColor: 'rgba(75, 192, 192, 1)',
                             borderWidth: 1
