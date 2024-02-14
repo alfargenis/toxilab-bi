@@ -31,9 +31,11 @@ class PatientFactory extends Factory
 
         // Generar una fecha aleatoria dentro del rango de 15 años
         $createdAt = $this->faker->dateTimeBetween($startDate, $endDate);
+
         return [
+            'id' => fake()->nationalId(),
             'name' => fake()->name,
-            'address' => fake()->address,
+            'address' => fake()->state,
             'old' => fake()->numberBetween(15, 50),
             'gender' => fake()->randomElement(['Masculino', 'Femenino']),
             'status_pemeriksaan' => "Ya comprobado",

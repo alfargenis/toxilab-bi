@@ -97,6 +97,31 @@ class ControllerDataMarts extends Controller
     </body>
     HTML;
 
+        // Obtener los datos de los pacientes desde la base de datos
+        $patients = Patient::all();
+
+        // Inicializar un array para almacenar los estados de los pacientes
+        $estadosPorCiudad = [];
+
+        foreach ($patients as $patient) {
+            // Extraer el estado de la dirección del paciente
+            $address = $patient->address;
+            $estado = substr($address, strpos($address, "Edo.") + 4);
+
+            // Si ya existe la ciudad en el array, incrementar el contador
+            if (isset($estadosPorCiudad[$estado])) {
+                $estadosPorCiudad[$estado]++;
+            } else {
+                // Si no existe, inicializar el contador en 1
+                $estadosPorCiudad[$estado] = 1;
+            }
+        }
+        // Convertir el array a formato JSON para pasarlo al script de JavaScript
+        $estadosPorCiudadJson = json_encode($estadosPorCiudad);
+        echo "<pre>";
+        print_r($estadosPorCiudadJson);
+        echo "</pre>";
+
 
         $mapa = <<<HTML
 
@@ -124,31 +149,45 @@ class ControllerDataMarts extends Controller
                     maxZoom: 19,
                 }).addTo(map);
 
-                // Ejemplo de ubicaciones de clientes
-                var clientes = [
-                    { nombre: 'Argenis Rodriguez', latitud: 8.27509, longitud: -62.7556955, ciudad: 'Puerto Ordaz' },
-                    { nombre: 'Cliente B', latitud: 8.0073377, longitud: -62.3977917, ciudad: 'Upata' },
-                    { nombre: 'Cliente C', latitud: 10.4804, longitud: -66.9035, ciudad: 'Caracas' },
-                    { nombre: 'Cliente D', latitud: 10.1622, longitud: -64.6806, ciudad: 'Barcelona' },
-                    { nombre: 'Cliente E', latitud: 8.27509, longitud: -62.7556955, ciudad: 'Puerto Ordaz' },
-                    { nombre: 'Cliente F', latitud: 8.27509, longitud: -62.7556955, ciudad: 'Puerto Ordaz' },
-                    { nombre: 'Cliente G', latitud: 8.27509, longitud: -62.7556955, ciudad: 'Puerto Ordaz' },
-                    { nombre: 'Cliente H', latitud: 8.27509, longitud: -62.7556955, ciudad: 'Puerto Ordaz' },
-                    { nombre: 'Cliente I', latitud: 8.27509, longitud: -62.7556955, ciudad: 'Puerto Ordaz' },
-                    { nombre: 'Cliente J', latitud: 8.27509, longitud: -62.7556955, ciudad: 'Puerto Ordaz' },
-                    { nombre: 'Cliente K', latitud: 8.27509, longitud: -62.7556955, ciudad: 'Puerto Ordaz' },
-                    { nombre: 'Cliente L', latitud: 8.27509, longitud: -62.7556955, ciudad: 'Puerto Ordaz' },
-                    { nombre: 'Cliente M', latitud: 8.27509, longitud: -62.7556955, ciudad: 'Puerto Ordaz' },
-                    { nombre: 'Cliente N', latitud: 8.27509, longitud: -62.7556955, ciudad: 'Puerto Ordaz' },
-                    { nombre: 'Cliente O', latitud: 8.27509, longitud: -62.7556955, ciudad: 'Puerto Ordaz' },
-                    { nombre: 'Cliente P', latitud: 8.0073377, longitud: -62.3977917, ciudad: 'Upata' },
-                    { nombre: 'Cliente Q', latitud: 8.0073377, longitud: -62.3977917, ciudad: 'Upata' },
-                    { nombre: 'Cliente R', latitud: 8.0073377, longitud: -62.3977917, ciudad: 'Upata' },
-                    { nombre: 'Cliente S', latitud: 8.0073377, longitud: -62.3977917, ciudad: 'Upata' },
-                    { nombre: 'Cliente S', latitud: 8.0073377, longitud: -62.3977917, ciudad: 'Tumeremo' },
+                // Datos de pacientes por estado (obtenidos desde PHP)
+                var pacientes = "<?php echo $estadosPorCiudadJson; ?>";
+                // var pacientes = '<?php echo json_encode($estadosPorCiudadJson); ?>';
 
-                    // Agrega más ubicaciones según sea necesario
-                ];
+                 // Coordenadas de los estados de Venezuela
+                var estados = {
+                    "Amazonas": [3.4167, -65.8561],
+                    "Anzoátegui": [9.3208, -64.6863],
+                    "Apure": [7.8597, -67.4753],
+                    "Aragua": [10.2353, -67.5917],
+                    "Barinas": [8.6314, -70.2070],
+                    "Bolívar": [6.2098, -65.7392],
+                    "Carabobo": [10.0820, -67.8589],
+                    "Cojedes": [9.3804, -68.2431],
+                    "Delta Amacuro": [8.0100, -61.7500],
+                    "Falcón": [11.1324, -69.3543],
+                    "Guárico": [9.7559, -66.6746],
+                    "Lara": [10.0410, -69.2406],
+                    "Mérida": [8.5986, -71.1580],
+                    "Miranda": [10.1293, -66.8766],
+                    "Monagas": [9.2382, -63.4916],
+                    "Nueva Esparta": [10.9985, -63.9113],
+                    "Portuguesa": [9.2081, -69.9848],
+                    "Sucre": [10.4496, -63.2590],
+                    "Táchira": [7.8388, -72.4747],
+                    "Trujillo": [9.3667, -70.4333],
+                    "Vargas": [10.5779, -66.6523],
+                    "Yaracuy": [10.3863, -68.7598],
+                    "Zulia": [9.0000, -71.7500]
+                };
+                // Agregar marcadores para cada ubicación de paciente y calcular pacientes por estado
+                 Object.keys(pacientes).forEach(function(estado) {
+                     var latlng = estados[estado];
+                        if (latlng) {
+                      // Si se encuentra la coordenada del estado, agregar marcador al mapa
+                          L.marker(latlng).addTo(map)
+                        .bindPopup(estado + ': ' + pacientes[estado] + ' pacientes');
+                         }
+
 
                 // Contador de personas por ciudad
                 var personasPorCiudad = {};
