@@ -42,6 +42,7 @@ class DatabaseSeeder extends Seeder
 
         Patient::create([
             'name' => fake()->name,
+            'ci' => fake()->NationalId,
             'Address' => fake()->state,
             'old' => fake()->numberBetween(15, 50),
             'gender' => fake()->randomElement(['Masculino', 'Femenino']),
@@ -50,7 +51,8 @@ class DatabaseSeeder extends Seeder
 
         Patient::create([
             'name' => fake()->name,
-            'Address' => fake()->address,
+            'ci' => fake()->NationalId,
+            'Address' => fake()->state,
             'old' => fake()->numberBetween(15, 50),
             'gender' => fake()->randomElement(['Masculino', 'Femenino']),
             'queue_number_id' => 9
@@ -58,7 +60,8 @@ class DatabaseSeeder extends Seeder
 
         Patient::create([
             'name' => fake()->name,
-            'Address' => fake()->address,
+            'ci' => fake()->NationalId,
+            'Address' => fake()->state,
             'old' => fake()->numberBetween(15, 50),
             'gender' => fake()->randomElement(['Masculino', 'Femenino']),
             'queue_number_id' => 8
@@ -66,7 +69,8 @@ class DatabaseSeeder extends Seeder
 
         Patient::create([
             'name' => fake()->name,
-            'Address' => fake()->address,
+            'ci' => fake()->NationalId,
+            'Address' => fake()->state,
             'old' => fake()->numberBetween(15, 50),
             'gender' => fake()->randomElement(['Masculino', 'Femenino']),
             'queue_number_id' => 7
@@ -74,7 +78,8 @@ class DatabaseSeeder extends Seeder
 
         Patient::create([
             'name' => fake()->name,
-            'Address' => fake()->address,
+            'ci' => fake()->NationalId,
+            'Address' => fake()->state,
             'old' => fake()->numberBetween(15, 50),
             'gender' => fake()->randomElement(['Masculino', 'Femenino']),
             'queue_number_id' => 6
@@ -82,7 +87,8 @@ class DatabaseSeeder extends Seeder
 
         Patient::create([
             'name' => fake()->name,
-            'Address' => fake()->address,
+            'ci' => fake()->NationalId,
+            'Address' => fake()->state,
             'old' => fake()->numberBetween(15, 50),
             'gender' => fake()->randomElement(['Masculino', 'Femenino']),
             'queue_number_id' => 5
@@ -90,7 +96,8 @@ class DatabaseSeeder extends Seeder
 
         Patient::create([
             'name' => fake()->name,
-            'Address' => fake()->address,
+            'ci' => fake()->NationalId,
+            'Address' => fake()->state,
             'old' => fake()->numberBetween(15, 50),
             'gender' => fake()->randomElement(['Masculino', 'Femenino']),
             'queue_number_id' => 4
@@ -98,7 +105,8 @@ class DatabaseSeeder extends Seeder
 
         Patient::create([
             'name' => fake()->name,
-            'Address' => fake()->address,
+            'ci' => fake()->NationalId,
+            'Address' => fake()->state,
             'old' => fake()->numberBetween(15, 50),
             'gender' => fake()->randomElement(['Masculino', 'Femenino']),
             'queue_number_id' => 3
@@ -106,7 +114,8 @@ class DatabaseSeeder extends Seeder
 
         Patient::create([
             'name' => fake()->name,
-            'Address' => fake()->address,
+            'ci' => fake()->NationalId,
+            'Address' => fake()->state,
             'old' => fake()->numberBetween(15, 50),
             'gender' => fake()->randomElement(['Masculino', 'Femenino']),
             'queue_number_id' => 2
@@ -114,7 +123,8 @@ class DatabaseSeeder extends Seeder
 
         Patient::create([
             'name' => fake()->name,
-            'Address' => fake()->address,
+            'ci' => fake()->NationalId,
+            'Address' => fake()->state,
             'old' => fake()->numberBetween(15, 50),
             'gender' => fake()->randomElement(['Masculino', 'Femenino']),
             'queue_number_id' => 1
