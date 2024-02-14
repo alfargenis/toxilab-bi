@@ -5,7 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Carbon\Carbon;
 use Faker\Factory as Faker;
-
+use NunoMaduro\Collision\Adapters\Phpunit\State;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Patient>
@@ -62,9 +62,10 @@ class PatientFactory extends Factory
         } elseif ($randomPercentage <= $porcentajeBolivar + $porcentajeEstadosCercanos) {
             return $estadosCercanos[array_rand($estadosCercanos)];
         } else {
-            // Generar una dirección aleatoria para otros estados
-            $faker = Faker::create();
-            $estados = array_diff($faker->states(), ['Bolívar'], $estadosCercanos);
+                // Generar una dirección aleatoria para otros estados
+                $faker = \Faker\Factory::create();
+                $allStates = $faker->state();
+                $estados = array_diff(['Bolívar','Amazonas', 'Delta Amacuro', 'Anzoátegui', 'Monagas']);
             return $estados[array_rand($estados)];
         }
     }

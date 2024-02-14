@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('patients', function (Blueprint $table) {
             $table->id();
-            $table->string('ci');
+            $table->foreignId('queue_number_id')->nullable();
             $table->string('name');
             $table->string('address');
             $table->integer('old');
