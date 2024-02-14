@@ -42,7 +42,7 @@ class PatientFactory extends Factory
 
         return [
             'name' => fake()->name,
-            'address' => fake()->state,
+            'address' => $address,
             'old' => fake()->numberBetween(15, 50),
             'gender' => fake()->randomElement(['Masculino', 'Femenino']),
             'status_pemeriksaan' => "Ya comprobado",
