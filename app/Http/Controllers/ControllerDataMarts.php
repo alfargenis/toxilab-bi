@@ -38,6 +38,11 @@ class ControllerDataMarts extends Controller
     $difference = $new_accounts_last_30_days - $new_accounts_last_60_days;
     $changeIcon = $difference >= 0 ? '▲' : '▼';
     $changeColor = $difference >= 0 ? 'green' : 'red';
+    if ($changeColor === 'green') {
+        $trend = 'alcista';
+    } else {
+        $trend = 'bajista';
+    }
     $percentage = abs(($difference / $new_accounts_last_60_days) * 100);
     // Limitar el número de decimales en el porcentaje
     $percentage = number_format($percentage, 2); // Esto limita el porcentaje a dos decimales
@@ -61,6 +66,34 @@ class ControllerDataMarts extends Controller
     <body>
         <canvas id="lineChart" data-patient-counts="$patientCountsJson"></canvas>
         <script src="/assets/js/chartpatient.js"></script>
+
+        <div id="report" style="display: flex; justify-content: space-between;">
+        <div style="flex: 1; margin-right: 20px;">
+            <h2>Informe de Pacientes</h2>
+            <p>El gráfico anterior muestra la cantidad de pacientes creados por mes en los últimos meses.</p>
+
+            <h3>Análisis de la cantidad de cuentas nuevas:</h3>
+            <p>En los últimos 30 días, se crearon <strong>$new_accounts_last_30_days</strong> cuentas nuevas.</p>
+            <p>En los 30 días anteriores, se crearon <strong>$new_accounts_last_60_days</strong> cuentas nuevas.</p>
+            <p>La diferencia entre estos períodos es de <strong>$difference</strong> ($changeIcon $percentage%)
+                <span style="color: $changeColor;">$changeIcon</span>
+            </p>
+        </div>
+
+        <div style="flex: 1; margin-right: 20px;">
+            <h3>Análisis de tendencias:</h3>
+            <p>Basándonos en los datos mostrados en el gráfico, parece que hay una tendencia <strong>$trend</strong>.</p>
+        </div>
+
+        <div style="flex: 1;">
+            <h3>Próximos pasos:</h3>
+            <ul>
+                <li>Realizar un análisis más profundo de la tendencia identificada.</li>
+                <li>Investigar las causas del aumento o disminución de las cuentas nuevas.</li>
+                <li>Explorar estrategias para mejorar la adquisición de nuevos pacientes.</li>
+            </ul>
+        </div>
+    </div>
     </body>
     HTML;
 
