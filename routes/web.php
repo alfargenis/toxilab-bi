@@ -10,6 +10,8 @@ use App\Http\Controllers\ControllerCollectionData;
 use App\Http\Controllers\ControllerDataMarts;
 use App\Http\Controllers\ControllerModulo;
 use App\Http\Controllers\ControllerFiles;
+use App\Http\Controllers\ControllerCompras;
+use App\Http\Controllers\ControllerProducto;
 use App\Http\Controllers\PdfController;
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +46,14 @@ Route::get('/admin/modulo0', [ControllerModulo::class, 'index'])->middleware('ad
 Route::get('/admin/datamarts', [ControllerDataMarts::class, 'index'])->middleware('admin');
 Route::get('/admin/datamarts/accounts', [ControllerDataMarts::class, 'accounts'])->middleware('admin');
 Route::get('/admin/datamarts/accounts', [ControllerDataMarts::class, 'reportaccounts'])->middleware('admin');
+
+Route::get('/admin/datamarts', [ControllerCompras::class, 'index'])->middleware('admin');
+Route::get('/admin/datamarts/compras', [ControllerCompras::class, 'accounts'])->middleware('admin');
+Route::get('/admin/datamarts/compras', [ControllerCompras::class, 'reportaccounts'])->middleware('admin');
+
+Route::get('/admin/datamarts', [ControllerProducto::class, 'index'])->middleware('admin');
+Route::get('/admin/datamarts/producto', [ControllerProducto::class, 'accounts'])->middleware('admin');
+Route::get('/admin/datamarts/producto', [ControllerProducto::class, 'reportaccounts'])->middleware('admin');
 
 
 //Collection Data, almacena las graficas y reportes creados por cada administrador por separado, con la ventaja de que se puede compartir

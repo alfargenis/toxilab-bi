@@ -10,7 +10,7 @@ use Carbon\Carbon;
 use App\Http\Controllers\PdfController;
 use Dompdf\Dompdf;
 
-class ControllerDataMarts extends Controller
+class ControllerProducto extends Controller
 {
    public function index(){
             return view('admin.datamarts.index', [
@@ -20,9 +20,9 @@ class ControllerDataMarts extends Controller
     }
 
     public function accounts(){
-            return view('admin.datamarts.accounts', [
+            return view('admin.datamarts.producto', [
                 'app' => Application::all(),
-                'title' => 'Data Marts, cuentas predeterminadas'
+                'title' => 'Data Marts, Reporte de Productos'
             ]);
     }
 
@@ -269,7 +269,7 @@ class ControllerDataMarts extends Controller
 HTML;
 
         // Pasa las variables a la vista
-        return view('admin.datamarts.accounts', [
+        return view('admin.datamarts.producto', [
             'app' => Application::all(),
             'title' => 'Data Marts, Resumen de cuentas',
             'patients' => $patients,

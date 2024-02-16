@@ -38,33 +38,20 @@
   <button type="button" class="btn card h-100 custom-button" onclick="window.location.href='/admin/datamarts/accounts'" >
     <div class="card-header">
       <h5 class="card-title m-0 me-2 fw-bold mb-2">
-        <i class="bx bx-line-chart"></i>  Reportes de Cuentas
+      <i class="bx bx-user"></i>  Reportes de Clientes
       </h5>
     </div>
     <div class="card-body">
-      <p>Este módulo proporciona informes detallados sobre las cuentas y su rendimiento financiero.</p>
+    <p>Accede a reportes específicos sobre tus clientes, su comportamiento y preferencias.</p>
     </div>
   </button>
 </div>
 
-  <div class="col-md-6 mb-4">
-    <button type="button" class="btn card h-100 custom-button">
+<div class="col-md-6 mb-4  {{ Request::is('admin/datamarts/compras*') ? 'active' : '' }}" >
+  <button type="button" class="btn card h-100 custom-button" onclick="window.location.href='/admin/datamarts/compras'" >
       <div class="card-header">
         <h5 class="card-title m-0 me-2 fw-bold mb-2">
-          <i class="bx bx-user"></i>  Reportes de Clientes
-        </h5>
-      </div>
-      <div class="card-body">
-        <p>Accede a reportes específicos sobre tus clientes, su comportamiento y preferencias.</p>
-      </div>
-    </button>
-  </div>
-
-  <div class="col-md-6 mb-4">
-    <button type="button" class="btn card h-100 custom-button">
-      <div class="card-header">
-        <h5 class="card-title m-0 me-2 fw-bold mb-2">
-          <i class="bx bx-shopping-bag"></i>  Compras y Ventas
+          <i class="bx bx-shopping-bag"></i>  Reportes de Compras y Ventas
         </h5>
       </div>
       <div class="card-body">
@@ -73,11 +60,11 @@
     </button>
   </div>
 
-  <div class="col-md-6 mb-4">
-    <button type="button" class="btn card h-100 custom-button">
+  <div class="col-md-6 mb-4  {{ Request::is('admin/datamarts/producto*') ? 'active' : '' }}" >
+  <button type="button" class="btn card h-100 custom-button" onclick="window.location.href='/admin/datamarts/producto'" >
       <div class="card-header">
         <h5 class="card-title m-0 me-2 fw-bold mb-2">
-          <i class="bx bx-bar-chart-alt"></i>  Analytic Events
+          <i class="bx bx-bar-chart-alt"></i>  Reporte de Productos.
         </h5>
       </div>
       <div class="card-body">
@@ -86,28 +73,16 @@
     </button>
   </div>
 
-  <div class="col-md-6 mb-4">
-    <button type="button" class="btn card h-100 custom-button">
-      <div class="card-header">
-        <h5 class="card-title m-0 me-2 fw-bold mb-2">
-          <i class="bx bx-box"></i>  Productos
-        </h5>
-      </div>
-      <div class="card-body">
-        <p>Gestiona y analiza información relacionada con tus productos y su rendimiento.</p>
-      </div>
-    </button>
-  </div>
 
   <div class="col-md-6 mb-4">
     <button type="button" class="btn card h-100 custom-button">
       <div class="card-header">
         <h5 class="card-title m-0 me-2 fw-bold mb-2">
-          <i class="bx bx-globe"></i>  Estadísticas del Mundo
+          <i class="bx bx-globe"></i>  Reportes de Equipos de Analisís.
         </h5>
       </div>
       <div class="card-body">
-        <p>Explora estadísticas globales y obtén una visión general del estado del mundo.</p>
+        <p>Visualiza ..............</p>
       </div>
     </button>
   </div>

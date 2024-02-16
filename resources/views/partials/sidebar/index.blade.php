@@ -26,10 +26,10 @@
 <li class="menu-item {{ Request::is('admin/modulo0*') ? 'active' : '' }}">
   <a class="menu-link cursor-pointer" onclick="window.location.href='/admin/modulo0'">
     <i class="menu-icon tf-icons bx bx-street-view"></i>
-    <div>MODULO 0</div>
+    <div>POWER BI</div>
   </a>
 </li>
-<li class="menu-item {{ Request::is('admin/antrian*') ? 'active' : '' }}">
+<!-- <li class="menu-item {{ Request::is('admin/antrian*') ? 'active' : '' }}">
   <a class="menu-link cursor-pointer" onclick="window.location.href='/admin/antrian'">
     <i class="menu-icon tf-icons bx bx-group"></i>
     <div>COLA PACIENTES</div>
@@ -46,7 +46,7 @@
   <i class="menu-icon tf-icons bx bxs-user-detail"></i>
     <div>CONSULTA DE PACIENTES</div>
   </a>
-</li>
+</li> -->
 <li class="menu-item {{ Request::is('admin/pengaturan*') ? 'active' : '' }}">
   <a class="menu-link cursor-pointer" onclick="window.location.href='/admin/pengaturan'">
     <i class="menu-icon tf-icons bx bx-cog"></i>
