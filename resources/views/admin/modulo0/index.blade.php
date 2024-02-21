@@ -2,17 +2,24 @@
 @section('container')
 <style>
     /* Estilo para el contenedor de iframes */
-    #iframe-container {
+    .iframe-container {
         display: flex;
         justify-content: space-between; /* Para distribuir los iframes horizontalmente */
+        width: 100%;
+        height: auto; /* Cambiado de 100% a auto */
     }
 
     /* Estilo para cada iframe */
-    #iframe-container iframe {
-        width: 45%; /* Ajustar el ancho de los iframes */
-        height: 600px; /* Ajustar la altura de los iframes */
+    .iframe-container iframe {
+        width: 100%; /* Ajustar el ancho de los iframes */
+        height: 800px; /* Cambiado de 1200px a 800px */
         border: 0;
     }
+
+    .app-name {
+    display: none !important;
+}
+
 </style>
 
 <!-- Botones -->
@@ -43,8 +50,8 @@ if(isset($_GET['button'])) {
 ?>
 
 <div class="iframe-container">
-    <iframe id="frame" src="https://lookerstudio.google.com/embed/reporting/35038bdd-0125-4c7a-8231-42ad8c23d50b/page/WZaqD" style="display: none;"></iframe>
-    <iframe id="frame2" src="https://lookerstudio.google.com/embed/reporting/6a121fe2-0adf-4f00-93f2-a7e726e701f6/page/0MdqD" style="display: none;"></iframe>
+    <iframe id="frame" src="https://lookerstudio.google.com/embed/reporting/35038bdd-0125-4c7a-8231-42ad8c23d50b/page/WZaqD"></iframe>
+    <iframe id="frame2" src="https://lookerstudio.google.com/embed/reporting/6a121fe2-0adf-4f00-93f2-a7e726e701f6/page/0MdqD"></iframe>
 </div>
 
 <script>
