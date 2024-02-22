@@ -18,7 +18,7 @@ class ControllerModulo extends Controller
             $textocompleto= $formato . "\n\n" . $mensaje;
 
 
-            $apiKey = 'AIzaSyBbhLyHcrbAvGfxTnGCJwXg_ERYf4zP848'; // Asegúrate de usar tu clave de API real
+            $apiKey = ''; // Asegúrate de usar tu clave de API real
             // URL de la API de Geminis
             $url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=' . $apiKey;
             // Datos que se enviarán en el cuerpo de la solicitud POST
