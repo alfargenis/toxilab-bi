@@ -3,9 +3,11 @@
 use App\Http\Controllers\Api\DokterController;
 use App\Http\Controllers\Api\ClinicController;
 use App\Http\Controllers\Api\PatientsController;
+use App\Http\Controllers\PowerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AdminDatapruebaController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
