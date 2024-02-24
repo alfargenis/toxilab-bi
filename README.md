@@ -1,6 +1,6 @@
-## About BubbleClinic
+## About TOXILAB-BI
 
-<b>BubbleClinic</b> is an application used for the process of taking queue numbers at clinics. This kind of application helps in managing patient queues at clinics or health care centers.
+<b>TOXILAB-BI</b> is an application used for the decision making process of clinical laboratories. It includes integrated chat to generate informative reports by querying the database with the help of artificial intelligence through Google APIs.
 
 ## Installation
 
@@ -19,8 +19,8 @@ cp .env.example .env
 #### 3. Configure .env
 
 ```sh
-FAKER_LOCALE=id_ID
-FILESYSTEM_DISK=public
+GEMINIS_API_KEY=YOUR_API_KEY
+
 ```
 
 #### 4. Install depedencies

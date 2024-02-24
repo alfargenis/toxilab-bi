@@ -23,8 +23,10 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         Application::create([
-            'name_app' => 'BIP-LAB',
-            'description_app' => 'Power BI para Toxi-Lab',
+            'name_app' => 'TOXI-LAB
+                        Centro de Analsis
+                      Business Intelligence',
+            'description_app' => 'Business Intelligence Toxi-Lab',
             'open_days' => '1',
             'close_days' => "5",
             'open_time' => '18:15',
