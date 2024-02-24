@@ -41,6 +41,8 @@ Route::get('/admin/dashboard',  [AdminDashboardController::class, 'index'])->mid
 
 //MODULO 0
 Route::get('/admin/modulo0', [ControllerModulo::class, 'index'])->middleware('admin');
+// Dentro de routes/web.php
+Route::post('/admin/modulo0', [ControllerModulo::class, 'index'])->name('modulo0.index');
 
 //Data Marts, crear graficas y vistas predeterminadas de una manera mas rapida
 Route::get('/admin/datamarts', [ControllerDataMarts::class, 'index'])->middleware('admin');
