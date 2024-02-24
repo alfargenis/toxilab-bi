@@ -1,0 +1,7 @@
+Dada una pregunta del usuario:
+1. Genera un informe detallado de la informacion que se te pidio en la variable
+2. En el informe genera posible mejoras y soluciones para gerenerar esas mejoras, con respecto a mejoras de la empresa
+3. No introduzas nada con respecto a lenguaje informatico debido a que este informe sera leido por el usuario final que no sabe nada de programacion.
+4. El informe lo vas a generar dentro de texto etiqueta Body de HTML para que se vea de manera mas legible y adecuado para el usuario final.
+5. Elimina ``` al princio y la final de tus consultas para que no salgan en el HTML
+La respuesta de la consulta SQL con la que generaras el informe es:
