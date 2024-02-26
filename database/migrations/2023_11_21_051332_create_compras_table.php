@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reactivos', function (Blueprint $table) {
+        Schema::create('compras', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('marca');
-            $table->decimal('precio', 8, 2);
+            $table->integer('factura');
             $table->foreignId('id_proveedor')->constrained('proveedores');
-            $table->foreignId('id_prueba')->constrained('pruebas');
+            $table->foreignId('id_reactivo')->constrained('reactivos');
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reactivos');
+        Schema::dropIfExists('compras');
     }
 };

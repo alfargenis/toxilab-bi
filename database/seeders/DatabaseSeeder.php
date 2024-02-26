@@ -13,6 +13,7 @@ use App\Models\especiales;
 use App\Models\QueueNumber;
 use App\Models\reactivos;
 use App\Models\orinas;
+use App\Models\compras;
 use App\Models\hemas;
 
 class DatabaseSeeder extends Seeder
@@ -36,6 +37,7 @@ class DatabaseSeeder extends Seeder
         proveedores::factory(8)->create();
         pruebas::factory(124)->create();
         reactivos::factory(78)->create();
+        compras::factory(78)->create();
         especiales::factory(6)->create();
         hemas::factory(9)->create();
         orinas::factory(10)->create();

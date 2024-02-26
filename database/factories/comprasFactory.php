@@ -8,7 +8,7 @@ use Carbon\Carbon;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Patient>
  */
-class proveedoresFactory extends Factory
+class comprasFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,13 +19,12 @@ class proveedoresFactory extends Factory
     {
         $start = Carbon::now()->startOfYear();
         $end = Carbon::now();
+
         $createdAt = fake()->dateTimeBetween($start, $end);
         return [
-            'name' => fake()->name,
-            'email' => fake()->unique()->email,
-            'empresa' => fake()->randomElement(['DISMELAB', 'SIEMENS', 'REACTILAB']),
-            'phone' => fake()->phoneNumber(),
-            'localidad' => fake()->address,
+            'factura' => fake()->numberBetween(120, 198),
+            'id_proveedor' => fake()->numberBetween(1, 8),
+            'id_reactivo' => fake()->numberBetween(1, 78),
             'created_at' => fake()->dateTimeBetween('-3 years', 'now'),
             'updated_at' => fake()->dateTimeBetween('-3 years', 'now'),
         ];
