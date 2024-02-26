@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         Application::create([
-            'name_app' => 'TOXIlab-BI',
+            'name_app' => 'TOXIlAB-BI',
             'description_app' => 'Business Intelligence Toxi-Lab',
             'open_days' => '1',
             'close_days' => "7",
@@ -36,11 +36,11 @@ class DatabaseSeeder extends Seeder
         Patient::factory(15550)->create();
         proveedores::factory(8)->create();
         pruebas::factory(124)->create();
-        reactivos::factory(78)->create();
+        reactivos::factory(500)->create();
         compras::factory(78)->create();
-        especiales::factory(6)->create();
-        hemas::factory(9)->create();
-        orinas::factory(10)->create();
+        especiales::factory(66)->create();
+        hemas::factory(93)->create();
+        orinas::factory(100)->create();
 
         User::create([
             'name' => 'Argenis Rodriguez',

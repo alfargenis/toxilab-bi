@@ -41,8 +41,9 @@ Route::get('/admin/dashboard',  [AdminDashboardController::class, 'index'])->mid
 
 //MODULO 0
 Route::get('/admin/modulo0', [ControllerModulo::class, 'index'])->middleware('admin');
-// Dentro de routes/web.php
 Route::post('/admin/modulo0', [ControllerModulo::class, 'index'])->name('modulo0.index');
+
+
 
 //Data Marts, crear graficas y vistas predeterminadas de una manera mas rapida
 Route::get('/admin/datamarts', [ControllerDataMarts::class, 'index'])->middleware('admin');
@@ -60,6 +61,7 @@ Route::get('/admin/datamarts/producto', [ControllerProducto::class, 'reportaccou
 
 //Collection Data, almacena las graficas y reportes creados por cada administrador por separado, con la ventaja de que se puede compartir
 Route::get('/admin/collectiondata', [ControllerCollectionData::class, 'index'])->middleware('admin');
+Route::post('/admin/collectiondata', [ControllerCollectionData::class, 'index'])->name('collectiondata.index');
 
 // Importacion de Archivos hacia la base de datos.
 Route::get('/admin/files', [ControllerFiles::class, 'index'])->middleware('admin');
