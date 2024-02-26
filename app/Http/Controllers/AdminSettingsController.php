@@ -15,7 +15,7 @@ class AdminSettingsController extends Controller
   {
     return view('admin.setting.index', [
       'app' => Application::all(),
-      'title' => 'Pengaturan'
+      'title' => 'Configuración'
     ]);
   }
 

@@ -23,12 +23,10 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         Application::create([
-            'name_app' => 'TOXI-LAB
-                        Centro de Analsis
-                      Business Intelligence',
+            'name_app' => 'TOXIlab-BI',
             'description_app' => 'Business Intelligence Toxi-Lab',
             'open_days' => '1',
-            'close_days' => "5",
+            'close_days' => "7",
             'open_time' => '18:15',
             'close_time' => '21:00',
             'address' => 'Puerto Ordaz, Estado Bolivar, Venezuela'

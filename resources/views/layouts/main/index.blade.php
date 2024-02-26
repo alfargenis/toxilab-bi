@@ -46,7 +46,7 @@
     }
 
     ::-webkit-scrollbar-thumb {
-      background: #696cff !important;
+      background: grey !important;
       border-radius: 6px;
     }
 
@@ -110,7 +110,7 @@
                           </div>
                         </div>
                         <div class="flex-grow-1">
-                          <span class="fw-semibold d-block">{{ auth()->user()->name }}@if(auth()->user()->is_admin)&nbsp;<i class='bx bxs-badge-check fs-6 text-primary' data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="auto" title="Administrator"></i>@endif</span>
+                          <span class="fw-semibold d-block">{{ auth()->user()->name }}@if(auth()->user()->is_admin)&nbsp;<i class='bx bxs-badge-check fs-6 text-primaryIcon' data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="auto" title="Administrator"></i>@endif</span>
                           <small class="text-muted">@if(auth()->user()->is_admin){{'Admin'}}@else{{'Member'}}@endif</small>
                         </div>
                       </div>
@@ -122,7 +122,7 @@
                   <li>
                     <button type="button" class="dropdown-item" onclick="window.location.href='@if(auth()->user()->is_admin) /admin/pengaturan @else /pengaturan @endif'">
                       <i class="bx bx-cog me-2"></i>
-                      <span class="align-middle">Pengaturan</span>
+                      <span class="align-middle">Configuración</span>
                     </button>
                   </li>
                   <li>
@@ -130,7 +130,7 @@
                       @csrf
                       <button type="submit" class="dropdown-item">
                         <i class="bx bx-power-off me-2"></i>
-                        <span class="align-middle">Logout</span>
+                        <span class="align-middle">Cerrar Sesión</span>
                       </button>
                     </form>
                   </li>

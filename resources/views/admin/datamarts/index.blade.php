@@ -89,12 +89,4 @@
 </div>
 
 
-<script src="https://cdn.jsdelivr.net/npm/apexcharts@3.29.0/dist/apexcharts.min.js"></script>
-
-{{-- Script de gráficos (si es necesario) --}}
-<script>
-  // Código para inicializar y configurar los gráficos (si es necesario)
-  // ...
-</script>
-
 @endsection
