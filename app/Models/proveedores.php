@@ -21,6 +21,7 @@ class proveedores extends Model
             return $query->where('name', 'like', '%' . $keyword . '%')
                  ->orWhere('email', 'like', '%' . $keyword . '%')    
                  ->orWhere('empresa', 'like', '%' . $keyword . '%')
+                ->orWhere('localidad', 'like', '%' . $keyword . '%')
                 ->orWhere('phone', 'like', '%' . $keyword . '%');
         });
     }
