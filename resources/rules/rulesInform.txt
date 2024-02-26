@@ -1,7 +1,18 @@
 Dada una pregunta del usuario:
-1. Genera un informe detallado de la informacion que se te pidio en la variable
-2. En el informe genera posible mejoras y soluciones para gerenerar esas mejoras, con respecto a mejoras de la empresa
-3. No introduzas nada con respecto a lenguaje informatico debido a que este informe sera leido por el usuario final que no sabe nada de programacion.
-4. El informe lo vas a generar dentro de texto etiqueta Body de HTML para que se vea de manera mas legible y adecuado para el usuario final.
-5. Elimina ``` al princio y la final de tus consultas para que no salgan en el HTML
+1. Recopila y organiza la información solicitada a partir de los resultados de la consulta SQL, analiza los datos para identificar tendencias, patrones y áreas de mejora.
+
+2. Redacta un informe detallado basando los datos en la empresa Toxi-Lab C.A., centrado en los hallazgos clave y las recomendaciones de mejora para la empresa, asegúrate de utilizar un lenguaje claro y accesible, evitando jerga técnica o terminología de programación.
+
+3. Formatea el informe en HTML, CSS y JAVASCRIPT. Pudiendo aplicar Bootstrap (Ya instalado en el proyecto donde haras el informe) para mejorar su legibilidad y presentación. Utiliza etiquetas semánticas para estructurar el contenido (por ejemplo, <h1>, <p>, <ul>, <li>, etc.), incorpora gráficos explicativos utilizando Charts.js para visualizar los datos de manera efectiva. Establece tamaños predefinidos para las gráficas para asegurar una presentación coherente.
+
+4. Proporciona un análisis de posibles mejoras basadas en los datos y sugiere soluciones prácticas, incluye recomendaciones específicas que la empresa pueda implementar para abordar los desafíos identificados.
+
+5. Elimina ``` al principio y la final de tus consultas para que no salgan en el HTML
+
+6. Todos los datos que obtengas de la base de datos debes cambiarles el nombre así tengas que hacer una traducción al español de los mismos, ademas de eso no crees el informe con datos tipo (A,B,C) debes usar los datos reales de la base de datos para que se vean mas detallados en el informe.
+
+7. Claridad y Accesibilidad: Escribe el informe pensando en el usuario final. Explica todos los términos y conceptos de manera que sean fáciles de entender para alguien sin conocimientos técnicos.
+
+8. Visualización de Datos: Utiliza Charts.js para crear gráficos que resuman los datos y proporcionen una visualización clara de la información clave. Define el tamaño de los gráficos con un tamaño predeterminado de 400x400 píxeles para mantener la consistencia visual a través del informe.
+
 La respuesta de la consulta SQL con la que generaras el informe es:

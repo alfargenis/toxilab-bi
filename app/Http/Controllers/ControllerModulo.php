@@ -12,12 +12,11 @@ class ControllerModulo extends Controller
         {
             if ($request->isMethod('post')) {//Vista POST
             $mensaje = $request->input('consultaTexto','No se ha escrito ningun tipo de Consulta'); //Texto del Usuario
-            $rules="/Users/Arge/Documents/PHP/bubbleclinic/resources/rules/rulesSQL.txt";//Reglas de consultas SQL.
+            $rules="/Users/Arge/Documents/PHP/toxilab-bi/resources/rules/rulesSQL.txt";//Reglas de consultas SQL.
             $textocompleto= $formato = file_get_contents($rules) . "\n\n" . $mensaje; //Formato + Texto
             $url = env('GEMINIS_API_URL') . '?key=' . env('GEMINIS_API_KEY'); // Construye la URL usando la variable de entorno
-            echo $url;
             $consultaSQL = $this->cRUL($this->dataStructure($textocompleto),$url); //Generea consulta SQL
-            $resultadosConsulta = DB::select($consultaSQL); //Realiza la consulta SQL
+            $resultadosConsulta = DB::select(trim(str_replace(["```", "sql", "```html"], "", $consultaSQL))); //Realiza la consulta SQL
             $respuestaFormateada = $this->enviarResultadosAGeminis($resultadosConsulta, $url);//Genera el informe
 
         return view('admin.modulo0.index', ['app' => Application::all(),'title' => 'Consultas','respuesta' => $respuestaFormateada,]);
@@ -26,7 +25,7 @@ class ControllerModulo extends Controller
 
         private function enviarResultadosAGeminis($resultados, $url)
         {
-            $rules="/Users/Arge/Documents/PHP/bubbleclinic/resources/rules/rulesInform.txt";
+            $rules="/Users/Arge/Documents/PHP/toxilab-bi/resources/rules/rulesInform.txt";
             $formato= file_get_contents($rules);
             $textocompleto= $formato . "\n\n";
 

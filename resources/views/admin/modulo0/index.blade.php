@@ -45,7 +45,14 @@
 </div>
 
 @if(isset($respuesta))
-  {!! $respuesta !!}
+<div class="col-md-6 col-lg-7 order-2 mb-4">
+    <div class="card h-100">
+      <div class="card-body">
+        {!! $respuesta !!}
+      </div>
+    </div>
+  </div>
+</div>
 @endif
 
 @endsection

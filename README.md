@@ -7,7 +7,7 @@
 #### 1. Clone the repository
 
 ```sh
-git clone git@github.com:alfargenis/bubbleclinic.git
+git clone git@github.com:alfargenis/toxilab-bi.git
 ```
 
 #### 2. Copy .env

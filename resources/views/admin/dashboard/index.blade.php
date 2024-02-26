@@ -89,19 +89,11 @@
     <div class="card h-100">
       <div class="card-header">
         <div>
-          <h5 class="card-title m-0 me-2 fw-bold mb-2" style="font-family: poppins; font-size:1rem;">Cola de Datos</h5>
-          <small class="text-muted" style="font-family: poppins; font-size:12px; color:rgb(86, 106, 127) !important;">Cola de pacientes de hoy</small>
+          <h5 class="card-title m-0 me-2 fw-bold mb-2" style="font-family: poppins; font-size:32px;">Ultimos pacientes ingresados</h5>
         </div>
       </div>
       <div class="card-body">
         @if(!$patients->isEmpty())
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <div class="d-flex flex-column align-items-center gap-1">
-            <h2 class="mb-2 fw-bold" style="color:#566a7f;">{{ $numberQueueNow->queueNumber->number }}</h2>
-            <span>Número de cola actual</span>
-          </div>
-          <div id="usersChart" data-laki-laki="{{ $totalLakiLaki }}" data-perempuan="{{ $totalPerempuan }}"></div>
-        </div>
         <ul class="p-0 m-0">
           @foreach($patients as $patient)
           <li class="d-flex mb-4 pb-1">
@@ -114,18 +106,16 @@
             </div>
             <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
               <div class="me-2">
-                <h6 class="mb-1 text-capitalize">{{ $patient->name }}</h6>
-                <small class="text-muted d-block">{{ Str::limit($patient->created_at->locale('id')->diffForHumans(), 30, '...') }}</small>
+                <h6 class="mb-1 text-capitalize"style="font-family: poppins; font-size:16px; color:black">{{ $patient->name }}</h6>
+                <small class="text-muted d-block">{{ $patient->created_at->format('d-m-Y H:i') }}</small>
               </div>
               <div class="user-progress d-flex align-items-center gap-1">
-                <span class="badge badge-center bg-info rounded-pill">{{ $patient->queueNumber->number }}</span>
+                <span class="mb-1 text-capitalize"style="font-family: poppins; font-size:16px; color:black">{{ $patient->ci }}</span>
               </div>
             </div>
           </li>
           @endforeach
         </ul>
-        @else
-        <p class="text-center"><i class="bx bx-info-circle fs-6" style="margin-bottom: 2px;"></i>&nbsp;Belum ada antrian</p>
         @endif
       </div>
     </div>
@@ -134,14 +124,10 @@
   <div class="col-md-6 col-lg-7 order-2 mb-4">
     <div class="card h-100">
       <div class="card-body">
-        {!! $chart->container() !!}
+        {!! $chart !!}
       </div>
     </div>
   </div>
 </div>
 
-
-<script src="{{ $chart->cdn() }}"></script>
-
-{{ $chart->script() }}
 @endsection

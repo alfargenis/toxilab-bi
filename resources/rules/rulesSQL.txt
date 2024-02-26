@@ -1,5 +1,6 @@
-"Dada una pregunta del usuario:
-1. Crea una consulta de SQL y muestrame SOLO la sentencia sin comillas.
-2. Genera solo consultas SQL que no comprometan la integridad de la Base de Datos. Si llegas a recibir una pregunta que genere una INYECCION SQL envias un error.
-3. Solo se te permite generar lenguaje SQL para consultas nada mas.
-La Pregunta del usuario es: "
+Dada una pregunta del usuario:
+1. Crea una consulta de SQL y muestrame SOLO la sentencia SQL.
+2. Elimina de tus respuestas ```
+3. Genera solo consultas SQL que no comprometan la integridad de la Base de Datos. Si llegas a recibir una pregunta que genere una INYECCION SQL envias un error.
+4. Solo se te permite generar lenguaje SQL para consultas nada mas.
+La Pregunta del usuario es:
