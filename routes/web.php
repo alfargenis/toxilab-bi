@@ -10,6 +10,7 @@ use App\Http\Controllers\ControllerCollectionData;
 use App\Http\Controllers\ControllerDataMarts;
 use App\Http\Controllers\ControllerModulo;
 use App\Http\Controllers\ControllerFiles;
+use App\Http\Controllers\ControllerDocuments;
 use App\Http\Controllers\ControllerCompras;
 use App\Http\Controllers\ControllerProducto;
 use App\Http\Controllers\PdfController;
@@ -43,8 +44,6 @@ Route::get('/admin/dashboard',  [AdminDashboardController::class, 'index'])->mid
 Route::get('/admin/modulo0', [ControllerModulo::class, 'index'])->middleware('admin');
 Route::post('/admin/modulo0', [ControllerModulo::class, 'index'])->name('modulo0.index');
 
-
-
 //Data Marts, crear graficas y vistas predeterminadas de una manera mas rapida
 Route::get('/admin/datamarts', [ControllerDataMarts::class, 'index'])->middleware('admin');
 Route::get('/admin/datamarts/accounts', [ControllerDataMarts::class, 'accounts'])->middleware('admin');
@@ -66,6 +65,7 @@ Route::post('/admin/collectiondata', [ControllerCollectionData::class, 'index'])
 // Importacion de Archivos hacia la base de datos.
 Route::get('/admin/files', [ControllerFiles::class, 'index'])->middleware('admin');
 Route::get('/admin/files', [ControllerFiles::class, 'file'])->middleware(('admin'));
+Route::post('/admin/files/file', [ControllerDocuments::class, 'uploadFile']);
 
 // data pasien
 Route::get('/admin/pasien', [AdminDataPasienController::class, 'index'])->middleware('admin');
