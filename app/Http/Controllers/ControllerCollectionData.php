@@ -13,12 +13,16 @@ use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\ControllerDocuments;
 
 class ControllerCollectionData extends Controller
 {
     public function index(Request $request)
     {
-        $data = ['app' => Application::all(), 'title' => 'Collection Data'];
+        $data = ['app' => Application::all(), 'title' => 'Collection Data',
+        'resultados' => CollectionData::where('user_id', auth()->user()->id)->get(),
+        'archivos' => Documents::where('user_id', auth()->user()->id)->get(),
+        ];
 
         if ($request->isMethod('post')) {
             $respuestaGeminis = $request->input('respuestaGeminis', 'No se ha escrito ningun tipo de Consulta');
@@ -28,7 +32,6 @@ class ControllerCollectionData extends Controller
             $collectionData->informe = $respuestaGeminis;
             $collectionData->save();
         }
-        $data['resultados'] = CollectionData::where('user_id', auth()->user()->id)->get();
         return view('admin.collectiondata.index', $data)->with('admin', Auth::user()->name);
     }
 

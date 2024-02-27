@@ -42,29 +42,39 @@
 </div>
 
 @if(isset($respuesta))
-<div class="col-md-12 col-lg-12 order-8 mb-8">
-    <div class="col-md-12 col-lg-12 order-8 mb-8">
-      <div class="card-body">
-        {!! $respuesta !!}
+  <div class="container mt-5"> <!-- Contenedor principal -->
+    <div class="row mb-5"> <!-- Sección de respuesta con margen inferior -->
+      <div class="col-12">
+        <div class="card"> 
+          <div class="card-body">
+            {!! $respuesta !!}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-center"> <!-- Sección del formulario, centrada y con espaciado -->
+      <div class="col-md-8 col-lg-6">
+        <!-- Contenedor del formulario para darle una presentación distinta -->
+        <div class="card">
+          <div class="card-body">
+            <form action="{{ route('collectiondata.index') }}" method="POST" class="p-3">
+              @csrf
+              <div class="mb-3">
+                <label for="nombreInforme" class="form-label">Nombre del Informe</label>
+                <input type="text" class="form-control" name="nombreInforme" id="nombreInforme" placeholder="Nombre del Informe" required>
+              </div>
+              <input type="hidden" name="respuestaGeminis" value="{{ $respuesta }}">
+              <button type="submit" class="btn btn-primary">Guardar Informe</button>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
-<div class="d-flex justify-content-center">
-    <form action="{{ route('collectiondata.index') }}" method="POST" class="p-3" style="max-width: 500px; width: 100%;">
-        @csrf
-        <div class="mb-3">
-            <label for="nombreInforme" class="form-label">Nombre del Informe</label>
-            <input type="text" class="form-control" name="nombreInforme" id="nombreInforme" placeholder="Nombre del Informe" required>
-        </div>
-        <input type="hidden" name="respuestaGeminis" value="{{ $respuesta }}">
-        <button type="submit" class="btn btn-primary">Guardar Informe</button>
-    </form>
-</div>
-
-
 @endif
+
+
 
 
 @endsection
