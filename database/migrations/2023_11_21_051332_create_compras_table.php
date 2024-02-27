@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('compras', function (Blueprint $table) {
             $table->id();
             $table->integer('factura');
+            $table->integer('fecha_compra');
+            $table->decimal('precio_unitario', 8, 2);
+            $table->boolean('status');
             $table->foreignId('id_proveedor')->constrained('proveedores');
             $table->foreignId('id_reactivo')->constrained('reactivos');
             $table->timestamps();

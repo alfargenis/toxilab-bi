@@ -24,7 +24,7 @@ class orinasFactory extends Factory
         return [
             'status' => "ACTIVO",
             'name' => fake()->randomElement(['H','N','M','S']),
-            'id_reactivos' => fake()->numberBetween(11, 16),
+            'id_reactivos' => \App\Models\reactivos::factory(),
             'created_at' => $createdAt,
             'updated_at' => $createdAt,
         ];

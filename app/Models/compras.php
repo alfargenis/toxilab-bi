@@ -19,6 +19,9 @@ class compras extends Model
     {
         $query->when($keyword, function ($query, $keyword) {
             return $query->where('factura', 'like', '%' . $keyword . '%')
+                ->orWhere('fecha_compra', 'like', '%' . $keyword . '%')
+                ->orWhere('precio_unitario', 'like', '%' . $keyword . '%')
+                ->orWhere('status', 'like', '%' . $keyword . '%')
                 ->orWhere('id_proveedor', 'like', '%' . $keyword . '%')
                 ->orWhere('id_reactivo', 'like', '%' . $keyword . '%');
         });

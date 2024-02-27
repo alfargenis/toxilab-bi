@@ -1,10 +1,6 @@
 @extends('layouts.main.index')
 @section('container')
 
-
-@extends('layouts.main.index')
-@section('container')
-
 <style>
   .file-import-container {
     max-width: 500px;

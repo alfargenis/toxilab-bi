@@ -24,7 +24,7 @@ class hemasFactory extends Factory
         return [
             'status' => "ACTIVO",
             'name' => fake()->randomElement(['E','F','J','K']),
-            'id_reactivos' => fake()->numberBetween(1, 13),
+            'id_reactivos' => \App\Models\reactivos::factory(),
             'created_at' => $createdAt,
             'updated_at' => $createdAt,
         ];

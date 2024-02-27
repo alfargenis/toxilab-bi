@@ -24,7 +24,7 @@ class especialesFactory extends Factory
         return [
             'status' => "ACTIVO",
             'name' => fake()->randomElement(['A','B','C','D']),
-            'id_reactivos' => fake()->numberBetween(7, 11),
+            'id_reactivos' => \App\Models\reactivos::factory(),
             'created_at' => $createdAt,
             'updated_at' => $createdAt,
         ];

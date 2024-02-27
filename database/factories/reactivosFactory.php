@@ -25,7 +25,7 @@ class reactivosFactory extends Factory
             'name' => fake()->randomElement(['COCAINA','ANTIGENO PROSTACTICO', 'HIV', 'MARIHUANA','COLESTEROLl','TRIGRICERIDOS','HEMATOLOGIA','CREATININA','DENGUE','TSH','T4','T3','BILIRUBINA','CALCIO','HIERRO','UREA']),
             'marca' => fake()->randomElement(['SIEMEMS', 'WIENER', 'JOMPSOM']),
             'precio' => fake()->numberBetween(10, 25),
-            'id_prueba' => fake()->numberBetween(1, 13),
+            'id_prueba' => \App\Models\pruebas::factory(),
             'created_at' => fake()->dateTimeBetween('-3 years', 'now'),
             'updated_at' => fake()->dateTimeBetween('-3 years', 'now'),
         ];
