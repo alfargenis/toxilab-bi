@@ -9,6 +9,10 @@ use App\Models\QueueNumber;
 use Carbon\Carbon;
 use App\Models\CollectionData; // Asegúrate de importar tu modelo en la parte superior
 use FontLib\Table\Type\name;
+use App\Http\Controllers\UserController;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class ControllerCollectionData extends Controller
 {
@@ -20,15 +24,12 @@ class ControllerCollectionData extends Controller
             $respuestaGeminis = $request->input('respuestaGeminis', 'No se ha escrito ningun tipo de Consulta');
             $collectionData = new CollectionData();
             $collectionData->user_id = auth()->user()->id; // Asume que tienes la autenticación configurada
-            $collectionData->name = 'prueba';
+            $collectionData->name = $request->input('nombreInforme'); // Captura el nombre del informe
             $collectionData->informe = $respuestaGeminis;
             $collectionData->save();
-            session()->flash('success', 'Datos guardados correctamente');
         }
-
         $data['resultados'] = CollectionData::where('user_id', auth()->user()->id)->get();
-
-        return view('admin.collectiondata.index', $data);
+        return view('admin.collectiondata.index', $data)->with('admin', Auth::user()->name);
     }
 
 }

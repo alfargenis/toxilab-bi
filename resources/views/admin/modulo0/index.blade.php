@@ -50,11 +50,19 @@
     </div>
   </div>
 </div>
-<form action="{{ route('collectiondata.index') }}" method="POST">
-    @csrf
-    <input type="hidden" name="respuestaGeminis" value="{{ $respuesta }}">
-    <button type="submit">Guardar Respuesta</button>
-</form>
+
+<div class="d-flex justify-content-center">
+    <form action="{{ route('collectiondata.index') }}" method="POST" class="p-3" style="max-width: 500px; width: 100%;">
+        @csrf
+        <div class="mb-3">
+            <label for="nombreInforme" class="form-label">Nombre del Informe</label>
+            <input type="text" class="form-control" name="nombreInforme" id="nombreInforme" placeholder="Nombre del Informe" required>
+        </div>
+        <input type="hidden" name="respuestaGeminis" value="{{ $respuesta }}">
+        <button type="submit" class="btn btn-primary">Guardar Informe</button>
+    </form>
+</div>
+
 
 @endif
 

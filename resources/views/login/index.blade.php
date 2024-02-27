@@ -32,7 +32,7 @@
           <div class="card-body">
             <div class="app-brand justify-content-center">
               <a href="/" class="app-brand-link gap-2">
-                <img src="@if(Storage::disk('public')->exists('logo-aplikasi')) {{ asset('storage/' . $app[0]->logo) }} @else {{ asset('assets/img/logo-aplikasi/logo.svg') }} @endif" class="h-auto bx-tada" style="width: 28px;" alt="Logo-{{ $app[0]->name_app }}"><span class="app-brand-text text-body fw-bolder text-primary" style="font-size: 1.7rem; font-family: 'Lobster', cursive; letter-spacing:1px;">{{ $app[0]->name_app }}</span>
+                <img src="@if(Storage::disk('public')->exists('logo-aplikasi')) {{ asset('storage/' . $app[0]->logo) }} @else {{ asset('assets/img/logo-aplikasi/logo.svg') }} @endif" class="h-auto bx-tada" style="width: 28px;" alt="Logo-{{ $app[0]->name_app }}"><span class="app-brand-text text-body fw-bolder text-primary" style="font-size: 1.7rem; font-family: 'poppins'; letter-spacing:1px;">{{ $app[0]->name_app }}</span>
               </a>
             </div>
             <h4 class="mb-2">Inicio de sesion.</h4>

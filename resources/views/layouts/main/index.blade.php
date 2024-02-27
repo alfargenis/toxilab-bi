@@ -63,7 +63,7 @@
             <span class="app-brand-logo demo">
               <img src="@if(Storage::disk('public')->exists('logo-aplikasi')) {{ asset('storage/' . $app[0]->logo) }} @else {{ asset('assets/img/logo-aplikasi/logo.svg') }} @endif" class="h-auto" style="width: 28px;" alt="Logo-{{ $app[0]->name_app }}">
             </span>
-            <span class="app-brand-text demo menu-text text-primary fw-bolder ms-2" style="font-family: 'Lobster', cursive; letter-spacing:1px;">{{ $app[0]->name_app }}</span>
+            <span class="app-brand-text demo menu-text text-primary fw-bolder ms-2" style="font-family: 'poppins'; letter-spacing:1px;">{{ $app[0]->name_app }}</span>
           </a>
           <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
             <i class="bx bx-chevron-left bx-sm align-middle"></i>

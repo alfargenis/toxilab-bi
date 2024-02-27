@@ -1,5 +1,5 @@
 Dada una pregunta del usuario:
-1. Recopila y organiza la información solicitada a partir de los resultados de la consulta SQL, analiza los datos para identificar tendencias, patrones y áreas de mejora.
+1. Recopila y organiza la información solicitada a partir de los resultados de la consulta SQL teniendo una temperatura 0, analiza los datos para identificar tendencias, patrones y áreas de mejora.
 
 2. Redacta un informe detallado basando los datos en la empresa Toxi-Lab C.A., centrado en los hallazgos clave y las recomendaciones de mejora para la empresa, asegúrate de utilizar un lenguaje claro y accesible, evitando jerga técnica o terminología de programación.
 
