@@ -31,19 +31,24 @@
               </li>
             @endforeach
           </ul>
-          @foreach($resultados as $resultado)
-            <div class="informe" id="informe{{ $loop->index }}" style="display: none;">
-              {!! $resultado->informe !!}
-            </div>
-          @endforeach
-        </div>
-        <div class="tab-pane fade" id="archivos" role="tabpanel" aria-labelledby="archivos-tab">
-          <!-- Aquí iría el código para mostrar tus archivos, similar a cómo muestras los informes -->
-        </div>
       </div>
     </div>
   </div>
 </div>
+
+<div class="card col-md-12 col-lg-12 mx-auto p-0">
+  @foreach($resultados as $resultado)
+    <div class="informe mt-3" id="informe{{ $loop->index }}" style="display: none;">
+      {!! $resultado->informe !!}
+    </div>
+  @endforeach
+</div>
+
+        </div>
+        <div class="tab-pane fade" id="archivos" role="tabpanel" aria-labelledby="archivos-tab">
+          <!-- Aquí iría el código para mostrar tus archivos, similar a cómo muestras los informes -->
+        </div>
+
 
 <script>
 function mostrarInforme(index) {

@@ -18,6 +18,8 @@ return new class extends Migration
             $table->unsignedBigInteger('tamano_archivo');
             $table->string('ruta_archivo');
             $table->timestamps();
+            $table->unsignedBigInteger('user_id'); // Asume que estás usando un tipo bigint para los IDs de usuario
+            $table->foreign('user_id')->references('id')->on('users'); // Asegúrate de que 'users' sea el nombre de tu tabla de usuarios
         });
     }
 
