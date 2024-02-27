@@ -63,9 +63,8 @@ Route::get('/admin/collectiondata', [ControllerCollectionData::class, 'index'])-
 Route::post('/admin/collectiondata', [ControllerCollectionData::class, 'index'])->name('collectiondata.index');
 
 // Importacion de Archivos hacia la base de datos.
-Route::get('/admin/files', [ControllerFiles::class, 'index'])->middleware('admin');
-Route::get('/admin/files', [ControllerFiles::class, 'file'])->middleware(('admin'));
-Route::post('/admin/files/file', [ControllerDocuments::class, 'uploadFile']);
+Route::get('/admin/files/', [ControllerDocuments::class, 'showUploadForm'])->middleware('admin');
+Route::post('/admin/files/file', [ControllerDocuments::class, 'uploadFile'])->middleware(('admin'));
 
 // data pasien
 Route::get('/admin/pasien', [AdminDataPasienController::class, 'index'])->middleware('admin');
