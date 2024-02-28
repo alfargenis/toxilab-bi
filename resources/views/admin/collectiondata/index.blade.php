@@ -53,8 +53,9 @@
         <div class="row mb-5"> <!-- Sección de respuesta con margen inferior -->
           <div class="col-12">
             <div class="card">
-              <div class="card-body"style="display: none;">
-              <div id="contenedorInforme" class="mt-5" style="display: none;"></div>
+              <!-- Inicialmente oculto hasta que se haga clic en un informe -->
+              <div id="cardBody" class="card-body" style="display: none;">
+                <div id="contenedorInforme" class="mt-5"></div>
               </div>
             </div>
           </div>
@@ -63,14 +64,28 @@
 </div>
 <script>
 function mostrarInforme(index) {
-  const contenedor = document.getElementById('contenedorInforme');
-  contenedor.innerHTML = document.getElementById('informe' + index).innerHTML;
-  contenedor.style.display = 'block';
+  // Referencia al contenedor del informe y al card-body
+  var contenedorInforme = document.getElementById('contenedorInforme');
+  var cardBody = document.getElementById('cardBody');
+
+  // Asegurarse de que todos los informes estén inicialmente ocultos
+  document.querySelectorAll('.informe').forEach(function(el) {
+    el.style.display = 'none';
+  });
+
+  // Mostrar el informe seleccionado
+  var informeSeleccionado = document.getElementById('informe' + index);
+  if (informeSeleccionado) {
+    contenedorInforme.innerHTML = informeSeleccionado.innerHTML;
+    // Mostrar tanto el contenedor del informe como el card-body
+    contenedorInforme.style.display = 'block';
+    cardBody.style.display = 'block';
+  }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('archivos-tab').addEventListener('click', function() {
-    document.getElementById('contenedorInforme').style.display = 'none';
+    document.getElementById('cardBody').style.display = 'none';
   });
 });
 </script>
