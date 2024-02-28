@@ -9,7 +9,8 @@ use App\Models\documents;
 use App\Models\QueueNumber;
 use Carbon\Carbon;
 use Psy\CodeCleaner\AssignThisVariablePass;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use function Laravel\Prompts\alert;
 
 class ControllerDocuments extends Controller
@@ -58,6 +59,7 @@ class ControllerDocuments extends Controller
                         'tipo_archivo' => $tipo_archivo,
                         'tamano_archivo' => $tamano_archivo,
                         'ruta_archivo' => $ruta_destino,
+                        'user_id' => auth()->user()->id,
                     ]);
                     return redirect()->to('/admin/files/')->with('success', 'Se ha cargado el archivo '.$nombre_archivo.' correctamente');
                 } catch (\Exception $e) {
