@@ -22,8 +22,8 @@ class list_reactivosFactory extends Factory
 
         $createdAt = fake()->dateTimeBetween($start, $end);
         return [
-            'id_equipo' => \App\Models\equipos::factory(),
-            'id_reactivos' => \App\Models\reactivos::factory(), 
+            'id_equipo' => fake()->numberBetween(1, 12),
+            'id_reactivos' => fake()->numberBetween(1, 500),
             'created_at' => $createdAt,
             'updated_at' => $createdAt,
         ];
