@@ -12,13 +12,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('asignar', function (Blueprint $table) {
-            $table->id(); // Esto crea automáticamente una columna ID autoincremental.
+            $table->primary('ID');
             $table->integer('idInterfase')->nullable(false);
             $table->integer('idExamen')->nullable(false);
             $table->integer('idExAnalizador')->nullable(false);
             $table->char('Activa', 1)->nullable(false);
             $table->integer('idMetodo')->nullable(false);
-            $table->primary('ID');
             $table->foreign('idExamen')->references('ID')->on('examenes')->onDelete('cascade');
             $table->foreign('idInterfase')->references('ID')->on('interfases')->onDelete('cascade');
             $table->foreign('idMetodo')->references('ID')->on('metodologia')->onDelete('cascade');

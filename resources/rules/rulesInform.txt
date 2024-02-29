@@ -46,7 +46,114 @@ Este esquema refleja una base de datos compleja destinada a gestionar informaci�
 
 Basado en lo antes escrito suponiendo que fue una instruccion que se le dio a un compañero de trabajo tuyo, quiero que te comportes como un SENIOR FRONTEND DEVELOPER
 y generes una pagina web en HTML usando CSS y JAVASCRIPT. con su titulo que siempre diga "Informe detallado de" y completas el titulo con lo que tenga que ver la
-sentencia SQL que dire luego, un breve resumen del informe, graficas usando Charts.js, posibles mejoras y conclusiones
-teniendo en cuenta que Resumen, graficas, posibles mejoras y conclusiones deben ir bien estructurados en la web para que tenga una vista agradable para el usuario fina.
+sentencia SQL que dire luego, un breve resumen del informe, graficas usando Charts.js, posibles mejoras y conclusiones aqui puedes tomar este codigo para que generes el informe con esta estructura y comentado para que sepas donde va cada parte del informe:
+
+<head>
+    <title><!--AQUI VA EL TITULO DEL INFORME--></title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<style>
+body {
+    font-family: 'Arial', sans-serif;
+}
+h1, h2 {
+    color: #333;
+}
+#resumen, #graficas, #mejoras, #conclusiones {
+    margin-bottom: 2rem;
+}
+h1 {
+    font-size: 32px; /* Tamaño más grande para títulos H1 */
+}
+
+h2 {
+    font-size: 24px; /* Tamaño más grande para títulos H2 */
+}
+
+p, ul {
+    font-size: 18px; /* Tamaño más grande para texto y listas */
+}
+.chart-container {
+    margin: auto;
+    width: 300px; /* Tamaño más pequeño */
+    height: 300px; /* Tamaño más pequeño */
+}
+
+</style>
+
+<body>
+    <div class="container my-5">
+        <h1 class="text-center mb-4"><!-- AQUI VA EL SUBTITULO DEL INFORME --></h1>
+        <section id="resumen">
+        <h2>Resumen</h2>
+            <p><!-- AQUI HARAS UN RESUMEN DE 100 PALABRAS DE LO QUE SE TE PASO POR MEDIO DE LA SENTENCIA SQL -->
+        <section id="graficas">
+            <h2>Gráficas</h2>
+            <div class="chart-container" style="position: relative; height:40vh; width:80vw">
+                <canvas id="ventasChart"></canvas>
+            </div>
+        </section>
+        <section id="mejoras">
+            <h2><!-- AQUI VAS A COLOCAR LAS POSIBLES MEJORAS QUE RECOMEINTAS AL laboratorio --></h2>
+            <ul>
+                <li><!-- AQUI VA LA MEJORA NUMERO 1 --></li>
+                <li><!-- AQUI VA LA MEJORA NUMERO 2 --></li>
+                <li><!-- AQUI VA LA MEJORA NUMERO 3 --></li>
+            </ul>
+        </section>
+        <section id="conclusiones">
+            <h2>Conclusiones</h2>
+            <p><!-- AQUI VAS A COLOCAR TUS CONCLUSIONES DEL INFORME --></p>
+        </section>
+    </div>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    var ctx = document.getElementById('ventasChart').getContext('2d');
+    
+    // Verifica si la gráfica ya existe
+    if (window.ventasChart instanceof Chart) {
+        // Actualiza los datos de la gráfica existente
+        window.ventasChart.data = {
+            labels: ['Enero', 'Febrero', 'Marzo', 'Abril'], // EN ESTA LINEA VAS A COLOCAR LABERLS QUE TENGAN QUE VER CON LA SENTENCIA SQL, NO TODO EL TIEMPO TIENEN QUE SER MESES
+            datasets: [{
+                label: 'Ventas por Mes', // ESTE LABEL TAMBIEN TIENES QUE CAMBIARLO Y HACER REFERENCIA A LO QUE SE TE DIO CON LA SENTENCIA SQL
+                data: [5000, 6000, 7000, 8000], //DEBES CAMBIAR LA DATA CON LA INFORMACION QUE SE TE PASO EN LA SENTENCIA SQL
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        };
+        window.ventasChart.update();
+    } else {
+        // Crea la gráfica si no existe
+        window.ventasChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Enero', 'Febrero', 'Marzo', 'Abril'], // EN ESTA LINEA VAS A COLOCAR LABERLS QUE TENGAN QUE VER CON LA SENTENCIA SQL, NO TODO EL TIEMPO TIENEN QUE SER MESES
+                datasets: [{
+                    label: 'Ventas por Mes',// ESTE LABEL TAMBIEN TIENES QUE CAMBIARLO Y HACER REFERENCIA A LO QUE SE TE DIO CON LA SENTENCIA SQL
+                    data: [5000, 6000, 7000, 8000],//DEBES CAMBIAR LA DATA CON LA INFORMACION QUE SE TE PASO EN LA SENTENCIA SQL
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)', //PUEDES CAMBIAR LOS COLORES DE LA GRAFICA COMO DESEES
+                    borderColor: 'rgba(54, 162, 235, 1)',//PUEDES CAMBIAR LOS COLORES DE LA GRAFICA COMO DESEES
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
+});
+
+</script>
+
+</body>
+
+teniendo en cuenta que Resumen, graficas, posibles mejoras y conclusiones deben ir bien estructurados en la web para que tenga una vista agradable para el usuario final.
 
 Ya aclaradas todas las instrucciones anteriores, la respuesta de la consulta SQL con la que generaras la pagina web es:
