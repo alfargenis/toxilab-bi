@@ -9,12 +9,11 @@ use App\Models\User;
 use App\Models\Patient;
 use App\Models\proveedores;
 use App\Models\pruebas;
-use App\Models\especiales;
+use App\Models\equipos;
 use App\Models\QueueNumber;
 use App\Models\reactivos;
-use App\Models\orinas;
+use App\Models\list_reactivos;
 use App\Models\compras;
-use App\Models\hemas;
 
 class DatabaseSeeder extends Seeder
 {
@@ -38,9 +37,8 @@ class DatabaseSeeder extends Seeder
         pruebas::factory(124)->create();
         reactivos::factory(500)->create();
         compras::factory(78)->create();
-        especiales::factory(66)->create();
-        hemas::factory(93)->create();
-        orinas::factory(100)->create();
+        equipos::factory(12)->create();
+        list_reactivos::factory(725)->create();
 
         User::create([
             'name' => 'Argenis Rodriguez',

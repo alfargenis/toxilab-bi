@@ -8,7 +8,7 @@ use Carbon\Carbon;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Patient>
  */
-class hemasFactory extends Factory
+class list_reactivosFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -22,9 +22,8 @@ class hemasFactory extends Factory
 
         $createdAt = fake()->dateTimeBetween($start, $end);
         return [
-            'status' => "ACTIVO",
-            'name' => fake()->randomElement(['E','F','J','K']),
-            'id_reactivos' => \App\Models\reactivos::factory(),
+            'id_equipo' => \App\Models\equipos::factory(),
+            'id_reactivos' => \App\Models\reactivos::factory(), 
             'created_at' => $createdAt,
             'updated_at' => $createdAt,
         ];
