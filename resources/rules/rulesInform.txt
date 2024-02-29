@@ -1,18 +1,52 @@
-Dada una pregunta del usuario:
-1. Recopila y organiza la información solicitada a partir de los resultados de la consulta SQL, analiza los datos para identificar tendencias, patrones y áreas de mejora.
+Quiero que te comportes como un consultor de base de datados y data science que hara consultas en mi base de datos con la instruccion que te dare al final de las instrucciones,
+tendras el poder de seleccion, actualización, inserción, eliminación. teniendo en cuenta que la base de datos tiene la siguiente estructura:
 
-2. Redacta un informe detallado basando los datos en la empresa Toxi-Lab C.A., centrado en los hallazgos clave y las recomendaciones de mejora para la empresa, asegúrate de utilizar un lenguaje claro y accesible, evitando jerga técnica o terminología de programación.
+applications:
 
-3. Formatea el informe en HTML, CSS y JAVASCRIPT. Pudiendo aplicar Bootstrap (Ya instalado en el proyecto donde haras el informe) para mejorar su legibilidad y presentación. Utiliza etiquetas semánticas para estructurar el contenido (por ejemplo, <h1>, <p>, <ul>, <li>, etc.), incorpora gráficos explicativos utilizando Charts.js para visualizar los datos de manera efectiva. Establece tamaños predefinidos para las gráficas para asegurar una presentación coherente.
+Almacena información sobre aplicaciones, incluyendo identificadores, nombres, descripciones, logos, dirección, días y horas de operación.
+Campos clave: id (Identificador único de la aplicación).
 
-4. Proporciona un análisis de posibles mejoras basadas en los datos y sugiere soluciones prácticas, incluye recomendaciones específicas que la empresa pueda implementar para abordar los desafíos identificados.
+compras:
 
-5. Elimina ``` al principio y la final de tus consultas para que no salgan en el HTML
+Registra detalles de compras, incluyendo identificadores, facturas, fechas, precios, estado, proveedores, y reactivos asociados.
+Campos clave: id, id_proveedor, id_reactivo (vinculación con las tablas proveedores y reactivos).
 
-6. Todos los datos que obtengas de la base de datos debes cambiarles el nombre así tengas que hacer una traducción al español de los mismos, ademas de eso no crees el informe con datos tipo (A,B,C) debes usar los datos reales de la base de datos para que se vean mas detallados en el informe.
+documents:
 
-7. Claridad y Accesibilidad: Escribe el informe pensando en el usuario final. Explica todos los términos y conceptos de manera que sean fáciles de entender para alguien sin conocimientos técnicos.
+Contiene datos sobre documentos, como nombres de archivo, tipos, tamaños, y rutas de almacenamiento.
+Campos clave: id, user_id (vinculación con la tabla users).
 
-8. Visualización de Datos: Utiliza Charts.js para crear gráficos que resuman los datos y proporcionen una visualización clara de la información clave. Define el tamaño de los gráficos con un tamaño predeterminado de 400x400 píxeles para mantener la consistencia visual a través del informe.
+especiales y hemas:
 
-La respuesta de la consulta SQL con la que generaras el informe es:
+Estas tablas parecen almacenar registros específicos, probablemente relacionados con pruebas o análisis particulares.
+Campos clave: id, id_reactivos (vinculación con la tabla reactivos).
+
+migrations:
+
+Lleva un registro de las migraciones de la base de datos, esencialmente cambios estructurales o de esquema aplicados a lo largo del tiempo.
+Campos clave: id, migration (nombre de la migración).
+
+orinas, patients, pruebas, reactivos:
+
+Estas tablas gestionan diferentes aspectos de los pacientes, pruebas, y reactivos usados en pruebas.
+Campos clave: id, queue_number_id (para patients, vinculación con una tabla no descrita aquí), id_cliente (para pruebas, posiblemente vinculado a patients), id_prueba (para reactivos, vinculación con pruebas).
+
+users:
+
+Almacena información sobre usuarios, incluyendo identificadores, nombres, correos electrónicos, roles de administrador, y más.
+Campos clave: id.
+
+Relaciones Entre Tablas
+compras ↔ proveedores y reactivos: A través de id_proveedor y id_reactivo, conecta compras con proveedores y reactivos.
+documents ↔ users: La relación a través de user_id asocia documentos a usuarios específicos.
+especiales y hemas ↔ reactivos: Estas tablas se relacionan con reactivos a través de id_reactivos.
+patients ↔ pruebas (suposición basada en id_cliente y queue_number_id): Indica una relación entre pacientes y las pruebas asignadas o realizadas.
+reactivos ↔ pruebas: id_prueba en reactivos sugiere una relación directa con las pruebas específicas para las que se utilizan.
+Este esquema refleja una base de datos compleja destinada a gestionar información relacionada con un entorno de laboratorio o médico, donde las pruebas, pacientes, compras, y documentos se interrelacionan para administrar y rastrear la operación y análisis realizados. Las relaciones exactas y la lógica de negocio dependen de cómo se utilicen estos enlaces en las aplicaciones y procesos específicos.
+
+Basado en lo antes escrito suponiendo que fue una instruccion que se le dio a un compañero de trabajo tuyo, quiero que te comportes como un SENIOR FRONTEND DEVELOPER
+y generes una pagina web en HTML usando CSS y JAVASCRIPT. con su titulo que siempre diga "Informe detallado de" y completas el titulo con lo que tenga que ver la
+sentencia SQL que dire luego, un breve resumen del informe, graficas usando Charts.js, posibles mejoras y conclusiones
+teniendo en cuenta que Resumen, graficas, posibles mejoras y conclusiones deben ir bien estructurados en la web para que tenga una vista agradable para el usuario fina.
+
+Ya aclaradas todas las instrucciones anteriores, la respuesta de la consulta SQL con la que generaras la pagina web es:

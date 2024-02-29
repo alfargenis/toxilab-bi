@@ -1,0 +1,91 @@
+@extends('layouts.main.index')
+
+@section('container')
+<head>
+    <title>Informe detallado de Desempeño de Ventas</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<style>
+body {
+    font-family: 'Arial', sans-serif;
+}
+h1, h2 {
+    color: #333;
+}
+#resumen, #graficas, #mejoras, #conclusiones {
+    margin-bottom: 2rem;
+}
+h1 {
+    font-size: 32px; /* Tamaño más grande para títulos H1 */
+}
+
+h2 {
+    font-size: 24px; /* Tamaño más grande para títulos H2 */
+}
+
+p, ul {
+    font-size: 18px; /* Tamaño más grande para texto y listas */
+}
+.chart-container {
+    margin: auto;
+    width: 300px; /* Tamaño más pequeño */
+    height: 300px; /* Tamaño más pequeño */
+}
+
+}
+</style>
+
+<body>
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Informe detallado de Desempeño de Ventas</h1>
+        <section id="resumen">
+        <h2>Resumen</h2>
+            <p>Este informe detallado explora en profundidad el desempeño de ventas de Toxi-Lab C.A. durante el último trimestre, identificando tendencias clave, desafíos enfrentados y oportunidades de crecimiento. A través de un análisis exhaustivo de los datos de ventas, hemos podido discernir patrones significativos que influencian los resultados financieros y operativos de la empresa. Las recomendaciones estratégicas propuestas buscan capitalizar las fortalezas identificadas y abordar las áreas de mejora para asegurar un crecimiento sostenido y mejorar la rentabilidad en el futuro.</p>
+        </section>
+        <section id="graficas">
+            <h2>Gráficas</h2>
+            <div class="chart-container" style="position: relative; height:40vh; width:80vw">
+                <canvas id="ventasChart"></canvas>
+            </div>
+        </section>
+        <section id="mejoras">
+            <h2>Posibles Mejoras</h2>
+            <ul>
+                <li>Optimización de la cadena de suministro para reducir costos.</li>
+                <li>Enfoque en productos de alta demanda para maximizar beneficios.</li>
+                <li>Implementación de estrategias de marketing digital para aumentar la visibilidad.</li>
+            </ul>
+        </section>
+        <section id="conclusiones">
+            <h2>Conclusiones</h2>
+            <p>La adopción de las mejoras sugeridas no solo optimizará el desempeño de ventas sino también fortalecerá la posición de Toxi-Lab C.A. en el mercado.</p>
+        </section>
+    </div>
+</body>
+
+<script>document.addEventListener('DOMContentLoaded', function() {
+    var ctx = document.getElementById('ventasChart').getContext('2d');
+    var ventasChart = new Chart(ctx, {
+        type: 'bar', // Tipo de gráfico
+        data: {
+            labels: ['Enero', 'Febrero', 'Marzo', 'Abril'], // Ejemplo de etiquetas mensuales
+            datasets: [{
+                label: 'Ventas por Mes',
+                data: [5000, 6000, 7000, 8000], // Datos hipotéticos
+                backgroundColor: 'rgba(54, 162, 235, 0.2)', // Color de fondo
+                borderColor: 'rgba(54, 162, 235, 1)', // Color del borde
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+});</script>
+
+@endsection

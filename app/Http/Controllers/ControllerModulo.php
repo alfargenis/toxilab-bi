@@ -17,7 +17,6 @@ class ControllerModulo extends Controller
             $url = env('GEMINIS_API_URL') . '?key=' . env('GEMINIS_API_KEY'); // Construye la URL usando la variable de entorno
             $consultaSQL = $this->cRUL($this->dataStructure($textocompleto),$url); //Generea consulta SQL
             $resultadosConsulta = DB::select(trim(str_replace(["```", "sql", "```html"], "", $consultaSQL))); //Realiza la consulta SQL
-            // trim($respuestaFormateada = $this->enviarResultadosAGeminis($resultadosConsulta, $url));//Genera el informe
             trim(str_replace(["```", "sql", "```html"], "", $respuestaFormateada = $this->enviarResultadosAGeminis($resultadosConsulta, $url)));
         return view('admin.modulo0.index', ['app' => Application::all(),'title' => 'Consultas','respuesta' => $respuestaFormateada,]);
             }
