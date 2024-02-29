@@ -9,6 +9,7 @@ class documents extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+    protected $fillable = ['nombre_archivo', 'tipo_archivo', 'tamano_archivo', 'ruta_archivo', 'user_id'];
 
     public function queueNumber()
     {

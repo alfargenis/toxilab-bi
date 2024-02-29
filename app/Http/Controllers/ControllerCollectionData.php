@@ -4,16 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Application;
-use App\Models\Patient;
-use App\Models\QueueNumber;
-use Carbon\Carbon;
 use App\Models\CollectionData; // Asegúrate de importar tu modelo en la parte superior
-use FontLib\Table\Type\name;
-use App\Http\Controllers\UserController;
-use App\Models\User;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\ControllerDocuments;
+use App\Models\documents; // Asegúrate de usar la ruta correcta al modelo // Importa también el modelo CollectionData si aún no lo has hecho
+
 
 class ControllerCollectionData extends Controller
 {
@@ -21,7 +15,7 @@ class ControllerCollectionData extends Controller
     {
         $data = ['app' => Application::all(), 'title' => 'Collection Data',
         'resultados' => CollectionData::where('user_id', auth()->user()->id)->get(),
-        'archivos' => Documents::where('user_id', auth()->user()->id)->get(),
+        'archivos' => documents::where('user_id', auth()->user()->id)->get(),
         ];
 
         if ($request->isMethod('post')) {
