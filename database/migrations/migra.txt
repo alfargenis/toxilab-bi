@@ -1,53 +1,6 @@
-CREATE TABLE [dbo].[AlarmaExa] (
-    [ID]        INT           IDENTITY (1, 1) NOT NULL,
-    [idMuestra] VARCHAR (12)  NOT NULL,
-    [idExamen]  INT           NOT NULL,
-    [Fecha]     DATETIME      NOT NULL,
-    [Status]    CHAR (1)      NOT NULL,
-    [Alarma]    VARCHAR (250) NOT NULL,
-    [idUsuario] INT           NOT NULL,
-    CONSTRAINT [PK_AlarmaExa] PRIMARY KEY CLUSTERED ([ID] ASC)
-);
-CREATE TABLE [dbo].[Antibiograma] (
-    [idBac]  INT          NOT NULL,
-    [idMOrg] INT          NOT NULL,
-    [idAnt]  INT          NOT NULL,
-    [Metodo] CHAR (1)     NOT NULL,
-    [Result] VARCHAR (15) NOT NULL,
-    [Sens]   CHAR (1)     NOT NULL
-);
-CREATE TABLE [dbo].[Asignar] (
-    [ID]             INT      IDENTITY (1, 1) NOT NULL,
-    [idInterfase]    INT      NOT NULL,
-    [idExamen]       INT      NOT NULL,
-    [idExAnalizador] INT      NOT NULL,
-    [Activa]         CHAR (1) NOT NULL,
-    [idMetodo]       INT      NOT NULL,
-    CONSTRAINT [PK_Asignar] PRIMARY KEY CLUSTERED ([ID] ASC),
-    CONSTRAINT [FK_Asignar_Examenes] FOREIGN KEY ([idExamen]) REFERENCES [dbo].[Examenes] ([ID]),
-    CONSTRAINT [FK_Asignar_Interfases] FOREIGN KEY ([idInterfase]) REFERENCES [dbo].[Interfases] ([ID]),
-    CONSTRAINT [FK_Asignar_Metodologia] FOREIGN KEY ([idMetodo]) REFERENCES [dbo].[Metodologia] ([ID])
-);
 
 
-GO
-CREATE NONCLUSTERED INDEX [IX_idInterface]
-    ON [dbo].[Asignar]([idInterfase] ASC, [idExamen] ASC, [idMetodo] ASC) WITH (FILLFACTOR = 90);
 
-CREATE TABLE [dbo].[Auditoria] (
-    [ID]        INT          IDENTITY (1, 1) NOT NULL,
-    [Area]      CHAR (3)     NOT NULL,
-    [TipEve]    CHAR (3)     NOT NULL,
-    [Numero]    VARCHAR (20) NOT NULL,
-    [Numero2]   VARCHAR (20) NOT NULL,
-    [Imec]      CHAR (1)     NOT NULL,
-    [Fecha]     DATETIME     NOT NULL,
-    [Descrip]   VARCHAR (50) NOT NULL,
-    [Estacion]  VARCHAR (20) NOT NULL,
-    [idUsuario] INT          NOT NULL,
-    [StatusExa] VARCHAR (1)  NOT NULL,
-    CONSTRAINT [PK_Auditoria] PRIMARY KEY CLUSTERED ([ID] ASC)
-);
 
 
 GO
