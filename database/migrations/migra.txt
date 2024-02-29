@@ -1,0 +1,2386 @@
+CREATE TABLE [dbo].[AlarmaExa] (
+    [ID]        INT           IDENTITY (1, 1) NOT NULL,
+    [idMuestra] VARCHAR (12)  NOT NULL,
+    [idExamen]  INT           NOT NULL,
+    [Fecha]     DATETIME      NOT NULL,
+    [Status]    CHAR (1)      NOT NULL,
+    [Alarma]    VARCHAR (250) NOT NULL,
+    [idUsuario] INT           NOT NULL,
+    CONSTRAINT [PK_AlarmaExa] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+CREATE TABLE [dbo].[Antibiograma] (
+    [idBac]  INT          NOT NULL,
+    [idMOrg] INT          NOT NULL,
+    [idAnt]  INT          NOT NULL,
+    [Metodo] CHAR (1)     NOT NULL,
+    [Result] VARCHAR (15) NOT NULL,
+    [Sens]   CHAR (1)     NOT NULL
+);
+CREATE TABLE [dbo].[Asignar] (
+    [ID]             INT      IDENTITY (1, 1) NOT NULL,
+    [idInterfase]    INT      NOT NULL,
+    [idExamen]       INT      NOT NULL,
+    [idExAnalizador] INT      NOT NULL,
+    [Activa]         CHAR (1) NOT NULL,
+    [idMetodo]       INT      NOT NULL,
+    CONSTRAINT [PK_Asignar] PRIMARY KEY CLUSTERED ([ID] ASC),
+    CONSTRAINT [FK_Asignar_Examenes] FOREIGN KEY ([idExamen]) REFERENCES [dbo].[Examenes] ([ID]),
+    CONSTRAINT [FK_Asignar_Interfases] FOREIGN KEY ([idInterfase]) REFERENCES [dbo].[Interfases] ([ID]),
+    CONSTRAINT [FK_Asignar_Metodologia] FOREIGN KEY ([idMetodo]) REFERENCES [dbo].[Metodologia] ([ID])
+);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_idInterface]
+    ON [dbo].[Asignar]([idInterfase] ASC, [idExamen] ASC, [idMetodo] ASC) WITH (FILLFACTOR = 90);
+
+CREATE TABLE [dbo].[Auditoria] (
+    [ID]        INT          IDENTITY (1, 1) NOT NULL,
+    [Area]      CHAR (3)     NOT NULL,
+    [TipEve]    CHAR (3)     NOT NULL,
+    [Numero]    VARCHAR (20) NOT NULL,
+    [Numero2]   VARCHAR (20) NOT NULL,
+    [Imec]      CHAR (1)     NOT NULL,
+    [Fecha]     DATETIME     NOT NULL,
+    [Descrip]   VARCHAR (50) NOT NULL,
+    [Estacion]  VARCHAR (20) NOT NULL,
+    [idUsuario] INT          NOT NULL,
+    [StatusExa] VARCHAR (1)  NOT NULL,
+    CONSTRAINT [PK_Auditoria] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_StatusExa]
+    ON [dbo].[Auditoria]([StatusExa] ASC) WITH (FILLFACTOR = 90);
+
+CREATE TABLE [dbo].[AxInterface] (
+    [ID]          INT          IDENTITY (1, 1) NOT NULL,
+    [idInterface] INT          NOT NULL,
+    [idCodigo]    VARCHAR (10) NOT NULL,
+    [Descrip]     VARCHAR (50) NOT NULL,
+    [Status]      CHAR (1)     NOT NULL,
+    [Activo]      CHAR (1)     NOT NULL,
+    CONSTRAINT [PK_AxInterface] PRIMARY KEY CLUSTERED ([idInterface] ASC, [idCodigo] ASC)
+);
+
+
+CREATE TABLE [dbo].[BacAnti] (
+    [ID]      INT          NOT NULL,
+    [Codigo]  VARCHAR (50) NOT NULL,
+    [Descrip] VARCHAR (35) NOT NULL,
+    [Grupo]   VARCHAR (25) NOT NULL,
+    [Activo]  CHAR (1)     NOT NULL
+);
+
+CREATE TABLE [dbo].[BacAntibioticos] (
+    [ID]         INT            IDENTITY (1, 1) NOT NULL,
+    [Codigo]     VARCHAR (3)    NULL,
+    [Descrip2]   VARCHAR (100)  NULL,
+    [Descrip]    VARCHAR (100)  NULL,
+    [Carga]      VARCHAR (20)   NULL,
+    [AntLocal]   CHAR (1)       NULL,
+    [Activo]     CHAR (1)       NULL,
+    [GUIDELINES] NVARCHAR (255) NULL,
+    [CLSI]       VARCHAR (10)   NULL,
+    [SFM]        VARCHAR (10)   NULL,
+    [SRGA]       VARCHAR (10)   NULL,
+    [BSAC]       NVARCHAR (255) NULL,
+    [DIN]        NVARCHAR (255) NULL,
+    [NEO]        NVARCHAR (255) NULL,
+    [AFA]        NVARCHAR (255) NULL,
+    [ABX_NUMBER] FLOAT (53)     NULL,
+    [BETALACTAM] NVARCHAR (255) NULL,
+    [CLASS]      NVARCHAR (255) NULL,
+    [SUBCLASS]   NVARCHAR (255) NULL,
+    [PROF_CLASS] NVARCHAR (255) NULL,
+    [CLSI_ORDER] NVARCHAR (255) NULL,
+    CONSTRAINT [PK_BacAntibioticos] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+
+CREATE TABLE [dbo].[BacAntxP] (
+    [idFam] INT NOT NULL,
+    [idAnt] INT NOT NULL,
+    CONSTRAINT [PK_BacAntxP] PRIMARY KEY CLUSTERED ([idFam] ASC, [idAnt] ASC)
+);
+
+CREATE TABLE [dbo].[BacColoracion] (
+    [ID]      INT          NOT NULL,
+    [Descrip] VARCHAR (35) NOT NULL,
+    CONSTRAINT [PK_BacColoracion] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+
+CREATE TABLE [dbo].[BacExamen] (
+    [ID]      INT          NOT NULL,
+    [Descrip] VARCHAR (50) NOT NULL,
+    [Activo]  CHAR (1)     NOT NULL
+);
+CREATE TABLE [dbo].[BacFMOrg] (
+    [ID]      INT          IDENTITY (1, 1) NOT NULL,
+    [Codigo]  VARCHAR (10) NOT NULL,
+    [Descrip] VARCHAR (30) NOT NULL,
+    CONSTRAINT [PK_BacFMOrg] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+
+CREATE TABLE [dbo].[BacFuente] (
+    [ID]      INT          IDENTITY (1, 1) NOT NULL,
+    [Descrip] VARCHAR (50) NOT NULL,
+    [Activo]  CHAR (1)     NOT NULL,
+    CONSTRAINT [PK_BacFuente] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+
+CREATE TABLE [dbo].[BacGram] (
+    [ID]      INT           IDENTITY (1, 1) NOT NULL,
+    [idBCol]  INT           NOT NULL,
+    [Descrip] VARCHAR (100) NOT NULL,
+    [Activo]  CHAR (1)      NOT NULL,
+    CONSTRAINT [PK_BacGram] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+
+CREATE TABLE [dbo].[BacMicro] (
+    [ID]      INT          NOT NULL,
+    [Codigo]  VARCHAR (10) NOT NULL,
+    [Descrip] VARCHAR (35) NOT NULL,
+    [Grupo]   VARCHAR (20) NOT NULL,
+    [Activo]  CHAR (1)     NOT NULL
+);
+
+CREATE TABLE [dbo].[BacMicroOrganismos] (
+    [ID]        INT          IDENTITY (1, 1) NOT NULL,
+    [Codigo]    VARCHAR (10) NOT NULL,
+    [idFamilia] INT          NOT NULL,
+    [Descrip]   VARCHAR (75) NOT NULL,
+    [Activo]    CHAR (1)     NOT NULL,
+    CONSTRAINT [PK_BacMicroOrganismos] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+
+
+CREATE TABLE [dbo].[BacMicxP] (
+    [idFam] INT NOT NULL,
+    [idMic] INT NOT NULL
+);
+
+
+CREATE TABLE [dbo].[BacMOrgxAnt] (
+    [idBac]  INT        NOT NULL,
+    [idMOrg] INT        NOT NULL,
+    [Metodo] CHAR (1)   NOT NULL,
+    [Blee]   CHAR (1)   NOT NULL,
+    [Porc]   FLOAT (53) NOT NULL,
+    CONSTRAINT [PK_BacMOrgxAnt] PRIMARY KEY CLUSTERED ([idBac] ASC, [idMOrg] ASC)
+);
+
+
+CREATE TABLE [dbo].[BacMuestra] (
+    [ID]      INT          IDENTITY (1, 1) NOT NULL,
+    [Descrip] VARCHAR (35) NOT NULL,
+    [Activo]  CHAR (1)     NOT NULL,
+    CONSTRAINT [PK_BacMuestra] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+
+
+CREATE TABLE [dbo].[BacPCorte] (
+    [ID]      INT          IDENTITY (1, 1) NOT NULL,
+    [idAnt]   INT          NOT NULL,
+    [idMOrg]  INT          NOT NULL,
+    [Metodo]  CHAR (1)     NOT NULL,
+    [PCorteR] VARCHAR (10) NOT NULL,
+    [PCorteI] VARCHAR (10) NOT NULL,
+    [PCorteS] VARCHAR (10) NOT NULL,
+    CONSTRAINT [PK_BacPCorte] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+
+CREATE TABLE [dbo].[BacRColor] (
+    [idBac]   INT          NOT NULL,
+    [idColor] INT          NOT NULL,
+    [Item]    INT          NOT NULL,
+    [Descrip] VARCHAR (50) NOT NULL,
+    [Cant]    VARCHAR (25) NOT NULL,
+    CONSTRAINT [PK_BacRColor] PRIMARY KEY CLUSTERED ([idBac] ASC, [idColor] ASC, [Item] ASC)
+);
+
+
+CREATE TABLE [dbo].[BacReporte] (
+    [ID]      INT           IDENTITY (1, 1) NOT NULL,
+    [Descrip] VARCHAR (50)  NOT NULL,
+    [Reporte] VARCHAR (512) NOT NULL,
+    CONSTRAINT [PK_BacReporte] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+
+
+CREATE TABLE [dbo].[Bacteriologia] (
+    [ID]        INT            IDENTITY (1, 1) NOT NULL,
+    [idMuestra] VARCHAR (12)   NOT NULL,
+    [idExamen]  INT            NOT NULL,
+    [idExaInt]  INT            NOT NULL,
+    [idEquipo]  INT            NOT NULL,
+    [idBMue]    INT            NOT NULL,
+    [idBFue]    INT            NOT NULL,
+    [Colonias]  VARCHAR (100)  NOT NULL,
+    [Resultado] VARCHAR (2048) NOT NULL,
+    [idCol1]    INT            NOT NULL,
+    [Color1]    VARCHAR (200)  NOT NULL,
+    [idCol2]    INT            NOT NULL,
+    [Color2]    VARCHAR (200)  NOT NULL,
+    [idMicro1]  INT            NOT NULL,
+    [idMicro2]  INT            NOT NULL,
+    [idMicro3]  INT            NOT NULL,
+    [idMicro4]  INT            NOT NULL,
+    [idMicro5]  INT            NOT NULL,
+    [Micro1]    VARCHAR (50)   NOT NULL,
+    [Micro2]    VARCHAR (50)   NOT NULL,
+    [Micro3]    VARCHAR (50)   NOT NULL,
+    [Micro4]    VARCHAR (50)   NOT NULL,
+    [Micro5]    VARCHAR (50)   NOT NULL,
+    [Met1]      VARCHAR (1)    NOT NULL,
+    [Met2]      VARCHAR (1)    NOT NULL,
+    [Met3]      VARCHAR (1)    NOT NULL,
+    [Met4]      VARCHAR (1)    NOT NULL,
+    [Met5]      VARCHAR (1)    NOT NULL,
+    [Blee1]     CHAR (1)       NOT NULL,
+    [Blee2]     CHAR (1)       NOT NULL,
+    [Blee3]     CHAR (1)       NOT NULL,
+    [Blee4]     CHAR (1)       NOT NULL,
+    [Blee5]     CHAR (1)       NOT NULL,
+    [Porc1]     INT            NOT NULL,
+    [Porc2]     INT            NOT NULL,
+    [Porc3]     INT            NOT NULL,
+    [Porc4]     INT            NOT NULL,
+    [Porc5]     INT            NOT NULL,
+    [Observ]    VARCHAR (2048) NOT NULL,
+    CONSTRAINT [PK_Bacteriologia] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+
+CREATE TABLE [dbo].[Bancos] (
+    [ID]      INT          IDENTITY (1, 1) NOT NULL,
+    [CodExt]  VARCHAR (15) NOT NULL,
+    [Descrip] VARCHAR (35) NOT NULL,
+    [Activo]  CHAR (1)     NOT NULL,
+    CONSTRAINT [PK_Bancos] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+
+CREATE TABLE [dbo].[Conclusiones] (
+    [ID]      INT            IDENTITY (1, 1) NOT NULL,
+    [Descrip] VARCHAR (100)  NOT NULL,
+    [Memo]    VARCHAR (8000) NOT NULL,
+    [DIConc]  CHAR (1)       NOT NULL,
+    CONSTRAINT [PK_Conclusiones] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+
+
+CREATE TABLE [dbo].[Configuracion] (
+    [ID]              INT            NOT NULL,
+    [DigitosMue]      INT            NOT NULL,
+    [LetrasServExt]   VARCHAR (10)   NOT NULL,
+    [LetrasConv]      VARCHAR (10)   NOT NULL,
+    [CompaniaExt]     CHAR (1)       NOT NULL,
+    [Contribuyente]   CHAR (1)       NOT NULL,
+    [IngxInterfase]   CHAR (1)       NOT NULL,
+    [EnvPreOrden]     CHAR (1)       NOT NULL,
+    [EnvFactura]      CHAR (1)       NOT NULL,
+    [EnvPago]         CHAR (1)       NOT NULL,
+    [EnvNCredito]     CHAR (1)       NOT NULL,
+    [EnvNDebito]      CHAR (1)       NOT NULL,
+    [EnvResultado]    CHAR (1)       NOT NULL,
+    [EnvPaciente]     CHAR (1)       NOT NULL,
+    [EnvAnuPreorden]  CHAR (1)       NOT NULL,
+    [MostrarAlarma]   CHAR (1)       NOT NULL,
+    [IPServSMTP]      VARCHAR (15)   NOT NULL,
+    [UserServSMTP]    VARCHAR (50)   NOT NULL,
+    [DigitosClave]    INT            NOT NULL,
+    [IPInfoKey]       VARCHAR (15)   NOT NULL,
+    [Historico]       CHAR (1)       NOT NULL,
+    [FecRecMon]       SMALLDATETIME  NOT NULL,
+    [NTxDias]         INT            NOT NULL,
+    [PassServSMTP]    VARCHAR (50)   NOT NULL,
+    [PortServSMTP]    INT            NOT NULL,
+    [lFact]           INT            NOT NULL,
+    [Contingencia]    CHAR (1)       NOT NULL,
+    [EnvXmlPac]       CHAR (1)       NOT NULL,
+    [EnvXmlRes]       CHAR (1)       NOT NULL,
+    [EnvXmlPOrd]      CHAR (1)       NOT NULL,
+    [EnvXmlFac]       CHAR (1)       NOT NULL,
+    [EnvXmlPag]       CHAR (1)       NOT NULL,
+    [EnvXmlNCr]       CHAR (1)       NOT NULL,
+    [EnvXmlNDe]       CHAR (1)       NOT NULL,
+    [EnvXmlConv]      CHAR (1)       NOT NULL,
+    [EnvXmlSConv]     CHAR (1)       NOT NULL,
+    [BloqImp]         CHAR (1)       NOT NULL,
+    [MensBloqImp]     VARCHAR (250)  NOT NULL,
+    [EnvOrdIM]        CHAR (1)       NOT NULL,
+    [ImpFacExo]       CHAR (1)       NOT NULL,
+    [IPServPOP]       VARCHAR (50)   NOT NULL,
+    [UserServPOP]     VARCHAR (50)   NOT NULL,
+    [PassServPOP]     VARCHAR (50)   NOT NULL,
+    [PortServPOP]     INT            NOT NULL,
+    [TipAutSMTP]      INT            NOT NULL,
+    [ForPDF]          CHAR (1)       NOT NULL,
+    [BloqIng]         CHAR (1)       NOT NULL,
+    [MueInicial]      INT            NOT NULL,
+    [TipUbicacion]    CHAR (1)       NOT NULL,
+    [ValIngCli]       CHAR (1)       NOT NULL,
+    [PorcTMue]        MONEY          NOT NULL,
+    [EliminarTRes]    CHAR (1)       NOT NULL,
+    [ImpDeuda]        CHAR (1)       NOT NULL,
+    [ImpCaratula]     CHAR (1)       NOT NULL,
+    [ImpTMuestra]     CHAR (1)       NOT NULL,
+    [VI]              CHAR (1)       NOT NULL,
+    [MEmb]            CHAR (1)       NOT NULL,
+    [MDisc]           CHAR (1)       NOT NULL,
+    [M3Edad]          CHAR (1)       NOT NULL,
+    [BarCode]         CHAR (1)       NOT NULL,
+    [Sucursales]      CHAR (1)       NOT NULL,
+    [CCorreo]         VARCHAR (100)  NOT NULL,
+    [ImpEdad]         CHAR (1)       NOT NULL,
+    [PDCorreo]        VARCHAR (2048) NOT NULL,
+    [MMetodo]         CHAR (1)       NOT NULL,
+    [lPOrd]           INT            NOT NULL,
+    [EnvPDFRes]       CHAR (1)       NOT NULL,
+    [PiePagRef]       VARCHAR (8000) NOT NULL,
+    [FecActCost]      DATETIME       NOT NULL,
+    [FecActDWHOrd]    DATETIME       NOT NULL,
+    [URLServSMS]      VARCHAR (250)  NOT NULL,
+    [PassServSMS]     VARCHAR (25)   NOT NULL,
+    [SendSMS]         CHAR (1)       NOT NULL,
+    [UserServSMS]     VARCHAR (50)   NOT NULL,
+    [xStringSMS]      VARCHAR (150)  NOT NULL,
+    [ImpResultado]    CHAR (2)       NOT NULL,
+    [ImpFactura]      CHAR (2)       NOT NULL,
+    [ImpPreOrden]     CHAR (2)       NOT NULL,
+    [ImpNCredito]     CHAR (2)       NOT NULL,
+    [ImpPresupuesto]  CHAR (2)       NOT NULL,
+    [ImpPago]         CHAR (2)       NOT NULL,
+    [ImpRepFactura]   CHAR (2)       NOT NULL,
+    [ImpEstadistica]  CHAR (2)       NOT NULL,
+    [EnvStatus]       CHAR (1)       NOT NULL,
+    [TipStatus]       VARCHAR (15)   NOT NULL,
+    [BarCodeRes]      CHAR (1)       NOT NULL,
+    [BarCodeText]     VARCHAR (250)  NOT NULL,
+    [MVRefOri]        CHAR (1)       NOT NULL,
+    [BloqPrec]        CHAR (1)       NOT NULL,
+    [PiePagPre]       VARCHAR (2048) NOT NULL,
+    [PiePagFA]        VARCHAR (2048) NOT NULL,
+    [PiePagFC]        VARCHAR (2048) NOT NULL,
+    [FecActAlarm]     DATETIME       NOT NULL,
+    [FecActRM]        DATETIME       NOT NULL,
+    [SepMil]          CHAR (1)       NOT NULL,
+    [SepDec]          CHAR (1)       NOT NULL,
+    [SimMon]          VARCHAR (5)    NOT NULL,
+    [AutSSLSMTP]      CHAR (1)       NOT NULL,
+    [MFEFact]         CHAR (1)       NOT NULL,
+    [PassPDFxMail]    CHAR (1)       NOT NULL,
+    [TipPassPDFxMail] CHAR (1)       NOT NULL,
+    [ImpTMuestra2]    CHAR (1)       NOT NULL,
+    [CodigoQR]        CHAR (1)       NOT NULL,
+    [UploadWeb]       CHAR (1)       NOT NULL,
+    [EnvURLSMS]       CHAR (1)       NOT NULL,
+    [ServFTPCodQR]    VARCHAR (250)  NOT NULL,
+    [DirFTPPDFWeb]    VARCHAR (250)  NOT NULL,
+    [URLWebCodQR]     VARCHAR (250)  NOT NULL,
+    [URLConCodQR]     VARCHAR (250)  NOT NULL,
+    [UserURLCodQR]    VARCHAR (100)  NOT NULL,
+    [PassURLCodQR]    VARCHAR (200)  NOT NULL,
+    [TipCarWeb]       CHAR (1)       NOT NULL,
+    [TipHosting]      CHAR (1)       NOT NULL,
+    [DirFTPXMLWeb]    VARCHAR (250)  NOT NULL,
+    [ServSincBD]      VARCHAR (250)  NOT NULL,
+    [ValAutSuc]       CHAR (1)       NOT NULL,
+    [SincronizarBD]   VARCHAR (250)  NOT NULL,
+    [CampOblig]       VARCHAR (1024) DEFAULT ('') NOT NULL,
+    [EnvPDFResParc]   CHAR (1)       DEFAULT ('N') NOT NULL
+);
+
+
+CREATE TABLE [dbo].[Convenios] (
+    [ID]           INT            NOT NULL,
+    [CodExt]       VARCHAR (10)   NOT NULL,
+    [LetExt]       VARCHAR (10)   NOT NULL,
+    [Descrip]      VARCHAR (100)  NOT NULL,
+    [Abrev]        VARCHAR (20)   NOT NULL,
+    [Juridica]     CHAR (1)       NOT NULL,
+    [Dir1]         VARCHAR (80)   NOT NULL,
+    [Dir2]         VARCHAR (80)   NOT NULL,
+    [Rif]          VARCHAR (15)   NOT NULL,
+    [Nit]          VARCHAR (12)   NOT NULL,
+    [Telefono]     VARCHAR (100)  NOT NULL,
+    [Contacto]     VARCHAR (100)  NOT NULL,
+    [Fax]          VARCHAR (50)   NOT NULL,
+    [eMail]        VARCHAR (1024) NOT NULL,
+    [SubConv]      CHAR (1)       NOT NULL,
+    [idLPrecio]    INT            NOT NULL,
+    [TipoPrecio]   VARCHAR (20)   NOT NULL,
+    [DR]           INT            NOT NULL,
+    [Porc]         FLOAT (53)     NOT NULL,
+    [CargaInt]     CHAR (1)       NOT NULL,
+    [ImpResult]    CHAR (1)       NOT NULL,
+    [Credito]      CHAR (1)       NOT NULL,
+    [Activo]       CHAR (1)       NOT NULL,
+    [Stat]         CHAR (1)       NOT NULL,
+    [CredDias]     INT            NOT NULL,
+    [TipDoc]       CHAR (1)       NOT NULL,
+    [ImpDoc]       CHAR (1)       NOT NULL,
+    [CopiaRes]     INT            NOT NULL,
+    [Sqlts]        VARCHAR (24)   NOT NULL,
+    [SegIntegral]  CHAR (1)       NOT NULL,
+    [LabRef]       CHAR (1)       NOT NULL,
+    [DescLabRef]   VARCHAR (8000) NOT NULL,
+    [Descrip2]     VARCHAR (100)  NOT NULL,
+    [ForFactura]   VARCHAR (100)  NOT NULL,
+    [Confidencial] CHAR (1)       NOT NULL,
+    [Validacion]   CHAR (1)       NOT NULL,
+    [ExConvenio]   CHAR (1)       NOT NULL,
+    [Observacion]  VARCHAR (2048) NOT NULL,
+    [ClavIngreso]  CHAR (1)       NOT NULL,
+    [ApliPorc]     CHAR (1)       NOT NULL,
+    [idGxConv]     INT            NOT NULL,
+    [CopiaDoc]     INT            NOT NULL,
+    [eMailAdm]     VARCHAR (1024) NOT NULL,
+    [BloqIngPac]   CHAR (1)       NOT NULL,
+    [BloqImpRes]   CHAR (1)       NOT NULL,
+    [HeaderRes]    VARCHAR (100)  NOT NULL,
+    [UsuarioWeb]   VARCHAR (100)  NOT NULL,
+    [ClaveWeb]     VARCHAR (50)   NOT NULL,
+    [StatusWeb]    CHAR (1)       NOT NULL,
+    [CorreoWeb]    VARCHAR (50)   NOT NULL,
+    [PregWeb1]     VARCHAR (50)   NOT NULL,
+    [RespWeb1]     VARCHAR (50)   NOT NULL,
+    [PregWeb2]     VARCHAR (50)   NOT NULL,
+    [RespWeb2]     VARCHAR (50)   NOT NULL,
+    [PregWeb3]     VARCHAR (50)   NOT NULL,
+    [RespWeb3]     VARCHAR (50)   NOT NULL,
+    [idLab]        INT            NOT NULL,
+    [Celular]      VARCHAR (200)  DEFAULT ('') NOT NULL,
+    [idMoneda]     INT            DEFAULT ((1)) NOT NULL,
+    CONSTRAINT [PK_Convenios] PRIMARY KEY CLUSTERED ([ID] ASC),
+    CONSTRAINT [FK_Convenios_LPrecio] FOREIGN KEY ([idLPrecio]) REFERENCES [dbo].[LPrecio] ([ID]),
+    CONSTRAINT [FK_Convenios_Moneda] FOREIGN KEY ([idMoneda]) REFERENCES [dbo].[Moneda] ([ID])
+);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_Descrip]
+    ON [dbo].[Convenios]([Descrip] ASC) WITH (FILLFACTOR = 90);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_UsuarioWeb]
+    ON [dbo].[Convenios]([UsuarioWeb] ASC) WITH (FILLFACTOR = 90);
+
+
+CREATE TABLE [dbo].[Cuantitativo] (
+    [idMuestra]     VARCHAR (12)   NOT NULL,
+    [idExamen]      INT            NOT NULL,
+    [ForReporte]    CHAR (1)       NOT NULL,
+    [Resultado]     FLOAT (53)     NOT NULL,
+    [ResultString]  VARCHAR (25)   NOT NULL,
+    [Corrida1]      FLOAT (53)     NOT NULL,
+    [Corrida2]      FLOAT (53)     NOT NULL,
+    [idMetodoR]     INT            NOT NULL,
+    [idMetodo1]     INT            NOT NULL,
+    [idMetodo2]     INT            NOT NULL,
+    [Verificado]    CHAR (1)       NOT NULL,
+    [xDiluir]       CHAR (1)       NOT NULL,
+    [Dilucion]      FLOAT (53)     NOT NULL,
+    [Observaciones] VARCHAR (8000) NOT NULL,
+    [idConclusion]  SMALLINT       NOT NULL,
+    [FHResult]      VARCHAR (50)   NOT NULL,
+    [CS]            CHAR (5)       NULL,
+    [MGrafico]      CHAR (1)       NOT NULL,
+    [AlarmCua]      CHAR (1)       NOT NULL,
+    [idVRefer]      INT            NOT NULL,
+    [idUnidadR]     INT            NOT NULL,
+    [idUnidad1]     INT            NOT NULL,
+    [idUnidad2]     INT            NOT NULL,
+    [Referido]      CHAR (1)       NOT NULL,
+    [ValMin]        FLOAT (53)     NOT NULL,
+    [ValMax]        FLOAT (53)     NOT NULL,
+    [ValEspecial]   VARCHAR (1024) NOT NULL,
+    [Interpretar]   VARCHAR (20)   NOT NULL,
+    CONSTRAINT [PK_Cuantitativo] PRIMARY KEY CLUSTERED ([idMuestra] ASC, [idExamen] ASC),
+    CONSTRAINT [FK_Cuantitativo_Metodologia] FOREIGN KEY ([idMetodoR]) REFERENCES [dbo].[Metodologia] ([ID]),
+    CONSTRAINT [FK_Cuantitativo_Unidades] FOREIGN KEY ([idUnidadR]) REFERENCES [dbo].[Unidades] ([ID])
+);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_idUnidadR]
+    ON [dbo].[Cuantitativo]([idUnidadR] ASC) WITH (FILLFACTOR = 90);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_idMetodoR]
+    ON [dbo].[Cuantitativo]([idMetodoR] ASC) WITH (FILLFACTOR = 90);
+
+CREATE TABLE [dbo].[DWHOrdenes] (
+    [idMuestra]     VARCHAR (12) NOT NULL,
+    [idExamen]      INT          NOT NULL,
+    [idExaInt]      INT          NOT NULL,
+    [idCodigo]      INT          NOT NULL,
+    [DEntrega]      INT          NOT NULL,
+    [dtIngreso]     DATETIME     NOT NULL,
+    [idUsuIng]      INT          NOT NULL,
+    [dtTomado]      DATETIME     NOT NULL,
+    [idUsuTom]      INT          NOT NULL,
+    [dtProcesando]  DATETIME     NOT NULL,
+    [idUsuPro]      INT          NOT NULL,
+    [dtxAutorizar]  DATETIME     NOT NULL,
+    [idUsuxAu]      INT          NOT NULL,
+    [dtCompleto]    DATETIME     NOT NULL,
+    [idUsuCom]      INT          NOT NULL,
+    [dtReportado]   DATETIME     NOT NULL,
+    [idUsuRep]      INT          NOT NULL,
+    [dtRepxMail]    DATETIME     NOT NULL,
+    [idUsuRxM]      INT          NOT NULL,
+    [StVReferencia] CHAR (1)     NOT NULL
+);
+
+CREATE TABLE [dbo].[Entrega] (
+    [ID]        INT          NOT NULL,
+    [Fecha]     DATETIME     NOT NULL,
+    [Entregado] VARCHAR (30) NOT NULL,
+    CONSTRAINT [PK_Entrega] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+
+CREATE TABLE [dbo].[Equipos] (
+    [ID]             INT          IDENTITY (1, 1) NOT NULL,
+    [Descrip]        VARCHAR (30) NOT NULL,
+    [idInterfase]    INT          NOT NULL,
+    [idMetodo]       INT          NOT NULL,
+    [idSeccion]      INT          NOT NULL,
+    [Activo]         CHAR (1)     NOT NULL,
+    [Enviar]         CHAR (1)     NOT NULL,
+    [Automatico]     CHAR (1)     NOT NULL,
+    [Intervalo]      SMALLINT     NOT NULL,
+    [ComPort]        VARCHAR (10) NOT NULL,
+    [BaudRate]       INT          NOT NULL,
+    [ByteSize]       SMALLINT     NOT NULL,
+    [Parity]         VARCHAR (10) NOT NULL,
+    [StopBit]        VARCHAR (10) NOT NULL,
+    [StreamProtocol] VARCHAR (15) NOT NULL,
+    [EliProc]        CHAR (1)     NOT NULL,
+    [CodExt]         VARCHAR (20) NOT NULL,
+    [Conexion]       CHAR (1)     NOT NULL,
+    [IP]             VARCHAR (15) NOT NULL,
+    [Port]           INT          NOT NULL,
+    CONSTRAINT [PK_Equipos] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+
+CREATE TABLE [dbo].[Especialidades] (
+    [ID]      INT          IDENTITY (1, 1) NOT NULL,
+    [Descrip] VARCHAR (35) NOT NULL,
+    [CodExt]  VARCHAR (20) NOT NULL,
+    CONSTRAINT [PK_Especialidades] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+
+CREATE TABLE [dbo].[EtiBacterio] (
+    [idMBac]    CHAR (8)     NOT NULL,
+    [idMuestra] VARCHAR (12) NOT NULL,
+    [idExamen]  INT          NOT NULL,
+    CONSTRAINT [PK_EtiBacterio] PRIMARY KEY CLUSTERED ([idMBac] ASC)
+);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [IX_idMuestra]
+    ON [dbo].[EtiBacterio]([idMuestra] ASC, [idExamen] ASC) WITH (FILLFACTOR = 90);
+    \\\\\\
+
+CREATE TABLE [dbo].[EtiReferencia] (
+    [idLab]     INT          NOT NULL,
+    [idERef]    VARCHAR (8)  NOT NULL,
+    [idMuestra] VARCHAR (12) NOT NULL,
+    [idExamen]  INT          NOT NULL,
+    CONSTRAINT [PK_EtiReferencia] PRIMARY KEY CLUSTERED ([idMuestra] ASC, [idExamen] ASC)
+);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [IX_idMuestra]
+    ON [dbo].[EtiReferencia]([idMuestra] ASC, [idExamen] ASC) WITH (FILLFACTOR = 90);
+
+\\\\
+CREATE TABLE [dbo].[Examenes] (
+    [ID]            INT            NOT NULL,
+    [Codigo]        INT            NOT NULL,
+    [CodEst]        INT            NOT NULL,
+    [CodExt]        VARCHAR (20)   NOT NULL,
+    [Descrip]       VARCHAR (100)  NOT NULL,
+    [Reporte]       VARCHAR (100)  NOT NULL,
+    [Etiqueta]      VARCHAR (15)   NOT NULL,
+    [Oculto]        CHAR (1)       NOT NULL,
+    [Activo]        CHAR (1)       NOT NULL,
+    [idSeccion]     INT            NOT NULL,
+    [idMetodo]      INT            NOT NULL,
+    [Unidades]      VARCHAR (50)   NOT NULL,
+    [DefExamen]     CHAR (1)       NOT NULL,
+    [Referencia]    CHAR (1)       NOT NULL,
+    [ForReporte]    CHAR (1)       NOT NULL,
+    [idRelacion]    INT            NOT NULL,
+    [Fluido]        CHAR (1)       NOT NULL,
+    [Alarma]        CHAR (1)       NOT NULL,
+    [DescAlarma]    VARCHAR (1024) NOT NULL,
+    [Formula]       VARCHAR (100)  NOT NULL,
+    [Decimales]     SMALLINT       NOT NULL,
+    [ValRefer]      CHAR (1)       NOT NULL,
+    [Combobox]      VARCHAR (250)  NOT NULL,
+    [Campo]         VARCHAR (25)   NOT NULL,
+    [Conclusion]    CHAR (1)       NOT NULL,
+    [PiePagina]     VARCHAR (8000) NOT NULL,
+    [PiePagText]    VARCHAR (8000) NOT NULL,
+    [Leyenda]       VARCHAR (1024) NOT NULL,
+    [ValBajo]       INT            NOT NULL,
+    [ValAlto]       INT            NOT NULL,
+    [CodBarra]      CHAR (1)       NOT NULL,
+    [InfoTubo]      VARCHAR (10)   NOT NULL,
+    [CantLabel]     SMALLINT       NOT NULL,
+    [Canal]         SMALLINT       NOT NULL,
+    [Recargo]       CHAR (1)       NOT NULL,
+    [Dias]          SMALLINT       NOT NULL,
+    [idUsuario]     INT            NOT NULL,
+    [SqlTs]         VARCHAR (50)   NOT NULL,
+    [Reconversion]  CHAR (1)       NULL,
+    [ValCero]       CHAR (1)       NOT NULL,
+    [Sexo]          CHAR (1)       NOT NULL,
+    [RTMuestra]     CHAR (1)       NOT NULL,
+    [MFac]          CHAR (1)       NOT NULL,
+    [MLPr]          CHAR (1)       NOT NULL,
+    [MEst]          CHAR (1)       NOT NULL,
+    [Observacion]   VARCHAR (1024) NOT NULL,
+    [Graficar]      CHAR (1)       NOT NULL,
+    [EMExamen]      CHAR (1)       NOT NULL,
+    [TMEspecial]    CHAR (1)       NOT NULL,
+    [DescTMEsp]     VARCHAR (2048) NOT NULL,
+    [PManual]       CHAR (1)       NOT NULL,
+    [PDinamico]     CHAR (1)       NOT NULL,
+    [DIPPag]        CHAR (1)       NOT NULL,
+    [idUnidad]      INT            NOT NULL,
+    [PiePaginaText] VARCHAR (8000) NOT NULL,
+    [iLeft]         FLOAT (53)     NOT NULL,
+    [iWidth]        FLOAT (53)     NOT NULL,
+    [iHeigth]       FLOAT (53)     NOT NULL,
+    [ciExa]         VARCHAR (15)   NOT NULL,
+    [ReporteIng]    VARCHAR (35)   NOT NULL,
+    [PiePagTextIng] VARCHAR (8000) NOT NULL,
+    [ComboboxIng]   VARCHAR (250)  NOT NULL,
+    CONSTRAINT [PK_Examenes] PRIMARY KEY CLUSTERED ([ID] ASC),
+    CONSTRAINT [FK_Examenes_Metodologia] FOREIGN KEY ([idMetodo]) REFERENCES [dbo].[Metodologia] ([ID]),
+    CONSTRAINT [FK_Examenes_Secciones] FOREIGN KEY ([idSeccion]) REFERENCES [dbo].[Secciones] ([ID]),
+    CONSTRAINT [FK_Examenes_Unidades] FOREIGN KEY ([idUnidad]) REFERENCES [dbo].[Unidades] ([ID])
+);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_Reporte]
+    ON [dbo].[Examenes]([Reporte] ASC) WITH (FILLFACTOR = 90);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_Descrip]
+    ON [dbo].[Examenes]([Descrip] ASC) WITH (FILLFACTOR = 90);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_idSeccion]
+    ON [dbo].[Examenes]([idSeccion] ASC) WITH (FILLFACTOR = 90);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_InfoTubo]
+    ON [dbo].[Examenes]([InfoTubo] ASC) WITH (FILLFACTOR = 90);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_DefExamen]
+    ON [dbo].[Examenes]([DefExamen] ASC) WITH (FILLFACTOR = 90);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_CodExt]
+    ON [dbo].[Examenes]([CodExt] ASC) WITH (FILLFACTOR = 90);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_Canal]
+    ON [dbo].[Examenes]([Canal] ASC) WITH (FILLFACTOR = 90);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_Codigo]
+    ON [dbo].[Examenes]([Codigo] ASC) WITH (FILLFACTOR = 90);
+
+
+
+\\\\\\
+
+
+CREATE TABLE [dbo].[ExAnalizador] (
+    [ID]          INT          IDENTITY (1, 1) NOT NULL,
+    [idInterfase] INT          NOT NULL,
+    [idHost]      VARCHAR (35) NOT NULL,
+    [idCanal]     VARCHAR (10) NOT NULL,
+    [Test]        VARCHAR (50) NOT NULL,
+    [Descrip]     VARCHAR (50) NOT NULL,
+    CONSTRAINT [PK_ExAnalizador] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+
+\\\\\\\
+
+CREATE TABLE [dbo].[ExConclusion] (
+    [ID]           INT IDENTITY (1, 1) NOT NULL,
+    [idConclusion] INT NOT NULL,
+    [idExamen]     INT NOT NULL,
+    CONSTRAINT [PK_ExConclusion] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+
+\\\\\\\\
+
+
+CREATE TABLE [dbo].[ExConvenio] (
+    [idConvenio] INT NOT NULL,
+    [idExamen]   INT NOT NULL,
+    CONSTRAINT [PK_ExConvenio] PRIMARY KEY CLUSTERED ([idConvenio] ASC, [idExamen] ASC)
+);
+
+\\\\\\\\
+CREATE TABLE [dbo].[ExConvenio] (
+    [idConvenio] INT NOT NULL,
+    [idExamen]   INT NOT NULL,
+    CONSTRAINT [PK_ExConvenio] PRIMARY KEY CLUSTERED ([idConvenio] ASC, [idExamen] ASC)
+);
+
+\\\\\\\\\\\
+
+CREATE TABLE [dbo].[ExLEstadistica] (
+    [idLEst]   INT      NOT NULL,
+    [idExamen] INT      NOT NULL,
+    [Activo]   CHAR (1) NOT NULL,
+    CONSTRAINT [PK_ExLEstadistica] PRIMARY KEY CLUSTERED ([idLEst] ASC, [idExamen] ASC)
+);
+
+\\\\\\\\\\\
+
+CREATE TABLE [dbo].[ExLPrecio] (
+    [ID]           INT          NOT NULL,
+    [idLPrecio]    INT          NOT NULL,
+    [idExamen]     INT          NOT NULL,
+    [Precio]       MONEY        NOT NULL,
+    [Aumento]      MONEY        NOT NULL,
+    [Reconversion] CHAR (1)     NOT NULL,
+    [DRPerf]       MONEY        NOT NULL,
+    [PorcPerf]     MONEY        NOT NULL,
+    [CAPerf]       CHAR (1)     NOT NULL,
+    [RedoPerf]     CHAR (1)     NOT NULL,
+    [PrecioOld]    MONEY        NOT NULL,
+    [idMoneda]     INT          NOT NULL,
+    [Costo]        MONEY        NOT NULL,
+    [PorcUtil]     MONEY        NOT NULL,
+    [SqlTs]        VARCHAR (26) NOT NULL,
+    CONSTRAINT [PK_ExLPrecio] PRIMARY KEY CLUSTERED ([idLPrecio] ASC, [idExamen] ASC),
+    CONSTRAINT [FK_ExLPrecio_Examenes] FOREIGN KEY ([idExamen]) REFERENCES [dbo].[Examenes] ([ID]),
+    CONSTRAINT [FK_ExLPrecio_LPrecio] FOREIGN KEY ([idLPrecio]) REFERENCES [dbo].[LPrecio] ([ID]),
+    CONSTRAINT [FK_ExLPrecio_Moneda] FOREIGN KEY ([idMoneda]) REFERENCES [dbo].[Moneda] ([ID])
+);
+
+\\\\\\\\\\
+
+
+CREATE TABLE [dbo].[ExLPrecioOld] (
+    [idLPrecio]    INT      NOT NULL,
+    [idExamen]     INT      NOT NULL,
+    [Precio]       MONEY    NOT NULL,
+    [Aumento]      MONEY    NOT NULL,
+    [Reconversion] CHAR (1) NOT NULL,
+    [DRPerf]       INT      NOT NULL,
+    [PorcPerf]     MONEY    NOT NULL,
+    [CAPerf]       CHAR (1) NOT NULL,
+    [RedoPerf]     CHAR (1) NOT NULL,
+    [PrecioOld]    MONEY    NOT NULL,
+    [idMoneda]     INT      NOT NULL,
+    [Costo]        MONEY    NOT NULL,
+    [PorcUtil]     MONEY    NOT NULL
+);
+
+\\\\\\\\\\\
+
+CREATE TABLE [dbo].[ExLTrabajo] (
+    [ID]         INT IDENTITY (1, 1) NOT NULL,
+    [idLTrabajo] INT NOT NULL,
+    [idExamen]   INT NOT NULL,
+    CONSTRAINT [PK_ExLTrabajo] PRIMARY KEY CLUSTERED ([ID] ASC),
+    CONSTRAINT [FK_ExLTrabajo_Examenes] FOREIGN KEY ([idExamen]) REFERENCES [dbo].[Examenes] ([ID])
+);
+
+\\\\\\\\
+
+CREATE TABLE [dbo].[ExMultiple] (
+    [ID]         INT          NOT NULL,
+    [idMultiple] INT          NOT NULL,
+    [idExamen]   INT          NOT NULL,
+    [Orden]      INT          NOT NULL,
+    [SqlTs]      VARCHAR (26) NOT NULL,
+    CONSTRAINT [PK_ExMultiple] PRIMARY KEY CLUSTERED ([idMultiple] ASC, [idExamen] ASC)
+);
+\\\\\\\\\\\
+
+
+
+CREATE TABLE [dbo].[ExMultipleOld] (
+    [idMultiple] INT NOT NULL,
+    [idExamen]   INT NOT NULL,
+    [Orden]      INT NOT NULL
+);
+
+
+\\\\\\\\\
+
+CREATE TABLE [dbo].[ExPerfil] (
+    [ID]       INT          NOT NULL,
+    [idPerfil] INT          NOT NULL,
+    [idExamen] INT          NOT NULL,
+    [SqlTs]    VARCHAR (26) NOT NULL,
+    CONSTRAINT [PK_ExPerfil] PRIMARY KEY CLUSTERED ([idPerfil] ASC, [idExamen] ASC)
+);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [IX_ID]
+    ON [dbo].[ExPerfil]([ID] ASC) WITH (FILLFACTOR = 90);
+
+\\\\\\\\\\
+
+
+CREATE TABLE [dbo].[ExPerfilOld] (
+    [idPerfil] INT NOT NULL,
+    [idExamen] INT NOT NULL
+);
+
+\\\\\\\
+
+CREATE TABLE [dbo].[ExPresupuesto] (
+    [idPre]        INT          NOT NULL,
+    [idExamen]     INT          NOT NULL,
+    [idCodigo]     VARCHAR (10) NOT NULL,
+    [idExaInt]     INT          NOT NULL,
+    [idSeccion]    INT          NOT NULL,
+    [Precio]       MONEY        NOT NULL,
+    [DefExamen]    CHAR (1)     NOT NULL,
+    [idReferencia] INT          NOT NULL,
+    [MOrd]         CHAR (1)     NOT NULL,
+    [PrecioOld]    MONEY        NOT NULL,
+    [Reconversion] CHAR (1)     NOT NULL,
+    [Precio2]      MONEY        NOT NULL,
+    CONSTRAINT [PK_ExPresupuesto] PRIMARY KEY CLUSTERED ([idPre] ASC, [idExamen] ASC)
+);
+\\\\\\\\\\
+
+
+CREATE TABLE [dbo].[ExPresupuesto] (
+    [idPre]        INT          NOT NULL,
+    [idExamen]     INT          NOT NULL,
+    [idCodigo]     VARCHAR (10) NOT NULL,
+    [idExaInt]     INT          NOT NULL,
+    [idSeccion]    INT          NOT NULL,
+    [Precio]       MONEY        NOT NULL,
+    [DefExamen]    CHAR (1)     NOT NULL,
+    [idReferencia] INT          NOT NULL,
+    [MOrd]         CHAR (1)     NOT NULL,
+    [PrecioOld]    MONEY        NOT NULL,
+    [Reconversion] CHAR (1)     NOT NULL,
+    [Precio2]      MONEY        NOT NULL,
+    CONSTRAINT [PK_ExPresupuesto] PRIMARY KEY CLUSTERED ([idPre] ASC, [idExamen] ASC)
+);
+\\\\\\\\\\\
+CREATE TABLE [dbo].[Facturas] (
+    [ID]             INT           NOT NULL,
+    [idMuestra]      VARCHAR (12)  NOT NULL,
+    [idConvenio]     INT           NOT NULL,
+    [idSConvenio]    INT           NOT NULL,
+    [idUbicacion]    INT           NOT NULL,
+    [TipFactura]     CHAR (1)      NOT NULL,
+    [Fecha]          DATETIME      NOT NULL,
+    [Status]         CHAR (1)      NOT NULL,
+    [ciResponsable]  VARCHAR (15)  NOT NULL,
+    [NitResponsable] VARCHAR (15)  NOT NULL,
+    [nmResponsable]  VARCHAR (100) NOT NULL,
+    [DirResponsable] VARCHAR (100) NOT NULL,
+    [Credito]        CHAR (1)      NOT NULL,
+    [Porcentaje]     MONEY         NOT NULL,
+    [DR]             INT           NOT NULL,
+    [Monto]          MONEY         NOT NULL,
+    [Saldo]          MONEY         NOT NULL,
+    [idUsuario]      INT           NOT NULL,
+    [Recargo]        MONEY         NOT NULL,
+    [Descuento]      MONEY         NOT NULL,
+    [MontoOld]       MONEY         NOT NULL,
+    [Reconversion]   CHAR (1)      NOT NULL,
+    [TelResponsable] VARCHAR (35)  NOT NULL,
+    [idPago]         INT           NOT NULL,
+    [Llave]          VARCHAR (5)   NOT NULL,
+    [Observ]         VARCHAR (250) NOT NULL,
+    [SaldoOld]       MONEY         NOT NULL,
+    [NControl]       VARCHAR (12)  NOT NULL,
+    [NSerie]         VARCHAR (10)  NOT NULL,
+    [Monto2]         MONEY         NOT NULL,
+    [TCambio]        MONEY         NOT NULL,
+    [Saldo2]         MONEY         NOT NULL,
+    [IGTF]           MONEY         DEFAULT ((0)) NOT NULL,
+    CONSTRAINT [PK_Facturas] PRIMARY KEY CLUSTERED ([NSerie] ASC, [ID] ASC),
+    CONSTRAINT [FK_Facturas_Convenios] FOREIGN KEY ([idConvenio]) REFERENCES [dbo].[Convenios] ([ID]),
+    CONSTRAINT [FK_Facturas_SerieFact] FOREIGN KEY ([NSerie]) REFERENCES [dbo].[SerieFact] ([NSerie])
+);
+\\\\\\\\\
+
+
+
+CREATE TABLE [dbo].[Firmas] (
+    [idUsuario] INT   NOT NULL,
+    [Firma]     IMAGE NOT NULL,
+    CONSTRAINT [PK_Firmas] PRIMARY KEY CLUSTERED ([idUsuario] ASC)
+);
+\\\\\\
+
+CREATE TABLE [dbo].[Formas] (
+    [ID]        INT          NOT NULL,
+    [Descrip]   VARCHAR (25) NOT NULL,
+    [nmReporte] VARCHAR (50) NOT NULL,
+    CONSTRAINT [PK_Formas] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+\\\
+
+CREATE TABLE [dbo].[ForPago] (
+    [ID]       INT          NOT NULL,
+    [Codigo]   VARCHAR (10) NOT NULL,
+    [CodExt]   VARCHAR (10) NOT NULL,
+    [Descrip]  VARCHAR (35) NOT NULL,
+    [TipPago]  CHAR (1)     NOT NULL,
+    [RBanco]   CHAR (1)     NOT NULL,
+    [RPVenta]  CHAR (1)     NOT NULL,
+    [Activa]   CHAR (1)     NOT NULL,
+    [idMoneda] INT          NOT NULL,
+    [Orden]    INT          NOT NULL,
+    [DescFact] VARCHAR (35) NOT NULL,
+    [PorcImp]  MONEY        DEFAULT ((0)) NOT NULL,
+    CONSTRAINT [PK_ForPago] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+
+\\\\\\\
+
+CREATE TABLE [dbo].[General] (
+    [idMuestra] CHAR (12)      NOT NULL,
+    [idExamen]  INT            NOT NULL,
+    [idExaInt]  INT            NOT NULL,
+    [Resultado] VARCHAR (2048) NOT NULL,
+    [idUnidad]  INT            NOT NULL,
+    CONSTRAINT [PK_General] PRIMARY KEY CLUSTERED ([idMuestra] ASC, [idExamen] ASC, [idExaInt] ASC),
+    CONSTRAINT [FK_General_Unidades] FOREIGN KEY ([idUnidad]) REFERENCES [dbo].[Unidades] ([ID])
+);
+\\\\\\\\\
+
+CREATE TABLE [dbo].[GExPaciente] (
+    [idPaciente] INT NOT NULL,
+    [idExamen]   INT NOT NULL,
+    CONSTRAINT [PK_GExPaciente] PRIMARY KEY CLUSTERED ([idPaciente] ASC, [idExamen] ASC)
+);
+\\\\\\
+
+CREATE TABLE [dbo].[GxConvenio] (
+    [ID]      INT          IDENTITY (1, 1) NOT NULL,
+    [Codigo]  VARCHAR (10) NOT NULL,
+    [Descrip] VARCHAR (30) NOT NULL,
+    [Activo]  CHAR (1)     NOT NULL
+);
+\\\\\\\\\\
+
+CREATE TABLE [dbo].[Heces] (
+    [idMuestra]     VARCHAR (12)   NOT NULL,
+    [idExamen]      INT            NOT NULL,
+    [Color]         VARCHAR (50)   NOT NULL,
+    [Consistencia]  VARCHAR (50)   NOT NULL,
+    [Aspecto]       VARCHAR (50)   NOT NULL,
+    [Moco]          VARCHAR (50)   NOT NULL,
+    [pH]            FLOAT (53)     NOT NULL,
+    [Reaccion]      VARCHAR (20)   NOT NULL,
+    [SangreO]       VARCHAR (20)   NOT NULL,
+    [Sangre]        VARCHAR (20)   NOT NULL,
+    [Hematies]      VARCHAR (20)   NOT NULL,
+    [Leucocitos]    VARCHAR (20)   NOT NULL,
+    [RestosA]       VARCHAR (20)   NOT NULL,
+    [Parasitos]     VARCHAR (750)  NOT NULL,
+    [ImpKato]       CHAR (1)       NOT NULL,
+    [Kato]          VARCHAR (250)  NOT NULL,
+    [Observaciones] VARCHAR (2048) NOT NULL,
+    [ObsAut]        CHAR (1)       NOT NULL,
+    CONSTRAINT [PK_Heces] PRIMARY KEY CLUSTERED ([idMuestra] ASC, [idExamen] ASC)
+);
+\\\\\\\\
+
+CREATE TABLE [dbo].[Hematologia] (
+    [idMuestra]     VARCHAR (12)   NOT NULL,
+    [idExamen]      INT            NOT NULL,
+    [idEquipo]      INT            NOT NULL,
+    [idMetodo]      INT            NOT NULL,
+    [RepDif]        CHAR (1)       NOT NULL,
+    [WBC]           FLOAT (53)     NOT NULL,
+    [RBC]           FLOAT (53)     NOT NULL,
+    [HGB]           FLOAT (53)     NOT NULL,
+    [HCT]           FLOAT (53)     NOT NULL,
+    [RET]           FLOAT (53)     NOT NULL,
+    [PLT]           FLOAT (53)     NOT NULL,
+    [MPV]           FLOAT (53)     NOT NULL,
+    [VCM]           FLOAT (53)     NOT NULL,
+    [HCM]           FLOAT (53)     NOT NULL,
+    [CHCM]          FLOAT (53)     NOT NULL,
+    [RDW]           FLOAT (53)     NOT NULL,
+    [Neutro]        FLOAT (53)     NOT NULL,
+    [Linfo]         FLOAT (53)     NOT NULL,
+    [Mono]          FLOAT (53)     NOT NULL,
+    [Eosi]          FLOAT (53)     NOT NULL,
+    [Baso]          FLOAT (53)     NOT NULL,
+    [Caya]          FLOAT (53)     NOT NULL,
+    [Promie]        FLOAT (53)     NOT NULL,
+    [Mielo]         FLOAT (53)     NOT NULL,
+    [Meta]          FLOAT (53)     NOT NULL,
+    [MonoAti]       FLOAT (53)     NOT NULL,
+    [LinfoAti]      FLOAT (53)     NOT NULL,
+    [NEp]           FLOAT (53)     NOT NULL,
+    [LYp]           FLOAT (53)     NOT NULL,
+    [MOp]           FLOAT (53)     NOT NULL,
+    [EOp]           FLOAT (53)     NOT NULL,
+    [BAp]           FLOAT (53)     NOT NULL,
+    [MIp]           FLOAT (53)     NOT NULL,
+    [NEa]           FLOAT (53)     NOT NULL,
+    [LYa]           FLOAT (53)     NOT NULL,
+    [MOa]           FLOAT (53)     NOT NULL,
+    [EOa]           FLOAT (53)     NOT NULL,
+    [BAa]           FLOAT (53)     NOT NULL,
+    [MIa]           FLOAT (53)     NOT NULL,
+    [RBCNuc]        FLOAT (53)     NOT NULL,
+    [aWBC]          VARCHAR (1024) NOT NULL,
+    [aRBC]          VARCHAR (100)  NOT NULL,
+    [aPLT]          VARCHAR (100)  NOT NULL,
+    [Observaciones] VARCHAR (2048) NOT NULL,
+    [SqlTs]         VARCHAR (50)   NOT NULL,
+    [LUp]           FLOAT (53)     NOT NULL,
+    [LUa]           FLOAT (53)     NOT NULL,
+    [CS]            CHAR (5)       NULL,
+    [idInterface]   INT            NOT NULL,
+    [GRp]           FLOAT (53)     NOT NULL,
+    [GRa]           FLOAT (53)     NOT NULL,
+    [MGrafico]      VARCHAR (250)  NOT NULL,
+    CONSTRAINT [PK_Hematologia] PRIMARY KEY CLUSTERED ([idMuestra] ASC, [idExamen] ASC)
+);
+\\\\\\
+
+CREATE TABLE [dbo].[HistPaciente] (
+    [ID]         INT           IDENTITY (1, 1) NOT NULL,
+    [idPaciente] INT           NOT NULL,
+    [Fecha]      DATETIME      NOT NULL,
+    [Descrip]    VARCHAR (250) NOT NULL,
+    [idUsuario]  INT           NOT NULL,
+    CONSTRAINT [PK_HistPaciente] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+\\\\\
+CREATE TABLE [dbo].[Imagenes] (
+    [idMuestra] VARCHAR (12) NOT NULL,
+    [idExamen]  INT          NOT NULL,
+    [idExaInt]  INT          NOT NULL,
+    [Imagen]    IMAGE        NOT NULL,
+    CONSTRAINT [PK_Imagenes] PRIMARY KEY CLUSTERED ([idMuestra] ASC, [idExamen] ASC, [idExaInt] ASC)
+);
+\\\\\\\\\
+
+CREATE TABLE [dbo].[Impresoras] (
+    [ID]          INT           IDENTITY (1, 1) NOT NULL,
+    [Descrip]     VARCHAR (25)  NOT NULL,
+    [idForma]     INT           NOT NULL,
+    [Printer]     VARCHAR (100) NOT NULL,
+    [Cola]        VARCHAR (50)  NOT NULL,
+    [idUbicacion] INT           NOT NULL,
+    [CodSeccion]  VARCHAR (10)  NOT NULL,
+    [xDefecto]    CHAR (1)      NOT NULL,
+    [idConvenio]  INT           NOT NULL,
+    CONSTRAINT [PK_Impresoras] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+\\\\\\\\
+
+
+CREATE TABLE [dbo].[Ingresos] (
+    [ID]           VARCHAR (12)  NOT NULL,
+    [idPaciente]   INT           NOT NULL,
+    [Fecha]        DATETIME      NOT NULL,
+    [idConvenio]   INT           NOT NULL,
+    [idSConvenio]  INT           NOT NULL,
+    [EnvConv]      CHAR (1)      NOT NULL,
+    [idUbicacion]  INT           NOT NULL,
+    [idMedico]     INT           NOT NULL,
+    [nmMedico]     VARCHAR (30)  NOT NULL,
+    [EnvMed]       CHAR (1)      NOT NULL,
+    [Porcentaje]   MONEY         NOT NULL,
+    [Monto]        MONEY         NOT NULL,
+    [Credito]      CHAR (1)      NOT NULL,
+    [Recargo]      MONEY         NOT NULL,
+    [Descuento]    MONEY         NOT NULL,
+    [DR]           INT           NOT NULL,
+    [Carga]        CHAR (1)      NOT NULL,
+    [Historia]     VARCHAR (15)  NOT NULL,
+    [Admision]     VARCHAR (35)  NOT NULL,
+    [FecIngreso]   DATETIME      NOT NULL,
+    [Habitacion]   VARCHAR (10)  NOT NULL,
+    [Cama]         VARCHAR (10)  NOT NULL,
+    [Piso]         VARCHAR (10)  NOT NULL,
+    [Deuda]        CHAR (1)      NOT NULL,
+    [Stat]         CHAR (1)      NOT NULL,
+    [Status]       CHAR (1)      NOT NULL,
+    [TipoPaciente] CHAR (1)      NOT NULL,
+    [idUsuario]    INT           NOT NULL,
+    [Observ]       VARCHAR (250) NOT NULL,
+    [EnvPac]       CHAR (1)      NOT NULL,
+    [Reconversion] CHAR (1)      NOT NULL,
+    [Clave]        VARCHAR (30)  NOT NULL,
+    [TMStat]       CHAR (1)      NOT NULL,
+    [idPrioridad]  INT           NOT NULL,
+    [idExterno]    VARCHAR (50)  NOT NULL,
+    [Llave]        VARCHAR (15)  NOT NULL,
+    [idSucursal]   INT           NOT NULL,
+    [Monto2]       MONEY         NOT NULL,
+    [TCambio]      MONEY         NOT NULL,
+    [idLabRef]     INT           NOT NULL,
+    [idMueRef]     VARCHAR (12)  NOT NULL,
+    [IdiomaRes]    VARCHAR (3)   NOT NULL,
+    CONSTRAINT [PK_Ingresos] PRIMARY KEY CLUSTERED ([ID] ASC),
+    CONSTRAINT [FK_Ingresos_Pacientes] FOREIGN KEY ([idPaciente]) REFERENCES [dbo].[Pacientes] ([ID]),
+    CONSTRAINT [FK_Ingresos_Usuarios] FOREIGN KEY ([idUsuario]) REFERENCES [dbo].[Usuarios] ([ID])
+);
+\\\\\\
+
+CREATE TABLE [dbo].[Interfases] (
+    [ID]          INT          NOT NULL,
+    [Descrip]     VARCHAR (50) NOT NULL,
+    [Imagen]      VARCHAR (50) NOT NULL,
+    [Exe]         VARCHAR (20) NOT NULL,
+    [idProtocolo] VARCHAR (2)  NOT NULL,
+    [Len]         SMALLINT     NOT NULL,
+    [Activo]      CHAR (1)     NOT NULL,
+    [Com]         VARCHAR (10) NOT NULL,
+    [Baud]        INT          NOT NULL,
+    [Byte]        SMALLINT     NOT NULL,
+    [Parity]      VARCHAR (10) NOT NULL,
+    [Stop]        VARCHAR (10) NOT NULL,
+    [Stream]      VARCHAR (15) NOT NULL,
+    CONSTRAINT [PK_Interfases] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+\\\\\\\\
+
+CREATE TABLE [dbo].[Laboratorio] (
+    [ID]      INT           NOT NULL,
+    [Codigo]  VARCHAR (10)  NOT NULL,
+    [Descrip] VARCHAR (100) NOT NULL,
+    [Abrev]   VARCHAR (50)  NOT NULL,
+    [Activo]  CHAR (1)      NOT NULL,
+    [CS]      CHAR (5)      NOT NULL,
+    [TipLab]  VARCHAR (12)  NOT NULL,
+    [IP]      VARCHAR (100) NOT NULL,
+    [Port]    VARCHAR (35)  NOT NULL,
+    [SincBD]  CHAR (1)      NOT NULL,
+    CONSTRAINT [PK_Laboratorio] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+\\\\\\\\\\
+
+CREATE TABLE [dbo].[LEstadistica] (
+    [ID]        INT          IDENTITY (1, 1) NOT NULL,
+    [Descrip]   VARCHAR (35) NOT NULL,
+    [Secciones] VARCHAR (15) NOT NULL,
+    [DefExamen] VARCHAR (15) NOT NULL,
+    CONSTRAINT [PK_LEstadistica] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+\\\\\\\\
+
+CREATE TABLE [dbo].[Licencia] (
+    [idCodigo]     CHAR (10)     NOT NULL,
+    [Laboratorio]  VARCHAR (50)  NOT NULL,
+    [Responsable]  VARCHAR (50)  NOT NULL,
+    [Direc1]       VARCHAR (100) NOT NULL,
+    [Direc2]       VARCHAR (100) NOT NULL,
+    [Telefono]     VARCHAR (60)  NOT NULL,
+    [Fax]          VARCHAR (30)  NOT NULL,
+    [Rif]          VARCHAR (20)  NOT NULL,
+    [eMail]        VARCHAR (100) NOT NULL,
+    [iLogo]        VARCHAR (50)  NOT NULL,
+    [xString]      VARCHAR (150) NOT NULL,
+    [EliminarTRes] CHAR (1)      NOT NULL,
+    [tLic]         CHAR (1)      NOT NULL,
+    [nLic]         INT           NOT NULL,
+    [ImpConDeuda]  CHAR (1)      NOT NULL,
+    [ImpCaratula]  CHAR (1)      NOT NULL,
+    [ImpTMuestra]  CHAR (1)      NOT NULL,
+    [HDDSerial]    VARCHAR (20)  NOT NULL,
+    [SerialKey]    VARCHAR (100) NOT NULL,
+    [Version]      VARCHAR (10)  NOT NULL,
+    [FechaVer]     VARCHAR (10)  NOT NULL,
+    [CS]           CHAR (5)      NOT NULL,
+    [Abrev]        VARCHAR (30)  NOT NULL,
+    [idLab]        INT           NOT NULL,
+    [FecActLic]    VARCHAR (14)  NOT NULL,
+    [ID]           INT           NOT NULL,
+    [Dir]          VARCHAR (125) NOT NULL,
+    [Dir2]         VARCHAR (125) NOT NULL,
+    [xStringSMS]   VARCHAR (150) NOT NULL,
+    [Style]        VARCHAR (100) NOT NULL
+);
+
+\\\\
+
+CREATE TABLE [dbo].[LogErrores] (
+    [ID]        INT            IDENTITY (1, 1) NOT NULL,
+    [Imec]      CHAR (1)       NOT NULL,
+    [Exe]       VARCHAR (25)   NOT NULL,
+    [Error]     VARCHAR (10)   NOT NULL,
+    [TipErr]    VARCHAR (10)   NOT NULL,
+    [Tabla]     VARCHAR (25)   NOT NULL,
+    [Modulo]    VARCHAR (35)   NOT NULL,
+    [Status]    CHAR (1)       NOT NULL,
+    [Descrip]   VARCHAR (1024) NOT NULL,
+    [Estacion]  VARCHAR (25)   NOT NULL,
+    [FecRec]    DATETIME       NOT NULL,
+    [FecEnv]    DATETIME       NOT NULL,
+    [Log]       VARCHAR (4096) NOT NULL,
+    [idUsuario] INT            NOT NULL
+);
+\\\\\\\\
+
+
+CREATE TABLE [dbo].[LPrecio] (
+    [ID]      INT          NOT NULL,
+    [Descrip] VARCHAR (35) NOT NULL,
+    [Activo]  CHAR (1)     NOT NULL,
+    [LPResp]  CHAR (1)     NOT NULL,
+    [SqlTs]   VARCHAR (26) NOT NULL,
+    CONSTRAINT [PK_LPrecio] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+\\\\\\
+
+CREATE TABLE [dbo].[LTrabajo] (
+    [ID]        INT          IDENTITY (1, 1) NOT NULL,
+    [Descrip]   VARCHAR (50) NOT NULL,
+    [idSeccion] INT          NOT NULL,
+    [xExamen]   CHAR (1)     NOT NULL,
+    CONSTRAINT [PK_LTrabajo] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+\\\\\\
+
+CREATE TABLE [dbo].[Mail] (
+    [idMuestra] VARCHAR (12) NOT NULL,
+    [idExamen]  INT          NOT NULL,
+    [Env]       CHAR (1)     NOT NULL
+);
+\\\\\\
+CREATE TABLE [dbo].[Medicos] (
+    [ID]             INT            IDENTITY (1, 1) NOT NULL,
+    [CodExt]         VARCHAR (10)   NOT NULL,
+    [Nombre]         VARCHAR (25)   NOT NULL,
+    [Apellido]       VARCHAR (25)   NOT NULL,
+    [Telefono]       VARCHAR (20)   NOT NULL,
+    [Celular]        VARCHAR (20)   NOT NULL,
+    [Fax]            VARCHAR (20)   NOT NULL,
+    [EnvFax]         CHAR (1)       NOT NULL,
+    [eMail]          VARCHAR (1024) NOT NULL,
+    [EnvMail]        CHAR (1)       NOT NULL,
+    [Dir1]           VARCHAR (30)   NOT NULL,
+    [SqlTs]          VARCHAR (50)   NOT NULL,
+    [Cedula]         VARCHAR (15)   NOT NULL,
+    [Activo]         CHAR (1)       NOT NULL,
+    [idEspecialidad] INT            NOT NULL,
+    CONSTRAINT [PK_Medicos] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+\\\\\\\\
+
+CREATE TABLE [dbo].[Menu] (
+    [ID]      INT          NOT NULL,
+    [Codigo]  VARCHAR (10) NOT NULL,
+    [Descrip] VARCHAR (35) NOT NULL,
+    CONSTRAINT [PK_Menu] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+\\\\\\
+CREATE TABLE [dbo].[Metodologia] (
+    [ID]      INT          IDENTITY (1, 1) NOT NULL,
+    [Descrip] VARCHAR (30) NOT NULL,
+    [Activo]  CHAR (1)     NOT NULL,
+    [CodExt]  VARCHAR (15) NOT NULL,
+    [ciMet]   VARCHAR (15) NOT NULL,
+    [SqlTs]   VARCHAR (26) NOT NULL,
+    CONSTRAINT [PK_Metodologia] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+\\\\\\
+
+CREATE TABLE [dbo].[Moneda] (
+    [ID]         INT          IDENTITY (1, 1) NOT NULL,
+    [Descrip]    VARCHAR (30) NOT NULL,
+    [Abrev]      VARCHAR (5)  NOT NULL,
+    [Factor]     MONEY        NOT NULL,
+    [Utilidad]   MONEY        NOT NULL,
+    [RedoMone]   CHAR (1)     NOT NULL,
+    [FecUltAct]  DATETIME     NOT NULL,
+    [idUsuario]  INT          NOT NULL,
+    [AplCalcIng] VARCHAR (1)  NOT NULL,
+    [Oculta]     CHAR (1)     NOT NULL,
+    [SqlTs]      VARCHAR (26) NOT NULL,
+    CONSTRAINT [PK_Moneda] PRIMARY KEY CLUSTERED ([ID] ASC),
+    CONSTRAINT [FK_Moneda_Usuarios] FOREIGN KEY ([idUsuario]) REFERENCES [dbo].[Usuarios] ([ID])
+);
+\\\\\\\\
+CREATE TABLE [dbo].[Motores] (
+    [ID]      INT          IDENTITY (1, 1) NOT NULL,
+    [Codigo]  CHAR (10)    NOT NULL,
+    [Descrip] VARCHAR (30) NOT NULL,
+    CONSTRAINT [PK_Motores] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+\\\\\
+
+CREATE TABLE [dbo].[MotxAnu] (
+    [ID]      INT          IDENTITY (1, 1) NOT NULL,
+    [Descrip] VARCHAR (50) NOT NULL,
+    [Activo]  CHAR (1)     NOT NULL,
+    CONSTRAINT [PK_MotxAnu] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+\\\\\\\
+
+CREATE TABLE [dbo].[Nacionalidad] (
+    [ID]      INT          NOT NULL,
+    [Codigo]  VARCHAR (5)  NOT NULL,
+    [CodExt]  VARCHAR (5)  NOT NULL,
+    [Descrip] VARCHAR (35) NOT NULL,
+    [Abrev]   VARCHAR (10) NOT NULL
+);
+\\\\\
+
+CREATE TABLE [dbo].[NCredito] (
+    [ID]           INT          NOT NULL,
+    [idFactura]    INT          NOT NULL,
+    [Fecha]        DATETIME     NOT NULL,
+    [Descrip]      VARCHAR (50) NOT NULL,
+    [Monto]        MONEY        NOT NULL,
+    [idUsuario]    INT          NOT NULL,
+    [MontoOld]     MONEY        NOT NULL,
+    [Reconversion] CHAR (1)     NOT NULL,
+    [idMotxAnu]    INT          NOT NULL,
+    [NControl]     VARCHAR (12) NOT NULL,
+    [NSerie]       VARCHAR (10) DEFAULT ('N/A') NOT NULL,
+    CONSTRAINT [PK_NCredito] PRIMARY KEY CLUSTERED ([NSerie] ASC, [ID] ASC),
+    CONSTRAINT [FK_NCredito_Facturas] FOREIGN KEY ([NSerie], [idFactura]) REFERENCES [dbo].[Facturas] ([NSerie], [ID]),
+    CONSTRAINT [FK_NCredito_SerieFact] FOREIGN KEY ([NSerie]) REFERENCES [dbo].[SerieFact] ([NSerie]),
+    CONSTRAINT [FK_NCredito_Usuarios] FOREIGN KEY ([idUsuario]) REFERENCES [dbo].[Usuarios] ([ID])
+);
+\\\\\\\\
+
+CREATE TABLE [dbo].[NCxDetalle] (
+    [idNcredito]   INT          NOT NULL,
+    [idMuestra]    VARCHAR (12) NOT NULL,
+    [idExamen]     INT          NOT NULL,
+    [idCodigo]     INT          NOT NULL,
+    [Precio]       MONEY        NOT NULL,
+    [PrecioOld]    MONEY        NOT NULL,
+    [Reconversion] CHAR (1)     NOT NULL,
+    CONSTRAINT [PK_NCxDetalle] PRIMARY KEY CLUSTERED ([idNcredito] ASC, [idExamen] ASC)
+);
+\\\\\\\
+
+CREATE TABLE [dbo].[NDebito] (
+    [ID]           INT          NOT NULL,
+    [idPago]       INT          NOT NULL,
+    [Fecha]        DATETIME     NOT NULL,
+    [Descrip]      VARCHAR (50) NOT NULL,
+    [Monto]        MONEY        NOT NULL,
+    [idUsuario]    INT          NOT NULL,
+    [MontoOld]     MONEY        NOT NULL,
+    [Reconversion] CHAR (1)     NOT NULL,
+    CONSTRAINT [PK_NDebito] PRIMARY KEY CLUSTERED ([ID] ASC),
+    CONSTRAINT [FK_NDebito_Pagos] FOREIGN KEY ([idPago]) REFERENCES [dbo].[Pagos] ([ID]),
+    CONSTRAINT [FK_NDebito_Usuarios] FOREIGN KEY ([idUsuario]) REFERENCES [dbo].[Usuarios] ([ID])
+);
+\\\\
+
+CREATE TABLE [dbo].[Ordenes] (
+    [idMuestra]    VARCHAR (12) NOT NULL,
+    [idExamen]     INT          NOT NULL,
+    [idCodigo]     INT          NOT NULL,
+    [idExaInt]     INT          NOT NULL,
+    [Precio]       MONEY        NOT NULL,
+    [idOrden]      INT          NOT NULL,
+    [idFactura]    INT          NOT NULL,
+    [Referencia]   CHAR (1)     NOT NULL,
+    [idReferencia] INT          NOT NULL,
+    [idSeccion]    INT          NOT NULL,
+    [DefExamen]    CHAR (1)     NOT NULL,
+    [MOrd]         CHAR (1)     NOT NULL,
+    [MRes]         CHAR (1)     NOT NULL,
+    [ForReporte]   CHAR (1)     NOT NULL,
+    [ValRefer]     CHAR (1)     NOT NULL,
+    [StatusExa]    CHAR (1)     NOT NULL,
+    [idEntr]       INT          NOT NULL,
+    [Impr]         CHAR (1)     NOT NULL,
+    [eMail]        CHAR (1)     NOT NULL,
+    [Fax]          CHAR (1)     NOT NULL,
+    [FHOrden]      DATETIME     NOT NULL,
+    [FHReporte]    DATETIME     NOT NULL,
+    [InfoTubo]     VARCHAR (10) NOT NULL,
+    [CodLabel]     VARCHAR (16) NOT NULL,
+    [idUsuario]    INT          NOT NULL,
+    [Costo]        MONEY        NOT NULL,
+    [PrecioOld]    MONEY        NOT NULL,
+    [Reconversion] CHAR (1)     NOT NULL,
+    [idBac]        INT          NULL,
+    [idOrdExt]     VARCHAR (20) NOT NULL,
+    [Precio2]      MONEY        NOT NULL,
+    [Costo2]       MONEY        DEFAULT ((0)) NOT NULL,
+    [NSerie]       VARCHAR (10) DEFAULT ('N/A') NOT NULL,
+    CONSTRAINT [PK_Ordenes] PRIMARY KEY CLUSTERED ([idMuestra] ASC, [idExamen] ASC),
+    CONSTRAINT [FK_Ordenes_Examenes] FOREIGN KEY ([idExamen]) REFERENCES [dbo].[Examenes] ([ID]),
+    CONSTRAINT [FK_Ordenes_Ingresos] FOREIGN KEY ([idMuestra]) REFERENCES [dbo].[Ingresos] ([ID]),
+    CONSTRAINT [FK_Ordenes_Secciones] FOREIGN KEY ([idSeccion]) REFERENCES [dbo].[Secciones] ([ID]),
+    CONSTRAINT [FK_Ordenes_Usuarios] FOREIGN KEY ([idUsuario]) REFERENCES [dbo].[Usuarios] ([ID])
+);
+\\\\\\\
+
+CREATE TABLE [dbo].[OrdExternas] (
+    [ID]        INT            IDENTITY (1, 1) NOT NULL,
+    [TipDoc]    VARCHAR (10)   NOT NULL,
+    [Numero]    VARCHAR (25)   NOT NULL,
+    [Status]    CHAR (1)       NOT NULL,
+    [Descrip]   VARCHAR (250)  NOT NULL,
+    [Estacion]  VARCHAR (25)   NOT NULL,
+    [FecRec]    DATETIME       NOT NULL,
+    [FecEnv]    DATETIME       NOT NULL,
+    [Data]      TEXT           NOT NULL,
+    [idUsuario] INT            NOT NULL,
+    [Xml]       VARCHAR (8000) NOT NULL,
+    [Log]       VARCHAR (250)  NOT NULL
+);
+\\\\
+
+CREATE TABLE [dbo].[Orina] (
+    [idMuestra]    VARCHAR (12)   NOT NULL,
+    [idExamen]     INT            NOT NULL,
+    [idEquipo]     INT            NOT NULL,
+    [Color]        VARCHAR (25)   NOT NULL,
+    [Aspecto]      VARCHAR (25)   NOT NULL,
+    [Densidad]     SMALLINT       NOT NULL,
+    [PH]           FLOAT (53)     NOT NULL,
+    [idMetodo]     INT            NOT NULL,
+    [Tiras]        VARCHAR (25)   NOT NULL,
+    [Proteinas]    VARCHAR (25)   NOT NULL,
+    [Glucosa]      VARCHAR (25)   NOT NULL,
+    [Bilirrubina]  VARCHAR (25)   NOT NULL,
+    [Nitritos]     VARCHAR (25)   NOT NULL,
+    [Cetonicos]    VARCHAR (25)   NOT NULL,
+    [Hemoglobina]  VARCHAR (25)   NOT NULL,
+    [QLeucocitos]  VARCHAR (25)   NOT NULL,
+    [Urobilina]    VARCHAR (25)   NOT NULL,
+    [Cilindricas]  VARCHAR (25)   NOT NULL,
+    [Mucina]       VARCHAR (25)   NOT NULL,
+    [Tricomonas]   VARCHAR (25)   NOT NULL,
+    [Hematies]     VARCHAR (25)   NOT NULL,
+    [MLeucocitos]  VARCHAR (25)   NOT NULL,
+    [Bacterias]    VARCHAR (25)   NOT NULL,
+    [Esperma]      VARCHAR (25)   NOT NULL,
+    [CEpiteliales] VARCHAR (25)   NOT NULL,
+    [CRedondas]    VARCHAR (25)   NOT NULL,
+    [CTransicion]  VARCHAR (25)   NOT NULL,
+    [Cilindros]    VARCHAR (100)  NOT NULL,
+    [Cristales]    VARCHAR (100)  NOT NULL,
+    [Observacion]  VARCHAR (2048) NOT NULL,
+    [AcuLeu]       VARCHAR (20)   NOT NULL,
+    [Hifas]        VARCHAR (20)   NOT NULL,
+    [Blasto]       VARCHAR (20)   NOT NULL,
+    [CilHi]        VARCHAR (20)   NOT NULL,
+    [CilHe]        VARCHAR (20)   NOT NULL,
+    [CilLe]        VARCHAR (20)   NOT NULL,
+    [CilMi]        VARCHAR (20)   NOT NULL,
+    [CilCe]        VARCHAR (20)   NOT NULL,
+    [CilGr]        VARCHAR (20)   NOT NULL,
+    [CilGrFi]      VARCHAR (20)   NOT NULL,
+    [CilGrGr]      VARCHAR (20)   NOT NULL,
+    [CriAcUr]      VARCHAR (20)   NOT NULL,
+    [CriUrAm]      VARCHAR (20)   NOT NULL,
+    [CriCi]        VARCHAR (20)   NOT NULL,
+    [CriOxCa]      VARCHAR (20)   NOT NULL,
+    [CriAcHi]      VARCHAR (20)   NOT NULL,
+    [CriLe]        VARCHAR (20)   NOT NULL,
+    [CriUrSo]      VARCHAR (20)   NOT NULL,
+    [CriTi]        VARCHAR (20)   NOT NULL,
+    [CriCo]        VARCHAR (20)   NOT NULL,
+    [CriCaCa]      VARCHAR (20)   NOT NULL,
+    [CriFoTr]      VARCHAR (20)   NOT NULL,
+    [CriFoCa]      VARCHAR (20)   NOT NULL,
+    [CriFoAm]      VARCHAR (20)   NOT NULL,
+    [CriBiAm]      VARCHAR (20)   NOT NULL,
+    [idInterface]  INT            NOT NULL,
+    CONSTRAINT [PK_Orina] PRIMARY KEY CLUSTERED ([idMuestra] ASC, [idExamen] ASC)
+);
+\\\\\\
+CREATE TABLE [dbo].[Pacientes] (
+    [ID]           INT            NOT NULL,
+    [Nombre]       VARCHAR (35)   NOT NULL,
+    [Apellido]     VARCHAR (35)   NOT NULL,
+    [Cedula]       VARCHAR (15)   NOT NULL,
+    [Telefono]     VARCHAR (20)   NOT NULL,
+    [Celular]      VARCHAR (15)   NOT NULL,
+    [Dir1]         VARCHAR (60)   NOT NULL,
+    [Sexo]         CHAR (1)       NOT NULL,
+    [FNacimiento]  SMALLDATETIME  NOT NULL,
+    [idConvenio]   INT            NOT NULL,
+    [idSConvenio]  INT            NOT NULL,
+    [Nacionalidad] CHAR (1)       NOT NULL,
+    [Activo]       CHAR (1)       NOT NULL,
+    [UltVisita]    SMALLDATETIME  NOT NULL,
+    [Historia]     VARCHAR (15)   NOT NULL,
+    [Piso]         VARCHAR (10)   NOT NULL,
+    [Habitacion]   VARCHAR (10)   NOT NULL,
+    [TotFac]       MONEY          NOT NULL,
+    [TotPag]       MONEY          NOT NULL,
+    [TotSal]       MONEY          NOT NULL,
+    [Asegurado]    VARCHAR (30)   NOT NULL,
+    [ciAsegurado]  VARCHAR (15)   NULL,
+    [SqlTs]        VARCHAR (50)   NULL,
+    [Mail]         VARCHAR (1024) NOT NULL,
+    [EnvMail]      CHAR (1)       NOT NULL,
+    [Reconversion] CHAR (1)       NOT NULL,
+    [Dir2]         VARCHAR (60)   NOT NULL,
+    [CodExt]       VARCHAR (50)   NOT NULL,
+    [Discapacidad] CHAR (1)       NOT NULL,
+    [Embarazo]     CHAR (1)       NOT NULL,
+    [FecEmb]       VARCHAR (10)   NOT NULL,
+    [TiempoEmb]    VARCHAR (4)    NOT NULL,
+    [idUsuario]    INT            NOT NULL,
+    [FecUltAct]    DATETIME       NOT NULL,
+    CONSTRAINT [PK_Pacientes] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+\\\\\\\\\
+CREATE TABLE [dbo].[Pagos] (
+    [ID]           INT          NOT NULL,
+    [idFactura]    INT          NOT NULL,
+    [Fecha]        DATETIME     NOT NULL,
+    [Monto]        MONEY        NOT NULL,
+    [Status]       CHAR (1)     NOT NULL,
+    [idUsuario]    INT          NOT NULL,
+    [SqlTs]        VARCHAR (50) NOT NULL,
+    [MontoOld]     MONEY        NOT NULL,
+    [Reconversion] CHAR (1)     NOT NULL,
+    [TipPag]       CHAR (1)     NOT NULL,
+    [idConvenio]   INT          NOT NULL,
+    [TipFactura]   CHAR (1)     NOT NULL,
+    [NSerie]       VARCHAR (10) DEFAULT ('N/A') NOT NULL,
+    [Impuesto]     MONEY        DEFAULT ((0)) NOT NULL,
+    CONSTRAINT [PK_Pagos] PRIMARY KEY CLUSTERED ([ID] ASC),
+    CONSTRAINT [FK_Pagos_Usuarios] FOREIGN KEY ([idUsuario]) REFERENCES [dbo].[Usuarios] ([ID])
+);
+\\\\\\\
+CREATE TABLE [dbo].[PagosMult] (
+    [idPago]       INT          NOT NULL,
+    [idFactura]    INT          NOT NULL,
+    [Monto]        MONEY        NOT NULL,
+    [MontoOld]     MONEY        NOT NULL,
+    [Reconversion] CHAR (1)     NOT NULL,
+    [NSerie]       VARCHAR (10) DEFAULT ('N/A') NOT NULL,
+    CONSTRAINT [PK_PagosMult] PRIMARY KEY CLUSTERED ([idPago] ASC, [NSerie] ASC, [idFactura] ASC),
+    CONSTRAINT [FK_PagosMult_Facturas] FOREIGN KEY ([NSerie], [idFactura]) REFERENCES [dbo].[Facturas] ([NSerie], [ID]),
+    CONSTRAINT [FK_PagosMult_SerieFact] FOREIGN KEY ([NSerie]) REFERENCES [dbo].[SerieFact] ([NSerie])
+);
+\\\\\\\\
+
+CREATE TABLE [dbo].[Pagosxd] (
+    [ID]           INT          IDENTITY (1, 1) NOT NULL,
+    [idPago]       INT          NOT NULL,
+    [idFPago]      INT          NULL,
+    [idBanco]      INT          NULL,
+    [Forma]        VARCHAR (25) NOT NULL,
+    [Banco]        VARCHAR (35) NOT NULL,
+    [Numero]       VARCHAR (30) NOT NULL,
+    [Monto]        MONEY        NOT NULL,
+    [MontoOld]     MONEY        NOT NULL,
+    [Reconversion] CHAR (1)     NOT NULL,
+    [idPVenta]     INT          NOT NULL,
+    [Lote]         INT          NOT NULL,
+    [Factor]       FLOAT (53)   NOT NULL,
+    [Impuesto]     MONEY        DEFAULT ((0)) NOT NULL,
+    CONSTRAINT [PK_Pagosxd] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+\\\\\\\\
+CREATE TABLE [dbo].[PagxPOrd] (
+    [idPOrd]       INT          NOT NULL,
+    [Recibo]       VARCHAR (10) NOT NULL,
+    [Fecha]        DATETIME     NOT NULL,
+    [Monto]        MONEY        NOT NULL,
+    [idUsuario]    INT          NOT NULL,
+    [MontoOld]     MONEY        NOT NULL,
+    [Reconversion] CHAR (1)     NOT NULL,
+    CONSTRAINT [PK_PagxPOrd] PRIMARY KEY CLUSTERED ([idPOrd] ASC, [Recibo] ASC)
+);\\\\\\\\
+
+CREATE TABLE [dbo].[Permisos] (
+    [idUsuario] INT          NOT NULL,
+    [idControl] VARCHAR (10) NOT NULL,
+    [CS]        CHAR (5)     NULL,
+    CONSTRAINT [PK_Permisos] PRIMARY KEY CLUSTERED ([idUsuario] ASC, [idControl] ASC)
+);
+\\\\\\\
+CREATE TABLE [dbo].[PreOrden] (
+    [ID]           INT          NOT NULL,
+    [idFactura]    INT          NOT NULL,
+    [idMuestra]    VARCHAR (12) NOT NULL,
+    [Fecha]        DATETIME     NOT NULL,
+    [Status]       CHAR (1)     NOT NULL,
+    [Recargo]      MONEY        NOT NULL,
+    [Descuento]    MONEY        NOT NULL,
+    [Monto]        MONEY        NOT NULL,
+    [idUsuario]    INT          NOT NULL,
+    [MontoOld]     MONEY        NOT NULL,
+    [Reconversion] CHAR (1)     NOT NULL,
+    [Saldo]        MONEY        NOT NULL,
+    [Cancelada]    CHAR (1)     NOT NULL,
+    [SaldoOld]     MONEY        NOT NULL,
+    [Monto2]       MONEY        NOT NULL,
+    [TCambio]      MONEY        NOT NULL,
+    [Saldo2]       MONEY        NOT NULL,
+    [NSerie]       VARCHAR (10) DEFAULT ('N/A') NOT NULL,
+    CONSTRAINT [PK_PreOrden] PRIMARY KEY CLUSTERED ([ID] ASC),
+    CONSTRAINT [FK_PreOrden_Usuarios] FOREIGN KEY ([idUsuario]) REFERENCES [dbo].[Usuarios] ([ID])
+);
+\\\\\
+
+
+CREATE TABLE [dbo].[Presupuesto] (
+    [ID]           INT            NOT NULL,
+    [Cedula]       VARCHAR (10)   NOT NULL,
+    [Nombre]       VARCHAR (50)   NOT NULL,
+    [Apellido]     VARCHAR (50)   NOT NULL,
+    [Telefono]     VARCHAR (30)   NOT NULL,
+    [Dir1]         VARCHAR (50)   NOT NULL,
+    [Fecha]        SMALLDATETIME  NOT NULL,
+    [FecNac]       DATETIME       NOT NULL,
+    [Sexo]         CHAR (1)       NOT NULL,
+    [idConv]       INT            NOT NULL,
+    [idSConv]      INT            NOT NULL,
+    [idLPre]       INT            NOT NULL,
+    [Monto]        MONEY          NOT NULL,
+    [Porc]         MONEY          NOT NULL,
+    [DR]           INT            NOT NULL,
+    [Observ]       VARCHAR (2048) NOT NULL,
+    [idUsuario]    INT            NOT NULL,
+    [MontoOld]     MONEY          NOT NULL,
+    [Reconversion] CHAR (1)       NOT NULL,
+    [Monto2]       MONEY          CONSTRAINT [DF_Presupuesto_Monto2] DEFAULT ((0)) NOT NULL,
+    [TCambio]      MONEY          CONSTRAINT [DF_Presupuesto_TCambio] DEFAULT ((0)) NOT NULL,
+    CONSTRAINT [PK_Presupuesto] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+\\\\\\
+
+
+CREATE TABLE [dbo].[Prioridad] (
+    [ID]          INT          IDENTITY (1, 1) NOT NULL,
+    [Descrip]     VARCHAR (50) NOT NULL,
+    [Prioridad]   CHAR (1)     NOT NULL,
+    [idUbicacion] INT          NOT NULL,
+    [idConvenio]  INT          NOT NULL,
+    [Codigo]      VARCHAR (2)  NOT NULL,
+    [SoloTM]      CHAR (1)     NOT NULL,
+    [Edad]        CHAR (9)     NOT NULL,
+    [Condicion]   CHAR (1)     NOT NULL,
+    [Sexo]        CHAR (1)     NOT NULL,
+    [Activo]      CHAR (1)     NOT NULL,
+    [Orden]       INT          NOT NULL
+);
+\\\\\\\
+
+CREATE TABLE [dbo].[PVenta] (
+    [ID]        INT          IDENTITY (1, 1) NOT NULL,
+    [Descrip]   VARCHAR (35) NOT NULL,
+    [CodExt]    VARCHAR (10) NOT NULL,
+    [idBanco]   INT          NOT NULL,
+    [ComTDe]    MONEY        NOT NULL,
+    [ComTDeO]   MONEY        NOT NULL,
+    [IsrlTDe]   MONEY        NOT NULL,
+    [IvaTDe]    MONEY        NOT NULL,
+    [ComTCr]    MONEY        NOT NULL,
+    [ComTCrO]   MONEY        NOT NULL,
+    [IsrlTCr]   MONEY        NOT NULL,
+    [IvaTCr]    MONEY        NOT NULL,
+    [Activo]    CHAR (1)     NOT NULL,
+    [idUsuario] INT          NOT NULL,
+    [FecUltAct] DATETIME     NOT NULL,
+    CONSTRAINT [PK_PVenta] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+\\\\\\\\
+CREATE TABLE [dbo].[Recargos] (
+    [ID]          INT          IDENTITY (1, 1) NOT NULL,
+    [Tipo]        VARCHAR (10) NOT NULL,
+    [Dia]         VARCHAR (10) NOT NULL,
+    [Fecha]       VARCHAR (10) NOT NULL,
+    [HoraIni]     CHAR (8)     NOT NULL,
+    [HoraFin]     CHAR (8)     NOT NULL,
+    [Recargo]     FLOAT (53)   NOT NULL,
+    [idUsuario]   INT          NOT NULL,
+    [idConvenio]  INT          NOT NULL,
+    [idUbicacion] INT          NOT NULL,
+    CONSTRAINT [PK_Recargos] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+\\\\\\
+
+CREATE TABLE [dbo].[Referencia] (
+    [ID]        INT            NOT NULL,
+    [Descrip]   VARCHAR (50)   NOT NULL,
+    [Abrev]     VARCHAR (50)   NOT NULL,
+    [Activo]    CHAR (1)       NOT NULL,
+    [Contacto]  VARCHAR (50)   NOT NULL,
+    [Descuento] FLOAT (53)     NOT NULL,
+    [Direccion] VARCHAR (50)   NOT NULL,
+    [Rif]       VARCHAR (50)   NOT NULL,
+    [Telefono]  VARCHAR (50)   NOT NULL,
+    [Fax]       VARCHAR (50)   NOT NULL,
+    [eMail]     VARCHAR (1024) NOT NULL,
+    [SqlTs]     VARCHAR (50)   NOT NULL,
+    [DExtras]   INT            NOT NULL,
+    [idLab]     INT            NOT NULL,
+    [onLine]    CHAR (1)       NOT NULL,
+    [FTPIn]     VARCHAR (250)  NOT NULL,
+    [FTPOut]    VARCHAR (250)  NOT NULL,
+    CONSTRAINT [PK_Referencia] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+\\\\\\\\
+
+CREATE TABLE [dbo].[Relaciones] (
+    [ID]      INT          IDENTITY (1, 1) NOT NULL,
+    [Descrip] VARCHAR (50) NOT NULL,
+    [Codigo1] INT          NOT NULL,
+    [Codigo2] INT          NOT NULL,
+    [Codigo3] INT          NOT NULL,
+    [Activo]  CHAR (1)     NOT NULL,
+    CONSTRAINT [PK_Relaciones] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+\\\\\\
+
+CREATE TABLE [dbo].[RepGenerico] (
+    [ID]      INT            IDENTITY (1, 1) NOT NULL,
+    [Descrip] VARCHAR (50)   NOT NULL,
+    [Script]  VARCHAR (8000) NOT NULL,
+    CONSTRAINT [PK_RepGenerico] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+\\\\\
+CREATE TABLE [dbo].[Secciones] (
+    [ID]           INT           NOT NULL,
+    [Codigo]       VARCHAR (2)   NOT NULL,
+    [Descrip]      VARCHAR (35)  NOT NULL,
+    [DescripIng]   VARCHAR (35)  NOT NULL,
+    [CodConta]     VARCHAR (20)  NOT NULL,
+    [ColaResult]   VARCHAR (50)  NOT NULL,
+    [ColaEtiq]     VARCHAR (50)  NOT NULL,
+    [enColaResult] CHAR (1)      NOT NULL,
+    [enColaEtiq]   CHAR (50)     NOT NULL,
+    [PiePagina]    VARCHAR (MAX) NOT NULL,
+    [SepImp]       CHAR (1)      NOT NULL,
+    [FontDos]      VARCHAR (1)   NOT NULL,
+    [Secbac]       CHAR (1)      NOT NULL,
+    [ImpMetodo]    CHAR (1)      NOT NULL,
+    [ImplbResult]  CHAR (1)      NOT NULL,
+    [ImplbUnidad]  CHAR (1)      NOT NULL,
+    [ImplbVRefer]  CHAR (1)      NOT NULL,
+    [DIPPag]       CHAR (1)      NOT NULL,
+    [SqlTs]        VARCHAR (26)  NOT NULL,
+    CONSTRAINT [PK_Secciones_1] PRIMARY KEY CLUSTERED ([ID] ASC),
+    CONSTRAINT [PK_Secciones] UNIQUE NONCLUSTERED ([ID] ASC)
+);
+\\\\
+
+CREATE TABLE [dbo].[SeccionesOld] (
+    [ID]           INT            NOT NULL,
+    [Codigo]       VARCHAR (2)    NOT NULL,
+    [CodConta]     VARCHAR (20)   NULL,
+    [Descrip]      VARCHAR (35)   NOT NULL,
+    [ColaResult]   VARCHAR (50)   NOT NULL,
+    [ColaEtiq]     VARCHAR (50)   NOT NULL,
+    [enColaResult] CHAR (1)       NOT NULL,
+    [enColaEtiq]   CHAR (1)       NOT NULL,
+    [PiePagina]    VARCHAR (8000) NOT NULL,
+    [SepImp]       CHAR (1)       NOT NULL,
+    [FontDOS]      VARCHAR (1)    NOT NULL,
+    [SecBac]       CHAR (1)       NOT NULL,
+    [ImpMetodo]    CHAR (1)       NOT NULL,
+    [ImplbResult]  CHAR (1)       NOT NULL,
+    [ImplbUnidad]  CHAR (1)       NOT NULL,
+    [ImplbVRefer]  CHAR (1)       NOT NULL,
+    [DIPPag]       CHAR (1)       NOT NULL,
+    [DescripIng]   VARCHAR (35)   NOT NULL,
+    [SqlTs]        VARCHAR (26)   NOT NULL
+);
+\\\\\\\\
+
+CREATE TABLE [dbo].[Seguridad] (
+    [ID]       INT          IDENTITY (1, 1) NOT NULL,
+    [Codigo]   VARCHAR (35) NOT NULL,
+    [Descrip]  VARCHAR (35) NOT NULL,
+    [Tabla]    VARCHAR (20) NOT NULL,
+    [Imec]     CHAR (1)     NOT NULL,
+    [Fecha]    DATETIME     NOT NULL,
+    [idUsu]    INT          NOT NULL,
+    [Estacion] VARCHAR (50) NOT NULL,
+    CONSTRAINT [PK_Seguridad] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+\\\\\
+CREATE TABLE [dbo].[SerieFact] (
+    [ID]      INT          NOT NULL,
+    [NSerie]  VARCHAR (10) NOT NULL,
+    [CodExt]  VARCHAR (15) NOT NULL,
+    [Descrip] VARCHAR (30) NOT NULL,
+    [Activa]  CHAR (1)     NOT NULL,
+    [SqlTs]   VARCHAR (26) NOT NULL,
+    CONSTRAINT [IX_NSerie] PRIMARY KEY CLUSTERED ([NSerie] ASC),
+    CONSTRAINT [PK_SerieFact] UNIQUE NONCLUSTERED ([ID] ASC)
+);\\\\
+
+CREATE TABLE [dbo].[ServDWH] (
+    [ID]        INT           IDENTITY (1, 1) NOT NULL,
+    [idMuestra] VARCHAR (12)  NOT NULL,
+    [TipDoc]    VARCHAR (5)   NOT NULL,
+    [Env]       CHAR (1)      NOT NULL,
+    [FecRec]    DATETIME      NOT NULL,
+    [FecEnv]    DATETIME      NOT NULL,
+    [Estacion]  VARCHAR (50)  NOT NULL,
+    [LogEnv]    VARCHAR (512) NOT NULL,
+    [idUsuario] INT           NOT NULL
+);
+\\\\
+CREATE TABLE [dbo].[ServExt] (
+    [ID]        INT            IDENTITY (1, 1) NOT NULL,
+    [Imec]      CHAR (1)       NOT NULL,
+    [TipDoc]    VARCHAR (5)    NOT NULL,
+    [Numero]    VARCHAR (35)   NOT NULL,
+    [FecRec]    DATETIME       NOT NULL,
+    [FecEnv]    DATETIME       NOT NULL,
+    [EnvLog]    DATETIME       NOT NULL,
+    [Estacion]  VARCHAR (25)   NOT NULL,
+    [Env]       CHAR (1)       NOT NULL,
+    [idUsuario] INT            NOT NULL,
+    [LogEnv]    VARCHAR (1024) NOT NULL,
+    [Status]    VARCHAR (1)    NOT NULL
+);
+\\\\\
+
+CREATE TABLE [dbo].[ServRefExt] (
+    [ID]        INT           IDENTITY (1, 1) NOT NULL,
+    [Imec]      CHAR (1)      NOT NULL,
+    [idLab]     INT           NOT NULL,
+    [TipDoc]    VARCHAR (10)  NOT NULL,
+    [Numero]    VARCHAR (25)  NOT NULL,
+    [Status]    CHAR (1)      NOT NULL,
+    [Descrip]   VARCHAR (50)  NOT NULL,
+    [Estacion]  VARCHAR (25)  NOT NULL,
+    [FecRec]    DATETIME      NOT NULL,
+    [FecEnv]    DATETIME      NOT NULL,
+    [XML]       XML           NOT NULL,
+    [Log]       VARCHAR (250) NOT NULL,
+    [idUsuario] INT           NOT NULL,
+    CONSTRAINT [PK_ServRefExt] PRIMARY KEY CLUSTERED ([ID] ASC),
+    CONSTRAINT [FK_ServRefExt_Laboratorio] FOREIGN KEY ([idLab]) REFERENCES [dbo].[Laboratorio] ([ID])
+);
+\\\\\
+
+CREATE TABLE [dbo].[ServSMS] (
+    [ID]        INT            IDENTITY (1, 1) NOT NULL,
+    [idMuestra] VARCHAR (12)   NOT NULL,
+    [TipDoc]    VARCHAR (5)    NOT NULL,
+    [Numero]    VARCHAR (15)   NOT NULL,
+    [Env]       CHAR (1)       NOT NULL,
+    [FecRec]    DATETIME       NOT NULL,
+    [FecEnv]    DATETIME       NOT NULL,
+    [Estacion]  VARCHAR (50)   NOT NULL,
+    [TextSMS]   VARCHAR (1024) NOT NULL,
+    [LogEnv]    VARCHAR (512)  NOT NULL,
+    [idUsuario] INT            NOT NULL
+);
+\\\\\\
+
+CREATE TABLE [dbo].[StatusMue] (
+    [idMuestra] CHAR (24) NOT NULL,
+    [idExamen]  INT       NOT NULL,
+    [Fecha]     DATETIME  NOT NULL,
+    [Status]    CHAR (1)  NOT NULL,
+    [idUsuario] SMALLINT  NOT NULL
+);
+\\\\\
+
+CREATE TABLE [dbo].[SubConv] (
+    [ID]         INT          IDENTITY (1, 1) NOT NULL,
+    [LetExt]     VARCHAR (10) NOT NULL,
+    [idConvenio] INT          NOT NULL,
+    [Credito]    CHAR (1)     NOT NULL,
+    [Descrip]    VARCHAR (50) NOT NULL,
+    [Abrev]      VARCHAR (20) NOT NULL,
+    [DR]         INT          NOT NULL,
+    [Porc]       FLOAT (53)   NOT NULL,
+    [CodExt]     VARCHAR (10) NOT NULL,
+    [Activo]     CHAR (1)     NOT NULL,
+    CONSTRAINT [PK_SubConv] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+\\\\\\
+CREATE TABLE [dbo].[SubMenu] (
+    [ID]      VARCHAR (10) NOT NULL,
+    [idMenu]  INT          NOT NULL,
+    [Descrip] VARCHAR (35) NOT NULL,
+    CONSTRAINT [PK_SubMenu] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+\\\\\
+
+CREATE TABLE [dbo].[Sucursales] (
+    [ID]       INT          IDENTITY (1, 1) NOT NULL,
+    [CodExt]   VARCHAR (20) NOT NULL,
+    [Descrip]  VARCHAR (35) NOT NULL,
+    [Orden]    CHAR (1)     NOT NULL,
+    [Abrev]    VARCHAR (15) NOT NULL,
+    [Serie]    CHAR (1)     NOT NULL,
+    [idMueIni] INT          NOT NULL,
+    [Activo]   CHAR (1)     NOT NULL,
+    [idLab]    INT          DEFAULT ((0)) NOT NULL,
+    CONSTRAINT [PK_Sucursales] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+\\\\
+CREATE TABLE [dbo].[Tareas] (
+    [ID]         INT           IDENTITY (1, 1) NOT NULL,
+    [TipTarea]   INT           NULL,
+    [Descrip]    VARCHAR (75)  NOT NULL,
+    [Abrev]      VARCHAR (15)  NOT NULL,
+    [Orden]      INT           NOT NULL,
+    [TipFrec]    CHAR (1)      NOT NULL,
+    [FrecTarea]  INT           NOT NULL,
+    [DiasSemana] VARCHAR (7)   NOT NULL,
+    [Ocurre]     CHAR (1)      NOT NULL,
+    [HoraIni]    DATETIME      NOT NULL,
+    [HoraFin]    DATETIME      NOT NULL,
+    [Carpeta]    VARCHAR (512) NOT NULL,
+    [TipNotif]   CHAR (1)      NOT NULL,
+    [Notifx]     CHAR (1)      NOT NULL,
+    [CantNotif]  INT           NOT NULL,
+    [IntNotif]   INT           NOT NULL,
+    [MCNotif]    VARCHAR (256) NOT NULL,
+    [UltEjec]    DATETIME      NOT NULL,
+    [UltNotif]   DATETIME      NOT NULL,
+    [NotifEnv]   INT           NOT NULL,
+    [Log]        VARCHAR (250) NOT NULL,
+    [Activo]     CHAR (1)      NOT NULL,
+    CONSTRAINT [PK_Tareas] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+\\\\\\\
+CREATE TABLE [dbo].[TecladoD] (
+    [idTeclado] SMALLINT NOT NULL,
+    [Tag]       SMALLINT NOT NULL,
+    [Letra]     CHAR (1) NOT NULL,
+    CONSTRAINT [PK_TecladoD] PRIMARY KEY CLUSTERED ([idTeclado] ASC, [Tag] ASC)
+);
+\\\\\
+
+CREATE TABLE [dbo].[TmpAnti] (
+    [ID]            VARCHAR (15) NOT NULL,
+    [Item]          INT          NOT NULL,
+    [idAntibiotico] INT          NOT NULL,
+    [Antibiotico]   VARCHAR (35) NOT NULL,
+    [idMicro1]      INT          NOT NULL,
+    [idMicro2]      INT          NOT NULL,
+    [idMicro3]      INT          NOT NULL,
+    [idMicro4]      INT          NOT NULL,
+    [idMicro5]      INT          NOT NULL,
+    [Result1]       VARCHAR (15) NOT NULL,
+    [Result2]       VARCHAR (15) NOT NULL,
+    [Result3]       VARCHAR (15) NOT NULL,
+    [Result4]       VARCHAR (15) NOT NULL,
+    [Result5]       VARCHAR (15) NOT NULL,
+    [Sens1]         VARCHAR (1)  NOT NULL,
+    [Sens2]         VARCHAR (1)  NOT NULL,
+    [Sens3]         VARCHAR (1)  NOT NULL,
+    [Sens4]         VARCHAR (1)  NOT NULL,
+    [Sens5]         VARCHAR (1)  NOT NULL,
+    [idMuestra]     VARCHAR (12) NOT NULL,
+    [idExamen]      INT          NOT NULL
+);
+\\\\
+
+CREATE TABLE [dbo].[TmpAuditoria] (
+    [ID]        VARCHAR (15) NOT NULL,
+    [idMuestra] VARCHAR (12) NOT NULL,
+    [idExamen]  INT          NOT NULL,
+    [Cantidad]  INT          NOT NULL
+);
+\\\\\
+
+CREATE TABLE [dbo].[TmpCaja] (
+    [ID]          INT          IDENTITY (1, 1) NOT NULL,
+    [idTCaja]     VARCHAR (15) NOT NULL,
+    [Correlativo] INT          NOT NULL,
+    [idPago]      INT          NOT NULL,
+    [idNdebito]   INT          NOT NULL,
+    [Tipo]        CHAR (1)     NOT NULL,
+    [Fecha]       DATETIME     NOT NULL,
+    [idFactura]   INT          NOT NULL,
+    [Status]      CHAR (1)     NOT NULL,
+    [Forma]       VARCHAR (20) NOT NULL,
+    [idBanco]     INT          NOT NULL,
+    [Banco]       VARCHAR (35) NOT NULL,
+    [Numero]      VARCHAR (30) NOT NULL,
+    [idUsuario]   INT          NOT NULL,
+    [Monto]       MONEY        NOT NULL,
+    [idPaciente]  INT          NOT NULL,
+    [idConvenio]  INT          NOT NULL,
+    [idPVenta]    INT          NOT NULL,
+    [Lote]        INT          NOT NULL,
+    [idMuestra]   VARCHAR (12) NOT NULL,
+    [Factor]      FLOAT (53)   NOT NULL,
+    [MMExt]       FLOAT (53)   NOT NULL,
+    [idFPago]     INT          NOT NULL,
+    [NSerie]      VARCHAR (10) DEFAULT ('N/A') NOT NULL
+);
+\\\\\\
+
+CREATE TABLE [dbo].[TmpEstadistica] (
+    [idTEst]    VARCHAR (15) NOT NULL,
+    [idExamen]  INT          NOT NULL,
+    [idSeccion] INT          NOT NULL,
+    [Cantidad]  INT          NOT NULL,
+    [Costo]     MONEY        NOT NULL,
+    [ID]        INT          IDENTITY (1, 1) NOT NULL,
+    [Item]      INT          NOT NULL
+);
+\\\\
+
+CREATE TABLE [dbo].[TmpExPac] (
+    [ID]          VARCHAR (15) NOT NULL,
+    [idMuestra]   VARCHAR (12) NOT NULL,
+    [Tipo]        CHAR (1)     NOT NULL,
+    [idPaciente]  INT          NOT NULL,
+    [idExamen]    INT          NOT NULL,
+    [StatusExa]   VARCHAR (15) NOT NULL,
+    [idUbicacion] INT          NOT NULL,
+    [Precio]      MONEY        NOT NULL,
+    [idCodigo]    VARCHAR (8)  NOT NULL,
+    [FechaTM]     DATETIME     NOT NULL
+);
+\\\\
+CREATE TABLE [dbo].[TmpFactura] (
+    [ID]         VARCHAR (15) NOT NULL,
+    [idFactura]  INT          NOT NULL,
+    [idExamen]   INT          NOT NULL,
+    [idCodigo]   INT          NOT NULL,
+    [FecEntrega] VARCHAR (10) NULL,
+    [Precio]     MONEY        NOT NULL,
+    [NSerie]     VARCHAR (10) DEFAULT ('N/A') NOT NULL
+);
+\\\\
+
+CREATE TABLE [dbo].[TmpFacturas] (
+    [ID]          VARCHAR (15)  NOT NULL,
+    [idPaciente]  INT           NOT NULL,
+    [idMuestra]   VARCHAR (12)  NOT NULL,
+    [Fecha]       SMALLDATETIME NOT NULL,
+    [TipDoc]      CHAR (1)      NOT NULL,
+    [Status]      CHAR (1)      NOT NULL,
+    [TipFactura]  CHAR (1)      NOT NULL,
+    [idFactura]   INT           NOT NULL,
+    [idNCredito]  INT           NOT NULL,
+    [idConvenio]  INT           NOT NULL,
+    [idSConvenio] INT           NOT NULL,
+    [idUbicacion] INT           NOT NULL,
+    [Porcentaje]  MONEY         NOT NULL,
+    [Credito]     CHAR (1)      NOT NULL,
+    [DR]          CHAR (1)      NOT NULL,
+    [Monto]       MONEY         NOT NULL,
+    [Saldo]       MONEY         NOT NULL,
+    [idUsuario]   INT           NOT NULL,
+    [Item]        INT           NOT NULL,
+    [NSerie]      VARCHAR (10)  DEFAULT ('N/A') NOT NULL
+);
+\\\\
+CREATE TABLE [dbo].[TmpGraficos] (
+    [ID]         VARCHAR (15)  NOT NULL,
+    [idPaciente] INT           NOT NULL,
+    [idExamen]   INT           NOT NULL,
+    [Fecha]      SMALLDATETIME NOT NULL,
+    [Result]     FLOAT (53)    NOT NULL,
+    [ValMinimo]  FLOAT (53)    NOT NULL,
+    [ValMaximo]  FLOAT (53)    NOT NULL
+);
+
+\\\\\\
+
+CREATE TABLE [dbo].[TmpGxGen] (
+    [ID]        VARCHAR (15) NOT NULL,
+    [idMuestra] VARCHAR (12) NOT NULL,
+    [idExamen]  INT          NOT NULL,
+    [idExaInt]  INT          NOT NULL,
+    [idCodigo]  INT          NOT NULL,
+    [Descrip]   VARCHAR (95) NOT NULL,
+    [Valor]     FLOAT (53)   NOT NULL
+);
+\\\\\
+
+CREATE TABLE [dbo].[TmpNCredito] (
+    [ID]          VARCHAR (15) NOT NULL,
+    [idNCredito]  INT          NOT NULL,
+    [idMotxAnu]   INT          NOT NULL,
+    [idPaciente]  INT          NOT NULL,
+    [Fecha]       VARCHAR (10) NOT NULL,
+    [idFactura]   INT          NOT NULL,
+    [TipFactura]  CHAR (1)     NOT NULL,
+    [idConvenio]  INT          NOT NULL,
+    [idSConvenio] INT          NOT NULL,
+    [Monto]       MONEY        NOT NULL,
+    [idUsuario]   INT          NOT NULL,
+    [idMotivo]    INT          NULL
+);
+\\\\
+CREATE TABLE [dbo].[TmpPagPOrd] (
+    [ID]         VARCHAR (15) NOT NULL,
+    [idPreOrden] INT          NOT NULL,
+    [Saldo]      MONEY        NOT NULL,
+    [Pago]       MONEY        NOT NULL,
+    [idFactura]  INT          NOT NULL
+);
+\\\\
+
+CREATE TABLE [dbo].[TmpPxImp] (
+    [ID]        VARCHAR (15) NOT NULL,
+    [idMuestra] VARCHAR (12) NOT NULL
+);
+\\\\\
+
+CREATE TABLE [dbo].[TmpRes] (
+    [ID]             VARCHAR (15)   NOT NULL,
+    [idMuestra]      VARCHAR (12)   NOT NULL,
+    [idExamen]       INT            NOT NULL,
+    [idExaInt]       INT            NOT NULL,
+    [idCodigo]       INT            NOT NULL,
+    [Descrip]        VARCHAR (125)  NOT NULL,
+    [Orden]          INT            NOT NULL,
+    [OrdImp]         INT            IDENTITY (1, 1) NOT NULL,
+    [idSeccion]      INT            NOT NULL,
+    [idMetodo]       INT            NOT NULL,
+    [idRelacion]     INT            NOT NULL,
+    [ForReporte]     CHAR (1)       NOT NULL,
+    [DefExamen]      CHAR (1)       NOT NULL,
+    [ValRefer]       CHAR (1)       NOT NULL,
+    [Resultado]      VARCHAR (50)   NOT NULL,
+    [Decimales]      INT            NOT NULL,
+    [Verificado]     CHAR (1)       NOT NULL,
+    [Unidades]       VARCHAR (15)   NOT NULL,
+    [ValReferencia]  VARCHAR (1024) NOT NULL,
+    [ValMinimo]      FLOAT (53)     NOT NULL,
+    [ValMaximo]      FLOAT (53)     NOT NULL,
+    [Campo]          VARCHAR (15)   NOT NULL,
+    [Texto]          VARCHAR (2048) NOT NULL,
+    [idUsu]          INT            NOT NULL,
+    [IniUser]        VARCHAR (4)    NOT NULL,
+    [Interpretacion] VARCHAR (25)   NOT NULL
+);
+\\\\\\
+
+
+
+CREATE TABLE [dbo].[Tracking] (
+    [ID]        INT          IDENTITY (1, 1) NOT NULL,
+    [IdMuestra] VARCHAR (12) NOT NULL,
+    [idExamen]  INT          NOT NULL,
+    [Descrip]   VARCHAR (50) NOT NULL,
+    [StatusExa] CHAR (1)     NOT NULL,
+    [Fecha]     VARCHAR (50) NOT NULL,
+    [idUsuario] INT          NOT NULL,
+    [Estacion]  VARCHAR (15) NULL,
+    CONSTRAINT [PK_Tracking] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+\\\\\\
+
+CREATE TABLE [dbo].[Ubicacion] (
+    [ID]         INT          NOT NULL,
+    [Codigo]     VARCHAR (10) NOT NULL,
+    [Descrip]    VARCHAR (30) NOT NULL,
+    [idConvenio] INT          NOT NULL,
+    [idSubConv]  INT          NOT NULL,
+    [CodExt]     VARCHAR (10) NOT NULL,
+    [Stat]       CHAR (1)     NOT NULL,
+    [TipHosp]    CHAR (1)     NOT NULL,
+    [TipUbic]    CHAR (1)     NOT NULL,
+    [ImpResult]  CHAR (1)     NOT NULL,
+    [Campo1]     VARCHAR (20) NOT NULL,
+    CONSTRAINT [PK_Ubicacion] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+\\\\\\
+
+CREATE TABLE [dbo].[Unidades] (
+    [ID]      INT          NOT NULL,
+    [CodExt]  VARCHAR (15) NOT NULL,
+    [Descrip] VARCHAR (15) NOT NULL,
+    [Activo]  CHAR (1)     NOT NULL,
+    [ciUni]   VARCHAR (15) NOT NULL,
+    [SqlTs]   VARCHAR (26) NOT NULL,
+    CONSTRAINT [PK_Unidades_1] PRIMARY KEY CLUSTERED ([ID] ASC),
+    CONSTRAINT [PK_Unidades] UNIQUE NONCLUSTERED ([ID] ASC)
+);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [PK__Unidades]
+    ON [dbo].[Unidades]([ID] ASC) WITH (FILLFACTOR = 90);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [IX_Descrip]
+    ON [dbo].[Unidades]([Descrip] ASC) WITH (FILLFACTOR = 90);
+
+\\\\\\\\
+
+CREATE TABLE [dbo].[UnidadesOld] (
+    [ID]      INT          NOT NULL,
+    [CodExt]  VARCHAR (15) NOT NULL,
+    [Descrip] VARCHAR (15) NOT NULL,
+    [Activo]  CHAR (1)     NOT NULL,
+    [ciUni]   VARCHAR (15) NOT NULL,
+    [SqlTs]   VARCHAR (26) NOT NULL
+);
+\\\\\
+
+CREATE TABLE [dbo].[Usuarios] (
+    [ID]        INT           NOT NULL,
+    [Usuario]   VARCHAR (50)  NOT NULL,
+    [Clave]     VARCHAR (50)  NOT NULL,
+    [Inic]      CHAR (3)      NOT NULL,
+    [Titulo]    CHAR (5)      NOT NULL,
+    [Cargo]     VARCHAR (20)  NOT NULL,
+    [MSDS]      VARCHAR (10)  NOT NULL,
+    [CDB]       VARCHAR (10)  NOT NULL,
+    [Univ]      VARCHAR (50)  NOT NULL,
+    [Tecl]      VARCHAR (15)  NOT NULL,
+    [FecVenc]   SMALLDATETIME NOT NULL,
+    [Vence]     CHAR (1)      NOT NULL,
+    [Hora1]     VARCHAR (8)   NOT NULL,
+    [Hora2]     VARCHAR (8)   NOT NULL,
+    [Hora]      CHAR (1)      NOT NULL,
+    [Nivel]     TINYINT       NOT NULL,
+    [Activo]    CHAR (1)      NOT NULL,
+    [CodExt]    VARCHAR (20)  NOT NULL,
+    [PSeg]      VARCHAR (50)  NOT NULL,
+    [RSeg]      VARCHAR (50)  NOT NULL,
+    [FecCrea]   DATETIME      NOT NULL,
+    [FecUltAcc] DATETIME      NOT NULL,
+    [TInac]     INT           NOT NULL,
+    [CS]        VARCHAR (5)   NOT NULL,
+    [Celular]   VARCHAR (20)  NOT NULL,
+    [FecNac]    VARCHAR (10)  NOT NULL,
+    [UsuGen]    CHAR (1)      NOT NULL,
+    [ClaveOld]  VARCHAR (75)  NOT NULL,
+    [Style]     VARCHAR (100) NOT NULL,
+    [SqlTs]     VARCHAR (26)  NOT NULL,
+    CONSTRAINT [PK_Usuarios] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+\\\\\\\\\
+
+
+CREATE TABLE [dbo].[UsxConvenio] (
+    [idConvenio] INT NOT NULL,
+    [idUsuario]  INT NOT NULL,
+    CONSTRAINT [PK_UsxConvenio] PRIMARY KEY CLUSTERED ([idConvenio] ASC, [idUsuario] ASC)
+);
+\\\\\\\
+
+CREATE TABLE [dbo].[UxConvenio] (
+    [idConvenio]  INT NOT NULL,
+    [idUbicacion] INT NOT NULL,
+    CONSTRAINT [PK_UxConvenio] PRIMARY KEY CLUSTERED ([idConvenio] ASC, [idUbicacion] ASC)
+);\\\\\\\\
+
+CREATE TABLE [dbo].[ValParam] (
+    [ID]          INT            NOT NULL,
+    [idExamen]    INT            NOT NULL,
+    [idMetodo]    INT            NOT NULL,
+    [idUnidad]    INT            NOT NULL,
+    [Sexo]        CHAR (1)       NOT NULL,
+    [Edad]        CHAR (9)       NOT NULL,
+    [ValMin]      FLOAT (53)     NOT NULL,
+    [ValMax]      FLOAT (53)     NOT NULL,
+    [Interpretar] VARCHAR (20)   NOT NULL,
+    [Memo]        VARCHAR (1024) NOT NULL,
+    [Tipo]        CHAR (1)       NOT NULL,
+    [BloqAut]     CHAR (1)       NOT NULL,
+    [BloqImp]     CHAR (1)       NOT NULL,
+    [MensBloqImp] VARCHAR (250)  NOT NULL,
+    [TipInter]    CHAR (1)       NOT NULL,
+    [SqlTs]       VARCHAR (26)   NOT NULL,
+    CONSTRAINT [PK_ValParam] PRIMARY KEY CLUSTERED ([ID] ASC),
+    CONSTRAINT [FK_ValParam_Metodologia] FOREIGN KEY ([idMetodo]) REFERENCES [dbo].[Metodologia] ([ID]),
+    CONSTRAINT [FK_ValParam_Unidades] FOREIGN KEY ([idUnidad]) REFERENCES [dbo].[Unidades] ([ID]),
+    CONSTRAINT [PK_ID] UNIQUE NONCLUSTERED ([ID] ASC)
+);
+\\\\\\\
+CREATE TABLE [dbo].[ValParamOld] (
+    [ID]          INT            NOT NULL,
+    [idExamen]    INT            NOT NULL,
+    [idMetodo]    INT            NOT NULL,
+    [Sexo]        CHAR (1)       NOT NULL,
+    [Edad]        CHAR (9)       NOT NULL,
+    [ValMin]      FLOAT (53)     NOT NULL,
+    [ValMax]      FLOAT (53)     NOT NULL,
+    [Interpretar] VARCHAR (20)   NOT NULL,
+    [Memo]        VARCHAR (1024) NOT NULL,
+    [SqlTs]       VARCHAR (50)   NOT NULL,
+    [Tipo]        CHAR (1)       NOT NULL,
+    [BloqAut]     CHAR (1)       NOT NULL,
+    [BloqImp]     CHAR (1)       NOT NULL,
+    [MensBloqImp] VARCHAR (250)  NOT NULL,
+    [TipInter]    CHAR (1)       NOT NULL,
+    [idUnidad]    INT            NOT NULL
+);
+\\\\\\\\
+
+
+
+
+CREATE TABLE [dbo].[VOrdenes] (
+    [idMuestra]    VARCHAR (12) NOT NULL,
+    [idExamen]     INT          NOT NULL,
+    [idCodigo]     INT          NOT NULL,
+    [idExaInt]     INT          NOT NULL,
+    [Precio]       MONEY        NOT NULL,
+    [idFactura]    INT          NOT NULL,
+    [Referencia]   CHAR (1)     NOT NULL,
+    [idReferencia] INT          NOT NULL,
+    [idSeccion]    INT          NOT NULL,
+    [DefExamen]    CHAR (1)     NOT NULL,
+    [MOrd]         CHAR (1)     NOT NULL,
+    [MRes]         CHAR (1)     NOT NULL,
+    [ForReporte]   CHAR (1)     NOT NULL,
+    [ValRefer]     CHAR (1)     NOT NULL,
+    [StatusExa]    CHAR (1)     NOT NULL,
+    [idEntr]       INT          NOT NULL,
+    [Impr]         CHAR (1)     NOT NULL,
+    [eMail]        CHAR (1)     NOT NULL,
+    [Fax]          CHAR (1)     NOT NULL,
+    [FHOrden]      DATETIME     NOT NULL,
+    [FHReporte]    DATETIME     NOT NULL,
+    [InfoTubo]     VARCHAR (10) NOT NULL,
+    [CodLabel]     VARCHAR (10) NOT NULL,
+    [idUsuario]    INT          NOT NULL
+);
+\\\\\\\\\
+
+CREATE TABLE [dbo].[WorkList] (
+    [ID]         INT          IDENTITY (1, 1) NOT NULL,
+    [idMuestra]  VARCHAR (12) NOT NULL,
+    [idEtiqueta] VARCHAR (10) NOT NULL,
+    [idEquipo]   INT          NOT NULL,
+    [idExamen]   INT          NOT NULL,
+    [idHost]     VARCHAR (35) NOT NULL,
+    [idCanal]    VARCHAR (10) NOT NULL,
+    [Rack]       VARCHAR (10) NOT NULL,
+    [Tubo]       VARCHAR (5)  NOT NULL,
+    [Fluido]     CHAR (1)     NOT NULL,
+    [Enviar]     CHAR (1)     NOT NULL,
+    [TipoEnv]    CHAR (1)     NOT NULL,
+    [NumEnv]     INT          NOT NULL,
+    CONSTRAINT [PK_WorkList] PRIMARY KEY CLUSTERED ([ID] ASC),
+    CONSTRAINT [FK_WorkList_Ingresos] FOREIGN KEY ([idMuestra]) REFERENCES [dbo].[Ingresos] ([ID])
+);
+\\\\\\\\
+

@@ -1,6 +1,3 @@
-@extends('layouts.main.index')
-
-@section('container')
 <head>
     <title>Informe detallado de Desempeño de Ventas</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -33,7 +30,6 @@ p, ul {
     height: 300px; /* Tamaño más pequeño */
 }
 
-}
 </style>
 
 <body>
@@ -62,30 +58,51 @@ p, ul {
             <p>La adopción de las mejoras sugeridas no solo optimizará el desempeño de ventas sino también fortalecerá la posición de Toxi-Lab C.A. en el mercado.</p>
         </section>
     </div>
-</body>
-
-<script>document.addEventListener('DOMContentLoaded', function() {
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
     var ctx = document.getElementById('ventasChart').getContext('2d');
-    var ventasChart = new Chart(ctx, {
-        type: 'bar', // Tipo de gráfico
-        data: {
-            labels: ['Enero', 'Febrero', 'Marzo', 'Abril'], // Ejemplo de etiquetas mensuales
+    
+    // Verifica si la gráfica ya existe
+    if (window.ventasChart instanceof Chart) {
+        // Actualiza los datos de la gráfica existente
+        window.ventasChart.data = {
+            labels: ['Enero', 'Febrero', 'Marzo', 'Abril'],
             datasets: [{
                 label: 'Ventas por Mes',
-                data: [5000, 6000, 7000, 8000], // Datos hipotéticos
-                backgroundColor: 'rgba(54, 162, 235, 0.2)', // Color de fondo
-                borderColor: 'rgba(54, 162, 235, 1)', // Color del borde
+                data: [5000, 6000, 7000, 8000],
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
                 borderWidth: 1
             }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
+        };
+        window.ventasChart.update();
+    } else {
+        // Crea la gráfica si no existe
+        window.ventasChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Enero', 'Febrero', 'Marzo', 'Abril'],
+                datasets: [{
+                    label: 'Ventas por Mes',
+                    data: [5000, 6000, 7000, 8000],
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
                 }
             }
-        }
-    });
-});</script>
+        });
+    }
+});
 
-@endsection
+</script>
+
+</body>
+
+
