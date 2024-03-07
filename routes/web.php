@@ -57,6 +57,9 @@ Route::get('/admin/datamarts', [ControllerProducto::class, 'index'])->middleware
 Route::get('/admin/datamarts/producto', [ControllerProducto::class, 'accounts'])->middleware('admin');
 Route::get('/admin/datamarts/producto', [ControllerProducto::class, 'reportaccounts'])->middleware('admin');
 
+Route::get('/admin/datamarts', [ControllerProducto::class, 'index'])->middleware('admin');
+Route::get('/admin/datamarts/equipos', [ControllerProducto::class, 'accounts'])->middleware('admin');
+Route::get('/admin/datamarts/equipos', [ControllerProducto::class, 'reportaccounts'])->middleware('admin');
 
 //Collection Data, almacena las graficas y reportes creados por cada administrador por separado, con la ventaja de que se puede compartir
 Route::get('/admin/collectiondata', [ControllerCollectionData::class, 'index'])->middleware('admin');

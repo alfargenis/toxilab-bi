@@ -73,9 +73,9 @@
     </button>
   </div>
 
-
-  <div class="col-md-6 mb-4">
-    <button type="button" class="btn card h-100 custom-button">
+<!-- 
+  <div class="col-md-6 mb-4 {{ Request::is('admin/datamarts/equipos*') ? 'active' : '' }}">
+    <button type="button" class="btn card h-100 custom-button"onclick="window.location.href='/admin/datamarts/equipos'>
       <div class="card-header">
         <h5 class="card-title m-0 me-2 fw-bold mb-2">
           <i class="bx bx-globe"></i>  Reportes de Equipos de Analisís.
@@ -86,7 +86,18 @@
       </div>
     </button>
   </div>
-</div>
-
+</div> -->
+<div class="col-md-6 mb-4  {{ Request::is('admin/datamarts/equipos*') ? 'active' : '' }}" >
+  <button type="button" class="btn card h-100 custom-button" onclick="window.location.href='/admin/datamarts/equipos'" >
+      <div class="card-header">
+        <h5 class="card-title m-0 me-2 fw-bold mb-2">
+          <i class="bx bx-bar-chart-alt"></i>   Reportes de Equipos de Analisís.
+        </h5>
+      </div>
+      <div class="card-body">
+        <p>Visualiza ..............</p>
+      </div>
+    </button>
+  </div>
 
 @endsection
