@@ -14,6 +14,7 @@
     </div>
   </div>
 </div>
+
 <script>
 // Función para ocultar el enlace de Looker Studio
 function ocultarLookerStudio() {

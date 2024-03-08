@@ -13,13 +13,6 @@
     </div>
   </div>
 </div>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    var link = document.querySelector('.branding-info');
-    if (link) {
-        link.style.display = 'none';
-    }
-});
-</script>
+
 @endsection
 
