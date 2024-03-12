@@ -38,7 +38,7 @@
           <ul class="list-group">
             @foreach($archivos as $archivo)
               <li class="list-group-item mb-2">
-                Nombre del archivo: {{ $archivo->nombre_archivo }} 
+                Nombre del archivo: {{ $archivo->nombre_archivo }}
                 | Subido: {{ $archivo->created_at->format('d/m/Y') }} |
                 <a href="{{ asset('storage/uploads/' . $archivo->nombre_archivo) }}" target="_blank">Ver archivo</a> 
               </li>

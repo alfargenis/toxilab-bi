@@ -26,7 +26,7 @@
 <li class="menu-item {{ Request::is('admin/modulo0*') ? 'active' : '' }}">
   <a class="menu-link cursor-pointer" onclick="window.location.href='/admin/modulo0'">
     <i class="menu-icon tf-icons bx bx-street-view"></i>
-    <div>POWER BI</div>
+    <div>CONSTRUCTOR DE INFORMES</div>
   </a>
 </li>
 

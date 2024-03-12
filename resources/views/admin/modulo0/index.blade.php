@@ -64,7 +64,7 @@
                 <label for="nombreInforme" class="form-label">Nombre del Informe</label>
                 <input type="text" class="form-control" name="nombreInforme" id="nombreInforme" placeholder="Nombre del Informe" required>
               </div>
-              <input type="hidden" name="respuestaGeminis" value="{{ $respuesta }}">
+              <input type="hidden" name="respuestaGeminis" value="{{ $respuesta }}".pdf>
               <button type="submit" class="btn btn-primary">Guardar Informe</button>
             </form>
           </div>

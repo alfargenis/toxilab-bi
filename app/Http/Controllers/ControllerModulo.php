@@ -18,6 +18,7 @@ class ControllerModulo extends Controller
             $consultaSQL = $this->cRUL($this->dataStructure($textocompleto),$url); //Generea consulta SQL
             $resultadosConsulta = DB::select(trim(str_replace(["```", "sql", "```html"], "", $consultaSQL))); //Realiza la consulta SQL
             trim(str_replace(["```", "sql", "```html"], "", $respuestaFormateada = $this->enviarResultadosAGeminis($resultadosConsulta, $url)));
+            trim(str_replace(["```", "sql", "```html"], "", $respuestaFormateada));
         return view('admin.modulo0.index', ['app' => Application::all(),'title' => 'Consultas','respuesta' => $respuestaFormateada,]);
             }
         return view('admin.modulo0.index', ['app' => Application::all(),'title' => 'Consultas',]);}//Vista GET sino se hace consulta

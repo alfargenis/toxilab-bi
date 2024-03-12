@@ -1,50 +1,4 @@
-Quiero que te comportes como un consultor de base de datados y data science que hara consultas en mi base de datos con la instruccion que te dare al final de las instrucciones,
-tendras el poder de seleccion, actualización, inserción, eliminación. teniendo en cuenta que la base de datos tiene la siguiente estructura:
-
-applications:
-
-Almacena información sobre aplicaciones, incluyendo identificadores, nombres, descripciones, logos, dirección, días y horas de operación.
-Campos clave: id (Identificador único de la aplicación).
-
-compras:
-
-Registra detalles de compras, incluyendo identificadores, facturas, fechas, precios, estado, proveedores, y reactivos asociados.
-Campos clave: id, id_proveedor, id_reactivo (vinculación con las tablas proveedores y reactivos).
-
-documents:
-
-Contiene datos sobre documentos, como nombres de archivo, tipos, tamaños, y rutas de almacenamiento.
-Campos clave: id, user_id (vinculación con la tabla users).
-
-especiales y hemas:
-
-Estas tablas parecen almacenar registros específicos, probablemente relacionados con pruebas o análisis particulares.
-Campos clave: id, id_reactivos (vinculación con la tabla reactivos).
-
-migrations:
-
-Lleva un registro de las migraciones de la base de datos, esencialmente cambios estructurales o de esquema aplicados a lo largo del tiempo.
-Campos clave: id, migration (nombre de la migración).
-
-orinas, patients, pruebas, reactivos:
-
-Estas tablas gestionan diferentes aspectos de los pacientes, pruebas, y reactivos usados en pruebas.
-Campos clave: id, queue_number_id (para patients, vinculación con una tabla no descrita aquí), id_cliente (para pruebas, posiblemente vinculado a patients), id_prueba (para reactivos, vinculación con pruebas).
-
-users:
-
-Almacena información sobre usuarios, incluyendo identificadores, nombres, correos electrónicos, roles de administrador, y más.
-Campos clave: id.
-
-Relaciones Entre Tablas
-compras ↔ proveedores y reactivos: A través de id_proveedor y id_reactivo, conecta compras con proveedores y reactivos.
-documents ↔ users: La relación a través de user_id asocia documentos a usuarios específicos.
-especiales y hemas ↔ reactivos: Estas tablas se relacionan con reactivos a través de id_reactivos.
-patients ↔ pruebas (suposición basada en id_cliente y queue_number_id): Indica una relación entre pacientes y las pruebas asignadas o realizadas.
-reactivos ↔ pruebas: id_prueba en reactivos sugiere una relación directa con las pruebas específicas para las que se utilizan.
-Este esquema refleja una base de datos compleja destinada a gestionar información relacionada con un entorno de laboratorio o médico, donde las pruebas, pacientes, compras, y documentos se interrelacionan para administrar y rastrear la operación y análisis realizados. Las relaciones exactas y la lógica de negocio dependen de cómo se utilicen estos enlaces en las aplicaciones y procesos específicos.
-
-Basado en lo antes escrito suponiendo que fue una instruccion que se le dio a un compañero de trabajo tuyo, quiero que te comportes como un SENIOR FRONTEND DEVELOPER
+Basado en loque te pregunte antierormente escrito suponiendo que fue una instruccion que se le dio a un compañero de trabajo tuyo, quiero que te comportes como un SENIOR FRONTEND DEVELOPER
 y generes una pagina web en HTML usando CSS y JAVASCRIPT. con su titulo que siempre diga "Informe detallado de" y completas el titulo con lo que tenga que ver la
 sentencia SQL que dire luego, un breve resumen del informe, graficas usando Charts.js, posibles mejoras y conclusiones aqui puedes tomar este codigo para que generes el informe con esta estructura y comentado para que sepas donde va cada parte del informe:
 
@@ -110,7 +64,7 @@ p, ul {
     <script>
 document.addEventListener('DOMContentLoaded', function() {
     var ctx = document.getElementById('ventasChart').getContext('2d');
-    
+
     // Verifica si la gráfica ya existe
     if (window.ventasChart instanceof Chart) {
         // Actualiza los datos de la gráfica existente
