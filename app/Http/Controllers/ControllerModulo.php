@@ -16,9 +16,16 @@ class ControllerModulo extends Controller
             $textocompleto= $formato = file_get_contents($rules) . "\n\n" . $mensaje; //Formato + Texto
             $url = env('GEMINIS_API_URL') . '?key=' . env('GEMINIS_API_KEY'); // Construye la URL usando la variable de entorno
             $consultaSQL = $this->cRUL($this->dataStructure($textocompleto),$url); //Generea consulta SQL
-            $resultadosConsulta = DB::select(trim(str_replace(["```", "sql", "```html"], "", $consultaSQL))); //Realiza la consulta SQL
-            trim(str_replace(["```", "sql", "```html"], "", $respuestaFormateada = $this->enviarResultadosAGeminis($resultadosConsulta, $url)));
-            trim(str_replace(["```", "sql", "```html"], "", $respuestaFormateada));
+
+            try {
+                $resultadosConsulta = DB::select(trim(str_replace(["```", "sql", "```html"], "", $consultaSQL))); //Realiza la consulta SQL
+                $respuestaFormateada = trim(str_replace(["```", "sql", "```html"], "", $this->enviarResultadosAGeminis($resultadosConsulta, $url)));
+                $data['respuesta'] = $respuestaFormateada;
+            } catch (\Exception $e) {
+                // En caso de error en la consulta SQL, captura la excepción y redirige con un mensaje de error.
+                return redirect()->back()->withInput()->with('error', 'Hubo un error en la consulta generada. Por favor, intenta de nuevo.');
+            }
+
         return view('admin.modulo0.index', ['app' => Application::all(),'title' => 'Consultas','respuesta' => $respuestaFormateada,]);
             }
         return view('admin.modulo0.index', ['app' => Application::all(),'title' => 'Consultas',]);}//Vista GET sino se hace consulta

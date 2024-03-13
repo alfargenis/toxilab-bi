@@ -41,6 +41,12 @@
   </div>
 </div>
 
+@if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
 @if(isset($respuesta))
   <div class="container mt-5"> <!-- Contenedor principal -->
     <div class="row mb-5"> <!-- Sección de respuesta con margen inferior -->
@@ -72,6 +78,16 @@
       </div>
     </div>
   </div>
+@endif
+
+@if(session('nombreArchivo'))
+    <script>
+        window.onload = function() {
+            var nombreArchivo = "{{ session('nombreArchivo') }}";
+            var url = "{{ url('/informes') }}/" + nombreArchivo;
+            window.open(url, '_blank');
+        }
+    </script>
 @endif
 
 

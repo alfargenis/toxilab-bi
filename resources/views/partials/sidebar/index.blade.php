@@ -23,10 +23,16 @@
     <div>IMPORTAR DATOS</div>
   </a>
 </li>
+<li class="menu-item {{ Request::is('admin/constructor*') ? 'active' : '' }}">
+  <a class="menu-link cursor-pointer" onclick="window.location.href='/admin/constructor'">
+    <i class="menu-icon tf-icons bx bx-wrench"></i>
+    <div>CONSTRUCTOR DE INFORMES</div>
+  </a>
+</li>
 <li class="menu-item {{ Request::is('admin/modulo0*') ? 'active' : '' }}">
   <a class="menu-link cursor-pointer" onclick="window.location.href='/admin/modulo0'">
-    <i class="menu-icon tf-icons bx bx-street-view"></i>
-    <div>CONSTRUCTOR DE INFORMES</div>
+    <i class="menu-icon tf-icons bx bx-bot"></i>
+    <div>CONSULTA NATURAL</div>
   </a>
 </li>
 

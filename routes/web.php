@@ -9,7 +9,7 @@ use App\Http\Controllers\AdminAntrianPasienController;
 use App\Http\Controllers\ControllerCollectionData;
 use App\Http\Controllers\ControllerDataMarts;
 use App\Http\Controllers\ControllerModulo;
-use App\Http\Controllers\ControllerFiles;
+use App\Http\Controllers\ControllerConstructor;
 use App\Http\Controllers\ControllerDocuments;
 use App\Http\Controllers\ControllerCompras;
 use App\Http\Controllers\ControllerProducto;
@@ -63,6 +63,10 @@ Route::get('/admin/datamarts/equipos', [ControllerEquipos::class, 'reportaccount
 //Collection Data, almacena las graficas y reportes creados por cada administrador por separado, con la ventaja de que se puede compartir
 Route::get('/admin/collectiondata', [ControllerCollectionData::class, 'index'])->middleware('admin');
 Route::post('/admin/collectiondata', [ControllerCollectionData::class, 'index'])->name('collectiondata.index');
+Route::get('/informes/{nombreArchivo}', [ControllerCollectionData::class, 'verPDF'])->name('verPDF');
+
+Route::get('/admin/constructor', [ControllerConstructor::class, 'index'])->middleware('admin');
+
 
 // Importacion de Archivos hacia la base de datos.
 Route::get('/admin/files/', [ControllerDocuments::class, 'showUploadForm'])->middleware('admin');

@@ -45,9 +45,23 @@ class ControllerCollectionData extends Controller
             $collectionData->save();
 
             // Si quieres enviar el PDF directamente al navegador
-            return $pdf->stream('nombre-del-documento.pdf');
+            // return $pdf->stream('nombre-del-documento.pdf');
+            // Después de guardar el archivo y el registro en la base de datos en tu controlador
+            return redirect()->back()->with(['nombreArchivo' => $nombreArchivo]);
+
         }
 
         return view('admin.collectiondata.index', $data)->with('admin', Auth::user()->name);
     }
+
+    public function verPDF($nombreArchivo)
+    {
+        $path = public_path('informes/' . $nombreArchivo);
+        if (file_exists($path)) {
+            return response()->file($path);
+        } else {
+            return response()->json(['error' => 'Archivo no encontrado.'], 404);
+        }
+    }
+
 }

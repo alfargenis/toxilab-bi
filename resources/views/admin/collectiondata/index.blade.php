@@ -26,7 +26,8 @@
           <ul class="list-group">
             @foreach($resultados as $index => $resultado)
               <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
-                <a href="javascript:void(0)" onclick="mostrarInforme('{{ $index }}')">{{ $resultado->name }}</a>
+                <!-- <a href="javascript:void(0)" onclick="mostrarInforme('{{ $index }}')">{{ $resultado->name }}</a> -->
+                <a href="javascript:void(0)" onclick="mostrarInformePDF('{{ $resultado->pdf_path }}')">{{ $resultado->name }}</a>
                 @if (isset($admin))
                   <span class="badge badge-personalizado ms-2">Creado por: {{ $admin }} en {{ $resultado->created_at->format('d/m/Y') }}</span>
                 @endif
@@ -63,6 +64,9 @@
     </div>
 </div>
 <script>
+  function mostrarInformePDF(pdfPath) {
+  window.open(pdfPath, '_blank');
+}
 function mostrarInforme(index) {
   // Referencia al contenedor del informe y al card-body
   var contenedorInforme = document.getElementById('contenedorInforme');

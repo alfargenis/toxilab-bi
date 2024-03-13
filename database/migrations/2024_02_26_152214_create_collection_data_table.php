@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->timestamps();
             $table->text('informe');
+            $table->string('pdf_path')->nullable();
             $table->unsignedBigInteger('user_id'); // Asume que estás usando un tipo bigint para los IDs de usuario
             $table->foreign('user_id')->references('id')->on('users'); // Asegúrate de que 'users' sea el nombre de tu tabla de usuarios
         });
@@ -29,5 +30,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('collection_data');
+        Schema::table('collection_data', function (Blueprint $table) {
+            // Eliminar la columna si la migración se revierte
+            $table->dropColumn('pdf_path');
+        });
     }
 };
