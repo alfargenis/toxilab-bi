@@ -8,7 +8,7 @@ use App\Models\CollectionData;
 use App\Models\documents;
 use Illuminate\Support\Facades\Auth;
 // Importar la clase PDF que proporciona Laravel a través de dompdf
-use Barryvdh\DomPDF\Facade as PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 
 class ControllerCollectionData extends Controller
@@ -33,11 +33,11 @@ class ControllerCollectionData extends Controller
             $collectionData->user_id = auth()->user()->id; // Asume que tienes la autenticación configurada
 
             // Guardar el PDF en el servidor
-            $nombreArchivo = 'nombreInforme' . time() . '.pdf';
-            $pdf->save(storage_path('app/public/informes/' . $nombreArchivo));
+            $name = $request->input('nombreInforme'); // Captura el nombre del informe
+            $nombreArchivo = $name . time() . '.pdf';
+            $pdf->save(public_path('informes/' . $nombreArchivo));
 
             $collectionData->name = $nombreArchivo; // Captura el nombre del informe
-
 
             $collectionData->informe = $respuestaGeminis;
             // Guardar también el path del PDF, asumiendo que tienes un campo para ello
@@ -45,7 +45,7 @@ class ControllerCollectionData extends Controller
             $collectionData->save();
 
             // Si quieres enviar el PDF directamente al navegador
-            // return $pdf->stream('nombre-del-documento.pdf');
+            return $pdf->stream('nombre-del-documento.pdf');
         }
 
         return view('admin.collectiondata.index', $data)->with('admin', Auth::user()->name);

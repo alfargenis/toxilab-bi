@@ -45,7 +45,7 @@
   <div class="container mt-5"> <!-- Contenedor principal -->
     <div class="row mb-5"> <!-- Sección de respuesta con margen inferior -->
       <div class="col-12">
-        <div class="card"> 
+        <div class="card">
           <div class="card-body">
             {!! $respuesta !!}
           </div>
