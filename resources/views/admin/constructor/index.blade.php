@@ -157,6 +157,7 @@
                     });
                 });
 
+                
                 $(document).ready(function() {
                 var toggleDatosBtn = $('#toggleDatosBtn');
                 var datosYGráficaDiv = $('#datosYGráfica');
