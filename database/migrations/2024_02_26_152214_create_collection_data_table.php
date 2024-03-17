@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->timestamps();
-            $table->text('informe');
+            $table->longtext('informe');
             $table->string('pdf_path')->nullable();
             $table->unsignedBigInteger('user_id'); // Asume que estás usando un tipo bigint para los IDs de usuario
             $table->foreign('user_id')->references('id')->on('users'); // Asegúrate de que 'users' sea el nombre de tu tabla de usuarios

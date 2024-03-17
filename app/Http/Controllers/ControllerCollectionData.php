@@ -41,7 +41,7 @@ class ControllerCollectionData extends Controller
 
             $collectionData->informe = $respuestaGeminis;
             // Guardar también el path del PDF, asumiendo que tienes un campo para ello
-            // $collectionData->pdf_path = 'path/to/your/directory/' . $nombreArchivo;
+            $collectionData->pdf_path = 'informes/' . $nombreArchivo;
             $collectionData->save();
 
             // Si quieres enviar el PDF directamente al navegador

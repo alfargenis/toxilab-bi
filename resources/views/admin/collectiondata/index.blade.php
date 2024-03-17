@@ -65,7 +65,9 @@
 </div>
 <script>
   function mostrarInformePDF(pdfPath) {
-  window.open(pdfPath, '_blank');
+  // Asumiendo que la ruta pdfPath ya incluye el prefijo "informes/"
+  const fullPath = '/' + pdfPath; // Asegura que la ruta sea relativa a la raíz del dominio
+  window.open(fullPath, '_blank');
 }
 function mostrarInforme(index) {
   // Referencia al contenedor del informe y al card-body

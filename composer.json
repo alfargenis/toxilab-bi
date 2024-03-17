@@ -9,10 +9,12 @@
         "arielmejiadev/larapex-charts": "^6.0",
         "barryvdh/laravel-dompdf": "^2.1",
         "dompdf/dompdf": "^2.0",
+        "elibyy/tcpdf-laravel": "^11.0",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
-        "laravel/tinker": "^2.8"
+        "laravel/tinker": "^2.8",
+        "tecnickcom/tcpdf": "^6.6"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

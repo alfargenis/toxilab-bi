@@ -10,6 +10,7 @@ use App\Http\Controllers\ControllerCollectionData;
 use App\Http\Controllers\ControllerDataMarts;
 use App\Http\Controllers\ControllerModulo;
 use App\Http\Controllers\ControllerConstructor;
+use App\Http\Controllers\ControllerConstructorPDF;
 use App\Http\Controllers\ControllerDocuments;
 use App\Http\Controllers\ControllerCompras;
 use App\Http\Controllers\ControllerProducto;
@@ -65,7 +66,41 @@ Route::get('/admin/collectiondata', [ControllerCollectionData::class, 'index'])-
 Route::post('/admin/collectiondata', [ControllerCollectionData::class, 'index'])->name('collectiondata.index');
 Route::get('/informes/{nombreArchivo}', [ControllerCollectionData::class, 'verPDF'])->name('verPDF');
 
-Route::get('/admin/constructor', [ControllerConstructor::class, 'index'])->middleware('admin');
+// Ruta para mostrar el índice y las tablas
+Route::get('/admin/constructor', [ControllerConstructor::class, 'index'])->name('admin.constructor.index');
+
+// Ruta para mostrar los datos de una tabla específica
+Route::get('/admin/constructor/mostrar', [ControllerConstructor::class, 'mostrarDatosTabla'])->name('mostrarDatosTabla');
+
+// Ruta para generar la gráfica con los datos seleccionados
+Route::post('/admin/constructor/generar', [ControllerConstructor::class, 'generarGrafica'])->name('generarGrafica');
+// Route::get('/admin/constructor/datosTabla', [ControllerConstructor::class, 'obtenerDatosTabla'])->name('admin.constructor.datosTabla');
+Route::post('/admin/constructor/coleccion', [ControllerConstructor::class, 'coleccion'])->name('constructor.coleccion');
+Route::get('/informes/{nombreArchivo}', [ControllerConstructor::class, 'verPDF'])->name('verPDF');
+// Route::post('/admin/constructor/generatePDF', [ControllerConstructor::class, 'generatePDF'])->name('constructor.generatePDF');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // Importacion de Archivos hacia la base de datos.

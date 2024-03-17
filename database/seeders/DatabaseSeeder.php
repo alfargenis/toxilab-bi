@@ -37,26 +37,26 @@ class DatabaseSeeder extends Seeder
         pruebas::factory(124)->create();
         reactivos::factory(500)->create();
         compras::factory(78)->create();
-        // equipos::factory(12)->create();
-        // list_reactivos::factory(725)->create();
+        equipos::factory(12)->create();
+        list_reactivos::factory(725)->create();
 
-//         User::create([
-//             'name' => 'Argenis Rodriguez',
-//             'email' => 'estefreric@gmail.com',
-//             'username' => 'admin',
-//             'image' => 'profil-images/man.jpeg',
-//             'is_admin' => 1,
-//             'gender' => 'Masculino',
-//             'password' => bcrypt('@Admin123')
-//         ]);
-//         User::create([
-//             'name' => 'Ali Rodriguez',
-//             'email' => 'alirodriguez067@gmail.com ',
-//             'username' => 'admin2',
-//             'image' => 'profil-images/man.jpeg',
-//             'is_admin' => 2,
-//             'gender' => 'Masculino',
-//             'password' => bcrypt('@Admin123')
-//         ]);
+        User::create([
+            'name' => 'Argenis Rodriguez',
+            'email' => 'estefreric@gmail.com',
+            'username' => 'admin',
+            'image' => 'profil-images/man.jpeg',
+            'is_admin' => 1,
+            'gender' => 'Masculino',
+            'password' => bcrypt('@Admin123')
+        ]);
+        User::create([
+            'name' => 'Ali Rodriguez',
+            'email' => 'alirodriguez067@gmail.com ',
+            'username' => 'admin2',
+            'image' => 'profil-images/man.jpeg',
+            'is_admin' => 2,
+            'gender' => 'Masculino',
+            'password' => bcrypt('@Admin123')
+        ]);
     }
 }
