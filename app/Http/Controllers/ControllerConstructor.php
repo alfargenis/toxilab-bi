@@ -110,6 +110,8 @@ class ControllerConstructor extends Controller
     {
         $htmlContent = $request->input('htmlContent');
         $comentario1 = $request->input('comentarioH');
+        $comentario2 = $request->input('comentarioH1');
+        $comentario3 = $request->input('comentarioH2');
         $nombreInforme = $request->input('nombreInforme', 'InformeSinNombre'); // Captura el nombre del informe
         $chartImage = $request->input('chartData');
         $chartImage2 = $request->input('chartData2');

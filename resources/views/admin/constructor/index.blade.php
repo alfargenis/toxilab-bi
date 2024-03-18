@@ -62,10 +62,11 @@
                                     <div class="chart-container" style="position: relative; height:40vh; width:80vw; display: flex; justify-content: center;">
                                         <canvas id="myChart" style="display: flex; justify-content: center;"></canvas>
                                     </div>
-                                    <div class="form-group">
-                                         <label for="comentario">Comentario:</label>
-                                         <textarea id="comentario" name="comentario" class="form-control" rows="1 placeholder="Escribe tu comentario aquí..."></textarea>
+                                    <div class="card-body" style="display: none;">
+                                        <label for="comentario">Comentario:</label>
+                                        <textarea id="comentario" name="comentario" class="form-control border-primary" rows="4" placeholder="Escribe tu comentario aquí..."></textarea>
                                     </div>
+                                    
                             </div>
                         </div>
                     </div>
@@ -78,8 +79,12 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body-3" style="display: none;">
-                                    <div class="chart-container" style="position: relative; height:40vh; width:80vw; display: flex; justify-content: center;">
-                                        <canvas id="myChart2" style="display: flex; justify-content: center;"></canvas>
+                                    <div class="chart-container" style="position: relative; height:40vh; width:80vw;">
+                                        <canvas id="myChart2"></canvas>
+                                    </div>
+                                    <div class="card-body-3" style="display: none;">
+                                        <label for="comentario1">Comentario:</label>
+                                        <textarea id="comentario1" name="comentario1" class="form-control border-primary" rows="4" placeholder="Escribe tu comentario aquí..."></textarea>
                                     </div>
                             </div>
                         </div>
@@ -118,6 +123,11 @@
                                         </div>
                                     @endif
                             </div>
+                                    <div class="card-body-2" style="display: none;">
+                                        <label for="comentario2">Comentario:</label>
+                                        <textarea id="comentario2" name="comentario2" class="form-control border-primary" rows="4" placeholder="Escribe tu comentario aquí..."></textarea>
+                                    </div>
+                                   
                         </div>
                     </div>
                     </div>
@@ -141,6 +151,8 @@
               <input type="hidden" name="htmlContent" id="hiddenHtml">
               <input type="hidden" id="tableImageData" name="tableImageData">
               <input type="hidden" id="comentarioH" name="comentarioH">
+              <input type="hidden" id="comentarioH1" name="comentarioH1">
+              <input type="hidden" id="comentarioH2" name="comentarioH2">
               <button type="submit" class="btn btn-primary">Guardar Informe</button>
             </form>
           </div>
@@ -179,8 +191,14 @@
                         
                         const comentario = document.getElementById('comentario').value;
                         document.getElementById('comentarioH').value = comentario;
+                        
+                        const comentario1 = document.getElementById('comentario1').value;
+                        document.getElementById('comentarioH1').value = comentario1;
+                       
+                        const comentario2 = document.getElementById('comentario2').value;
+                        document.getElementById('comentarioH2').value = comentario2;
 
-                       // Convertir la tabla en una imagen base64 y almacenar en otro input oculto
+                        // Convertir la tabla en una imagen base64 y almacenar en otro input oculto
                         const tableElement = document.getElementById('miTabla'); // Asegúrate de que este es el ID de tu tabla
                         if (tableElement) {
                             html2canvas(tableElement).then(canvas => {
