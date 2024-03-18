@@ -62,6 +62,10 @@
                                     <div class="chart-container" style="position: relative; height:40vh; width:80vw;">
                                         <canvas id="myChart"></canvas>
                                     </div>
+                                    <div class="form-group">
+                                         <label for="comentario">Comentario:</label>
+                                         <textarea id="comentario" name="comentario" class="form-control" rows="4" placeholder="Escribe tu comentario aquí..."></textarea>
+                                    </div>
                             </div>
                         </div>
                     </div>
@@ -135,6 +139,7 @@
               <input type="hidden" name="chartData" id="chartInputData">
               <input type="hidden" name="htmlContent" id="hiddenHtml">
               <input type="hidden" id="tableImageData" name="tableImageData">
+              <input type="hidden" id="comentarioH" name="comentarioH">
               <button type="submit" class="btn btn-primary">Guardar Informe</button>
             </form>
           </div>
@@ -165,6 +170,9 @@
                         }
                         const htmlContent = document.getElementById('contentToConvert').innerHTML;
                         document.getElementById('hiddenHtml').value = htmlContent;
+                        
+                        const comentario = document.getElementById('comentario').value;
+                        document.getElementById('comentarioH').value = comentario;
 
                        // Convertir la tabla en una imagen base64 y almacenar en otro input oculto
                         const tableElement = document.getElementById('miTabla'); // Asegúrate de que este es el ID de tu tabla

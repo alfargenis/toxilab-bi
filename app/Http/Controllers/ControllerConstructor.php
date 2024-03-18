@@ -109,11 +109,14 @@ class ControllerConstructor extends Controller
     public function coleccion(Request $request)
     {
         $htmlContent = $request->input('htmlContent');
+        $comentario = $request->input('comentarioH');
+        
+
         $nombreInforme = $request->input('nombreInforme', 'InformeSinNombre'); // Captura el nombre del informe
         $chartImage = $request->input('chartData');
         $tabla = $request->input('tableImageData');
-        require_once('/Users/Arge/Documents/PHP/toxilab-bi/TCPDF/examples/tcpdf_include.php');
-        require_once('/Users/Arge/Documents/PHP/toxilab-bi/TCPDF/tcpdf.php');
+        require_once('/Users/air/Documents/PHP/toxilab-bi/TCPDF/examples/tcpdf_include.php');
+        require_once('/Users/air/Documents/PHP/toxilab-bi/TCPDF/tcpdf.php');
 
 
             // create new PDF document
@@ -177,6 +180,7 @@ class ControllerConstructor extends Controller
         <p style="color:#CC0000;">TO IMPROVE AND EXPAND TCPDF I NEED YOUR SUPPORT, PLEASE <a href="http://sourceforge.net/donate/index.php?group_id=128076">MAKE A DONATION!</a></p>
         <div style="text-align: center;"><img src="$chartImage" style="width: 750px;"></div>
         <div style="text-align: center;"><img src="$tabla" style="width: 750px;"></div>
+        <div>$comentario</div>
         EOD;
         $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
 
@@ -190,16 +194,15 @@ class ControllerConstructor extends Controller
         $collectionData = new CollectionData(); // Crea instancia de CollectionData (modelo de tu base de datos)
         $collectionData->user_id = auth()->user()->id; // Asume que tienes la autenticación configurada
         $collectionData->name = $nombreArchivo; // Captura el nombre del informe
-        $collectionData->informe = $htmlContent; // Guarda el informe tipo texto plano
-        $collectionData->pdf_path = 'informes/' . $nombreArchivo; // Guardar el path del PDF en el servidor
+        $collectionData->informe = $htmlContent; // Guarda el informe tipo texto plano$collectionData->pdf_path = 'informes/' . $nombreArchivo; // Guardar el path del PDF en el servidor
         $collectionData->save(); // Guarda el registro en la base de datos
         return redirect()->back()->with(['nombreArchivo' => $nombreArchivo]);
     }
 
 }
 
-require_once('/Users/Arge/Documents/PHP/toxilab-bi/TCPDF/examples/tcpdf_include.php');
-require_once('/Users/Arge/Documents/PHP/toxilab-bi/TCPDF/tcpdf.php');
+require_once('/Users/air/Documents/PHP/toxilab-bi/TCPDF/examples/tcpdf_include.php');
+require_once('/Users/air/Documents/PHP/toxilab-bi/TCPDF/tcpdf.php');
 
 class MYPDF extends TCPDF {
 
@@ -208,7 +211,7 @@ class MYPDF extends TCPDF {
     public $fecha = '';
     public $nombreEmpresa = 'TOXI-LAB C.A. RIF: J-30208958-1';
 
-    public $logoEmpresa = '/Users/Arge/Documents/PHP/toxilab-bi/TCPDF/logotoxilab.png';
+    public $logoEmpresa = '/Users/air/Documents/PHP/toxilab-bi/TCPDF/logotoxilab.png';
     // Método para configurar el código
     public function setCodigo($codigo) {
         $this->codigo = $codigo;
