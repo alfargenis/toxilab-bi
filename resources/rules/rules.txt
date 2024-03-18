@@ -1,0 +1,106 @@
+"Gemini, como reportero experto, estoy solicitando la creación de un artículo detallado sobre un tema que te pedire al final de todas las reglas. Este artículo debe ser informativo, bien investigado, y presentado con una estructura clara y profesional. Por favor, sigue esta guía para su estructuración:
+
+Título y Subtítulo: Empieza con un título atractivo y un subtítulo que ofrezca una idea general del contenido del artículo.
+
+Introducción: Inicia con un párrafo introductorio que capte la atención, ofreciendo una visión general del tema y su relevancia.
+
+Encabezados y Subencabezados: Utiliza encabezados para cada sección principal y subencabezados para segmentar el contenido adicionalmente, facilitando la lectura y comprensión del artículo.
+
+Desarrollo del Contenido:
+
+Contexto General: Explica la importancia del tema en el contexto actual.
+Desarrollos Recientes: Presenta los eventos o hallazgos recientes relevantes.
+Impacto: Describe cómo estos desarrollos afectan diversos aspectos como la sociedad, economía, y medio ambiente.
+Opiniones de Expertos: Integra citas o perspectivas de expertos para agregar profundidad al análisis.
+Previsiones Futuras: Especula sobre futuras tendencias o investigaciones relacionadas con el tema.
+Conclusión: Finaliza con un párrafo que resuma los puntos clave del artículo y ofrezca una reflexión final o pregunta provocativa para el lector.
+
+Fuentes: Asegúrate de listar las fuentes utilizadas al final del artículo para credibilidad y referencia.
+
+Este formato detallado ayudará a presentar la información de manera clara y accesible, mejorando la experiencia de lectura. Agradezco tu atención a los detalles y tu compromiso con la calidad del contenido utilizando markdown
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TITULO</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 40px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+        }
+        h2 {
+            border-bottom: 2px solid #666;
+            padding-bottom: 5px;
+        }
+        p, li {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #666;
+        }
+        ul {
+            list-style-position: inside;
+        }
+        .expert-quote {
+            font-style: italic;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .sources {
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>TITULO 1</h1>
+        <h2>SUBTIULO</h2>
+
+        <p>PARRAFO</p>
+
+        <h2>Contexto General</h2>
+        <p>PARRAFO GENERAL</p>
+
+        <h2>Desarrollos Recientes</h2>
+        <ul>
+            <li>DESARROLLO RECIENTE 1.</li>
+            <li>DESARROLLO RECIENTE 2</li>
+        </ul>
+
+        <h2>Impacto</h2>
+        <p>PARRA DE IMPACTO</p>
+
+        <h2>Opiniones de Expertos</h2>
+        <p class="expert-quote">"VARIAS OPINIONES DE EXPERTOS</p>
+
+        <h2>Previsiones Futuras</h2>
+        <p>PARRAFOR DE PREVISIONES FUTURAS</p>
+
+        <h2>Conclusión</h2>
+        <p>PARRAFO DE CONCLUSIONES</p>
+
+        <div class="sources">
+            <h2>Fuentes:</h2>
+            <ul>
+                <li>FUENTES 1</li>
+                <li>FUENTES 2</li>
+                <li>FUENTES 3</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
+
+
+El tema con el que generaras el articulo es el siguiente:

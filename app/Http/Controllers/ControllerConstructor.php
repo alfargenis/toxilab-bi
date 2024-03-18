@@ -114,6 +114,7 @@ class ControllerConstructor extends Controller
 
         $nombreInforme = $request->input('nombreInforme', 'InformeSinNombre'); // Captura el nombre del informe
         $chartImage = $request->input('chartData');
+        $chartImage2 = $request->input('chartData2');
         $tabla = $request->input('tableImageData');
         require_once('/Users/air/Documents/PHP/toxilab-bi/TCPDF/examples/tcpdf_include.php');
         require_once('/Users/air/Documents/PHP/toxilab-bi/TCPDF/tcpdf.php');
@@ -172,18 +173,24 @@ class ControllerConstructor extends Controller
         // Set some content to print
 
         $html = <<<EOD
-        <p></p>
         <h1>$nombreInforme</h1>
-        <i>This is the first example of TCPDF library.</i>
-        <p>This text is printed using the <i>writeHTMLCell()</i> method but you can also use: <i>Multicell(), writeHTML(), Write(), Cell() and Text()</i>.</p>
-        <p>Please check the source code documentation and other examples for further information.</p>
-        <p style="color:#CC0000;">TO IMPROVE AND EXPAND TCPDF I NEED YOUR SUPPORT, PLEASE <a href="http://sourceforge.net/donate/index.php?group_id=128076">MAKE A DONATION!</a></p>
         <div style="text-align: center;"><img src="$chartImage" style="width: 750px;"></div>
+        EOD;
+        $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
+        $pdf->AddPage();
+        $html2 = <<<EOD
+        <h1>$nombreInforme</h1>
+        <div style="text-align: center;"><img src="$chartImage2" style="width: 350px;"></div>
+        EOD;
+        $pdf->writeHTMLCell(0, 0, '', '', $html2, 0, 1, 0, true, '', true);
+        $pdf->AddPage();
+        $html3 = <<<EOD
+        <h1>$nombreInforme</h1>
         <div style="text-align: center;"><img src="$tabla" style="width: 750px;"></div>
         <div>$comentario</div>
         EOD;
-        $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
 
+        $pdf->writeHTMLCell(0, 0, '', '', $html3, 0, 1, 0, true, '', true);
         // Asume que $pdf es tu objeto TCPDF ya configurado y listo para generar el PDF
         $nombreArchivo = $nombreInforme . '.pdf'; // Formato del nombre de archivo
         $rutaArchivo = public_path('informes/' . $nombreArchivo); // Define la ruta completa

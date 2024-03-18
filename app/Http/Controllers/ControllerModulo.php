@@ -12,21 +12,17 @@ class ControllerModulo extends Controller
         {
             if ($request->isMethod('post')) {//Vista POST
             $mensaje = $request->input('consultaTexto','No se ha escrito ningun tipo de Consulta'); //Texto del Usuario
-            $rules="/Users/Arge/Documents/PHP/toxilab-bi/resources/rules/rulesSQL.txt";//Reglas de consultas SQL.
+            $rules="/Users/Arge/Documents/PHP/toxilab-bi/resources/rules/rules.txt";//Reglas de consultas SQL.
             $textocompleto= $formato = file_get_contents($rules) . "\n\n" . $mensaje; //Formato + Texto
             $url = env('GEMINIS_API_URL') . '?key=' . env('GEMINIS_API_KEY'); // Construye la URL usando la variable de entorno
-            $consultaSQL = $this->cRUL($this->dataStructure($textocompleto),$url); //Generea consulta SQL
-
             try {
-                $resultadosConsulta = DB::select(trim(str_replace(["```", "sql", "```html"], "", $consultaSQL))); //Realiza la consulta SQL
-                $respuestaFormateada = trim(str_replace(["```", "sql", "```html"], "", $this->enviarResultadosAGeminis($resultadosConsulta, $url)));
-                $data['respuesta'] = $respuestaFormateada;
+                $consultaUno = $this->cRUL($this->dataStructure($textocompleto),$url); //Generea consulta SQL
             } catch (\Exception $e) {
                 // En caso de error en la consulta SQL, captura la excepción y redirige con un mensaje de error.
                 return redirect()->back()->withInput()->with('error', 'Hubo un error en la consulta generada. Por favor, intenta de nuevo.');
             }
 
-        return view('admin.modulo0.index', ['app' => Application::all(),'title' => 'Consultas','respuesta' => $respuestaFormateada,]);
+        return view('admin.modulo0.index', ['app' => Application::all(),'title' => 'Consultas','respuesta' => $consultaUno,]);
             }
         return view('admin.modulo0.index', ['app' => Application::all(),'title' => 'Consultas',]);}//Vista GET sino se hace consulta
 

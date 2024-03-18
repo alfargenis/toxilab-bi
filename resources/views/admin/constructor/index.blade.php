@@ -137,6 +137,7 @@
                 <input type="text" class="form-control" name="nombreInforme" id="nombreInforme" placeholder="Nombre del Informe" required>
               </div>
               <input type="hidden" name="chartData" id="chartInputData">
+              <input type="hidden" name="chartData2" id="chartInputData2">
               <input type="hidden" name="htmlContent" id="hiddenHtml">
               <input type="hidden" id="tableImageData" name="tableImageData">
               <input type="hidden" id="comentarioH" name="comentarioH">
@@ -167,6 +168,11 @@
                         if (chartCanvas) {
                             const chartImageURL = chartCanvas.toDataURL('image/png');
                             document.getElementById('chartInputData').value = chartImageURL;
+                        }
+                        const chartCanvas2 = document.getElementById('myChart2');
+                        if (chartCanvas2) {
+                            const chartImageURL2 = chartCanvas2.toDataURL('image/png');
+                            document.getElementById('chartInputData2').value = chartImageURL2;
                         }
                         const htmlContent = document.getElementById('contentToConvert').innerHTML;
                         document.getElementById('hiddenHtml').value = htmlContent;
@@ -286,14 +292,14 @@
                         myChart.update();
                     }
                 }
-            });                                                                                 
+                                                                                            
             // Listener para el cambio de selección en el selector de columna de etiquetas
             $('select[name="columnaEtiquetas2"]').on('change', function() {
                     if ($(this).val()) {
                         cardBody3.show();
                     if (!myChart2) {
                         myChart2 = new Chart(ctx2, {
-                            type: 'bar',
+                            type: 'pie',
                             data: {
                                 labels: [],
                                 datasets: [{
@@ -357,6 +363,7 @@
                         myChart2.update();
                     }
                 }
+            });
     </script>
 
 @endsection
