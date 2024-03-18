@@ -184,6 +184,8 @@ class ControllerConstructor extends Controller
         $html2 = <<<EOD
         <h1>$nombreInforme</h1>
         <div style="text-align: center;"><img src="$chartImage2" style="width: 350px;"></div>
+        <h2>Resumen:</h2>
+        <p>$comentario2</p>
         EOD;
         $pdf->writeHTMLCell(0, 0, '', '', $html2, 0, 1, 0, true, '', true);
 
@@ -191,7 +193,8 @@ class ControllerConstructor extends Controller
         $html3 = <<<EOD
         <h1>$nombreInforme</h1>
         <div style="text-align: center;"><img src="$tabla" style="width: 750px;"></div>
-        
+        <h2>Resumen:</h2>
+        <p>$comentario3</p>
         EOD;
         $pdf->writeHTMLCell(0, 0, '', '', $html3, 0, 1, 0, true, '', true);
 

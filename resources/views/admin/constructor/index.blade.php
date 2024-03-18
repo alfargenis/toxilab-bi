@@ -49,9 +49,6 @@
         </div>
     </form>
 </div>
-<!-- El botón 'Ver Datos' se mantiene fuera del form y de los ajustes realizados arriba -->
-<!-- <button id="toggleDatosBtn" class="btn btn-primary mb-3">Ver Datos</button> -->
-
         <!-- PDF -->
         <div id="contentToConvert">
                 <div class="container mt-5"> <!-- Contenedor principal -->
@@ -59,32 +56,29 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body" style="display: none;">
-                                    <div class="chart-container" style="position: relative; height:40vh; width:80vw; display: flex; justify-content: center;">
-                                        <canvas id="myChart" style="display: flex; justify-content: center;"></canvas>
+                                    <div class="chart-container" style="position: relative">
+                                        <canvas id="myChart""></canvas>
                                     </div>
                                     <div class="card-body" style="display: none;">
-                                        <label for="comentario">Comentario:</label>
-                                        <textarea id="comentario" name="comentario" class="form-control border-primary" rows="4" placeholder="Escribe tu comentario aquí..."></textarea>
+                                        <textarea id="comentario" name="comentario" class="form-control border-primary" rows="1" placeholder="Escribe tu comentario aquí..."></textarea>
                                     </div>
-                                    
                             </div>
                         </div>
                     </div>
                     </div>
                 </div>
             </div>
-            <div id="contentToConvert3">
+            <div id="contentToConvert">
                 <div class="container mt-5"> <!-- Contenedor principal -->
                     <div class="row mb-5"> <!-- Sección de respuesta con margen inferior -->
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body-3" style="display: none;">
-                                    <div class="chart-container" style="position: relative; height:40vh; width:80vw;">
+                                    <div class="chart-container col-12" style="position: relative;">
                                         <canvas id="myChart2"></canvas>
                                     </div>
                                     <div class="card-body-3" style="display: none;">
-                                        <label for="comentario1">Comentario:</label>
-                                        <textarea id="comentario1" name="comentario1" class="form-control border-primary" rows="4" placeholder="Escribe tu comentario aquí..."></textarea>
+                                        <textarea id="comentario1" name="comentario1" class="form-control border-primary" rows="1" placeholder="Escribe tu comentario aquí..."></textarea>
                                     </div>
                             </div>
                         </div>
@@ -124,10 +118,8 @@
                                     @endif
                             </div>
                                     <div class="card-body-2" style="display: none;">
-                                        <label for="comentario2">Comentario:</label>
-                                        <textarea id="comentario2" name="comentario2" class="form-control border-primary" rows="4" placeholder="Escribe tu comentario aquí..."></textarea>
+                                        <textarea id="comentario2" name="comentario2" class="form-control border-primary" rows="1" placeholder="Escribe tu comentario aquí..."></textarea>
                                     </div>
-                                   
                         </div>
                     </div>
                     </div>
