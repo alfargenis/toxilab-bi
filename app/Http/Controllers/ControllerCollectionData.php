@@ -58,8 +58,8 @@ class ControllerCollectionData extends Controller
     {
         $respuestaGeminis = $request->input('respuestaGeminis', 'No se ha escrito ningun tipo de Consulta');
         $nombreInforme = $request->input('nombreInforme', 'InformeSinNombre'); // Captura el nombre del informe
-        require_once('/Users/Arge/Documents/PHP/toxilab-bi/TCPDF/examples/tcpdf_include.php');
-        require_once('/Users/Arge/Documents/PHP/toxilab-bi/TCPDF/tcpdf.php');
+        require_once('/Users/air/Documents/PHP/toxilab-bi/TCPDF/examples/tcpdf_include.php');
+        require_once('/Users/air/Documents/PHP/toxilab-bi/TCPDF/tcpdf.php');
 
 
             // create new PDF document
@@ -150,8 +150,8 @@ class ControllerCollectionData extends Controller
     }
 
 }
-require_once('/Users/Arge/Documents/PHP/toxilab-bi/TCPDF/examples/tcpdf_include.php');
-require_once('/Users/Arge/Documents/PHP/toxilab-bi/TCPDF/tcpdf.php');
+require_once('/Users/air/Documents/PHP/toxilab-bi/TCPDF/examples/tcpdf_include.php');
+require_once('/Users/air/Documents/PHP/toxilab-bi/TCPDF/tcpdf.php');
 
 class MYPDF extends TCPDF {
 
@@ -160,7 +160,7 @@ class MYPDF extends TCPDF {
     public $fecha = '';
     public $nombreEmpresa = 'TOXI-LAB C.A. RIF: J-30208958-1';
 
-    public $logoEmpresa = '/Users/Arge/Documents/PHP/toxilab-bi/TCPDF/logotoxilab.png';
+    public $logoEmpresa = '/Users/air/Documents/PHP/toxilab-bi/TCPDF/logotoxilab.png';
     // Método para configurar el código
     public function setCodigo($codigo) {
         $this->codigo = $codigo;

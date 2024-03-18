@@ -24,7 +24,7 @@
  */
 
 // always load alternative config file for examples
-require_once('/Users/Arge/Documents/PHP/toxilab-bi/TCPDF/config/tcpdf_config.php');
+require_once('/Users/air/Documents/PHP/toxilab-bi/TCPDF/config/tcpdf_config.php');
 
 // Include the main TCPDF library (search the library on the following directories).
 $tcpdf_include_dirs = array(
