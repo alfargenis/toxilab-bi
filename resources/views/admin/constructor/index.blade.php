@@ -59,12 +59,12 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body" style="display: none;">
-                                    <div class="chart-container" style="position: relative; height:40vh; width:80vw;">
-                                        <canvas id="myChart"></canvas>
+                                    <div class="chart-container" style="position: relative; height:40vh; width:80vw; display: flex; justify-content: center;">
+                                        <canvas id="myChart" style="display: flex; justify-content: center;"></canvas>
                                     </div>
                                     <div class="form-group">
                                          <label for="comentario">Comentario:</label>
-                                         <textarea id="comentario" name="comentario" class="form-control" rows="4" placeholder="Escribe tu comentario aquí..."></textarea>
+                                         <textarea id="comentario" name="comentario" class="form-control" rows="1 placeholder="Escribe tu comentario aquí..."></textarea>
                                     </div>
                             </div>
                         </div>
@@ -78,8 +78,8 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body-3" style="display: none;">
-                                    <div class="chart-container" style="position: relative; height:40vh; width:80vw;">
-                                        <canvas id="myChart2"></canvas>
+                                    <div class="chart-container" style="position: relative; height:40vh; width:80vw; display: flex; justify-content: center;">
+                                        <canvas id="myChart2" style="display: flex; justify-content: center;"></canvas>
                                     </div>
                             </div>
                         </div>

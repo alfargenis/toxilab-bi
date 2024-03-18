@@ -114,8 +114,8 @@ class ControllerConstructor extends Controller
         $chartImage = $request->input('chartData');
         $chartImage2 = $request->input('chartData2');
         $tabla = $request->input('tableImageData');
-        require_once('/Users/Arge/Documents/PHP/toxilab-bi/TCPDF/examples/tcpdf_include.php');
-        require_once('/Users/Arge/Documents/PHP/toxilab-bi/TCPDF/tcpdf.php');
+        require_once 'TCPDF/examples/tcpdf_include.php';
+        require_once 'TCPDF/tcpdf.php';
 
 
             // create new PDF document
@@ -210,8 +210,8 @@ class ControllerConstructor extends Controller
 
 }
 
-require_once('/Users/Arge/Documents/PHP/toxilab-bi/TCPDF/examples/tcpdf_include.php');
-require_once('/Users/Arge/Documents/PHP/toxilab-bi/TCPDF/tcpdf.php');
+require_once'TCPDF/examples/tcpdf_include.php';
+require_once'TCPDF/tcpdf.php';
 
 class MYPDF extends TCPDF {
 
@@ -220,7 +220,7 @@ class MYPDF extends TCPDF {
     public $fecha = '';
     public $nombreEmpresa = 'TOXI-LAB C.A. RIF: J-30208958-1';
 
-    public $logoEmpresa = '/Users/Arge/Documents/PHP/toxilab-bi/TCPDF/logotoxilab.png';
+    public $logoEmpresa = 'TCPDF/logotoxilab.png';
     // Método para configurar el código
     public function setCodigo($codigo) {
         $this->codigo = $codigo;

@@ -17,14 +17,32 @@ Conclusión: Finaliza con un párrafo que resuma los puntos clave del artículo 
 
 Fuentes: Asegúrate de listar las fuentes utilizadas al final del artículo para credibilidad y referencia.
 
-Este formato detallado ayudará a presentar la información de manera clara y accesible, mejorando la experiencia de lectura. Agradezco tu atención a los detalles y tu compromiso con la calidad del contenido utilizando markdown
+Las partes antes mencionadas del articulos las vas a estructurar en el siguiente formato de HTML para que tenga una mejor presentación
+Formato: El formato recomendado es un texto bien estructurado, que incluya una introducción clara, detalles clave, conclusión y una sección de
+Ejemplo de estructura:
+
+Introducción:
+	- Contexto general.
+	- Problemática o objetivo a abordar.
+
+Eventos Recientes:
+	- Enumerar y describir los eventos más relevantes.
+	- Citas de expertos.
+
+Análisis Profundo:
+	- Descripción detallada del tema principal.
+	- Análisis comparativo entre diferentes opciones.
+	- Conclusión de unos dos parrafos
+
+Bibliografía:
+	- Listado de fuentes consultadas.
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TITULO</title>
+    <title>TITULO <u>DOCUMENTACIÓN FORANEA</u></title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -69,25 +87,35 @@ Este formato detallado ayudará a presentar la información de manera clara y ac
 
         <p>PARRAFO</p>
 
-        <h2>Contexto General</h2>
-        <p>PARRAFO GENERAL</p>
+        <h2>General</h2>
+        <p>PARRAFO GENERAL DE MINIMO DOS PARRAFOS</p>
 
         <h2>Desarrollos Recientes</h2>
         <ul>
-            <li>DESARROLLO RECIENTE 1.</li>
+            <li>DESARROLLO RECIENTE 1</li>
             <li>DESARROLLO RECIENTE 2</li>
+            <li>DESARROLLO RECIENTE 3</li>
+            <li>DESARROLLO RECIENTE 4</li>
+            <li>DESARROLLO RECIENTE 5</li>
+            <li>DESARROLLO RECIENTE 6</li>
         </ul>
 
         <h2>Impacto</h2>
-        <p>PARRA DE IMPACTO</p>
+        <p>PARRAFO DE IMPACTO</p>
+        <p>PARRAFO DE IMPACTO</p>
 
         <h2>Opiniones de Expertos</h2>
         <p class="expert-quote">"VARIAS OPINIONES DE EXPERTOS</p>
+        <p class="expert-quote">"VARIAS OPINIONES DE EXPERTOS</p>
+        <p class="expert-quote">"VARIAS OPINIONES DE EXPERTOS</p>
 
         <h2>Previsiones Futuras</h2>
-        <p>PARRAFOR DE PREVISIONES FUTURAS</p>
+        <p>PARRAFO DE PREVISIONES FUTURAS</p>
+        <p>PARRAFO DE PREVISIONES FUTURAS</p>
+        <p>PARRAFO DE PREVISIONES FUTURAS</p>
 
         <h2>Conclusión</h2>
+        <p>PARRAFO DE CONCLUSIONES</p>
         <p>PARRAFO DE CONCLUSIONES</p>
 
         <div class="sources">
@@ -96,11 +124,15 @@ Este formato detallado ayudará a presentar la información de manera clara y ac
                 <li>FUENTES 1</li>
                 <li>FUENTES 2</li>
                 <li>FUENTES 3</li>
+                <li>FUENTES 4</li>
+                <li>FUENTES 5</li>
+                <li>FUENTES6</li>
             </ul>
         </div>
     </div>
 </body>
 </html>
 
+SOLO ME GENERAS LA RESPUESTA CON ESE FORMATO QUE TE ESTOY DANDO SINO ES ASI VUELVES A GENERARLA HASTA QUE SALGA CON EL FORMATO DESEADO
 
 El tema con el que generaras el articulo es el siguiente:

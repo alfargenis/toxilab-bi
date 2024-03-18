@@ -17,26 +17,16 @@ class ControllerModulo extends Controller
             $url = env('GEMINIS_API_URL') . '?key=' . env('GEMINIS_API_KEY'); // Construye la URL usando la variable de entorno
             try {
                 $consultaUno = $this->cRUL($this->dataStructure($textocompleto),$url); //Generea consulta SQL
+                $consultaFormateada = trim(str_replace(["*", "**", "***"], "", $consultaUno)); //Realiza la consulta SQL
             } catch (\Exception $e) {
                 // En caso de error en la consulta SQL, captura la excepción y redirige con un mensaje de error.
                 return redirect()->back()->withInput()->with('error', 'Hubo un error en la consulta generada. Por favor, intenta de nuevo.');
             }
 
-        return view('admin.modulo0.index', ['app' => Application::all(),'title' => 'Consultas','respuesta' => $consultaUno,]);
+        return view('admin.modulo0.index', ['app' => Application::all(),'title' => 'Consultas','respuesta' => $consultaFormateada,]);
             }
         return view('admin.modulo0.index', ['app' => Application::all(),'title' => 'Consultas',]);}//Vista GET sino se hace consulta
 
-        private function enviarResultadosAGeminis($resultados, $url)
-        {
-            $rules="/Users/Arge/Documents/PHP/toxilab-bi/resources/rules/rulesInform.txt";
-            $formato= file_get_contents($rules);
-            $textocompleto= $formato . "\n\n";
-
-            foreach ($resultados as $resultados) {
-                foreach ($resultados as $propiedad => $valor) {$textocompleto .= ucfirst($propiedad) . ": " . $valor . ", ";}
-                $textocompleto = rtrim($textocompleto, ", ") . "\n";}
-            return $respuestaFormateada = $this->cRUL($this->dataStructure($textocompleto),$url);
-        }
 
         private function cRUL($data,$url){
             $ch = curl_init($url);
