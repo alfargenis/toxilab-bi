@@ -109,15 +109,13 @@ class ControllerConstructor extends Controller
     public function coleccion(Request $request)
     {
         $htmlContent = $request->input('htmlContent');
-        $comentario = $request->input('comentarioH');
-        
-
+        $comentario1 = $request->input('comentarioH');
         $nombreInforme = $request->input('nombreInforme', 'InformeSinNombre'); // Captura el nombre del informe
         $chartImage = $request->input('chartData');
         $chartImage2 = $request->input('chartData2');
         $tabla = $request->input('tableImageData');
-        require_once('/Users/air/Documents/PHP/toxilab-bi/TCPDF/examples/tcpdf_include.php');
-        require_once('/Users/air/Documents/PHP/toxilab-bi/TCPDF/tcpdf.php');
+        require_once('/Users/Arge/Documents/PHP/toxilab-bi/TCPDF/examples/tcpdf_include.php');
+        require_once('/Users/Arge/Documents/PHP/toxilab-bi/TCPDF/tcpdf.php');
 
 
             // create new PDF document
@@ -175,22 +173,26 @@ class ControllerConstructor extends Controller
         $html = <<<EOD
         <h1>$nombreInforme</h1>
         <div style="text-align: center;"><img src="$chartImage" style="width: 750px;"></div>
+        <h2>Resumen:</h2>
+        <p>$comentario1</p>
         EOD;
         $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
+
         $pdf->AddPage();
         $html2 = <<<EOD
         <h1>$nombreInforme</h1>
         <div style="text-align: center;"><img src="$chartImage2" style="width: 350px;"></div>
         EOD;
         $pdf->writeHTMLCell(0, 0, '', '', $html2, 0, 1, 0, true, '', true);
+
         $pdf->AddPage();
         $html3 = <<<EOD
         <h1>$nombreInforme</h1>
         <div style="text-align: center;"><img src="$tabla" style="width: 750px;"></div>
-        <div>$comentario</div>
+        
         EOD;
-
         $pdf->writeHTMLCell(0, 0, '', '', $html3, 0, 1, 0, true, '', true);
+
         // Asume que $pdf es tu objeto TCPDF ya configurado y listo para generar el PDF
         $nombreArchivo = $nombreInforme . '.pdf'; // Formato del nombre de archivo
         $rutaArchivo = public_path('informes/' . $nombreArchivo); // Define la ruta completa
@@ -208,8 +210,8 @@ class ControllerConstructor extends Controller
 
 }
 
-require_once('/Users/air/Documents/PHP/toxilab-bi/TCPDF/examples/tcpdf_include.php');
-require_once('/Users/air/Documents/PHP/toxilab-bi/TCPDF/tcpdf.php');
+require_once('/Users/Arge/Documents/PHP/toxilab-bi/TCPDF/examples/tcpdf_include.php');
+require_once('/Users/Arge/Documents/PHP/toxilab-bi/TCPDF/tcpdf.php');
 
 class MYPDF extends TCPDF {
 
@@ -218,7 +220,7 @@ class MYPDF extends TCPDF {
     public $fecha = '';
     public $nombreEmpresa = 'TOXI-LAB C.A. RIF: J-30208958-1';
 
-    public $logoEmpresa = '/Users/air/Documents/PHP/toxilab-bi/TCPDF/logotoxilab.png';
+    public $logoEmpresa = '/Users/Arge/Documents/PHP/toxilab-bi/TCPDF/logotoxilab.png';
     // Método para configurar el código
     public function setCodigo($codigo) {
         $this->codigo = $codigo;
