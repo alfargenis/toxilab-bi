@@ -61,7 +61,6 @@ class ControllerConstructor extends Controller
         $etiquetas = $datos->pluck($columnaEtiquetas)->all();
         $valores = $datos->pluck('total')->all();
 
-        $tables = $this->obtenerNombresTablas();
 
             // Almacenar los datos en la sesión de manera más persistente
         session(['etiquetas' => $etiquetas, 'valores' => $valores]);

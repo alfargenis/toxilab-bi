@@ -34,6 +34,14 @@
                     @endforeach
                 </select>
             </div>
+            <div class="col-md-3">
+                <select name="columnaEtiquetas2" class="form-select" id="columnaEtiquetas2" style="display: none;">
+                    <option disabled selected value="">Seleccione la columna para etiquetas</option>
+                    @foreach(array_keys((array)$datosTabla[0]) as $columna)
+                        <option value="{{ $columna }}" @if(old('columnaEtiquetas2', $columnaEtiquetas2 ?? '') == $columna) selected @endif>{{ ucfirst($columna) }}</option>
+                    @endforeach
+                </select>
+            </div>
             @endif
             <div class="col-auto">
                 <button id="toggleDatosBtn" type="button" class="btn btn-primary mb-3">Ver Datos</button>
@@ -53,6 +61,21 @@
                             <div class="card-body" style="display: none;">
                                     <div class="chart-container" style="position: relative; height:40vh; width:80vw;">
                                         <canvas id="myChart"></canvas>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div id="contentToConvert3">
+                <div class="container mt-5"> <!-- Contenedor principal -->
+                    <div class="row mb-5"> <!-- Sección de respuesta con margen inferior -->
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body-3" style="display: none;">
+                                    <div class="chart-container" style="position: relative; height:40vh; width:80vw;">
+                                        <canvas id="myChart2"></canvas>
                                     </div>
                             </div>
                         </div>
@@ -161,11 +184,15 @@
                 $(document).ready(function() {
                 var toggleDatosBtn = $('#toggleDatosBtn');
                 var datosYGráficaDiv = $('#datosYGráfica');
+                var columnaEtiquestas2 = $('#columnaEtiquetas2');
                 var cardBody = $('.card-body'); // Selector para el card-body
                 var cardBody2 = $('.card-body-2'); // Selector para el card-body
+                var cardBody3 = $('.card-body-3'); // Selector para el card-body
                 var guardar = $('.guardar')
                 var ctx = $('#myChart').get(0).getContext('2d');
                 var myChart = null; // Inicializa la variable de la gráfica como null
+                var ctx2 = $('#myChart2').get(0).getContext('2d');
+                var myChart2 = null; // Inicializa la variable de la gráfica como null
 
                 toggleDatosBtn.click(function() {
                     datosYGráficaDiv.toggle();
@@ -184,6 +211,7 @@
                 $('select[name="columnaEtiquetas"]').on('change', function() {
                     if ($(this).val()) {
                         cardBody.show();
+                        columnaEtiquestas2.show();
                     if (!myChart) {
                         myChart = new Chart(ctx, {
                             type: 'bar',
@@ -250,7 +278,77 @@
                         myChart.update();
                     }
                 }
-            });
+            });                                                                                 
+            // Listener para el cambio de selección en el selector de columna de etiquetas
+            $('select[name="columnaEtiquetas2"]').on('change', function() {
+                    if ($(this).val()) {
+                        cardBody3.show();
+                    if (!myChart2) {
+                        myChart2 = new Chart(ctx2, {
+                            type: 'bar',
+                            data: {
+                                labels: [],
+                                datasets: [{
+                                    label: 'Datos Seleccionados',
+                                    data: [],
+                                    backgroundColor: [
+                                        'rgba(255, 99, 132, 1)',
+                                        'rgba(54, 162, 235, 1)',
+                                        'rgba(255, 206, 86, 1)',
+                                        'rgba(75, 192, 192, 1)',
+                                        'rgba(153, 102, 255, 1)',
+                                        'rgba(255, 159, 64, 1)'
+                                    ],
+                                    borderColor: [
+                                        'rgba(255, 99, 132, 1)',
+                                        'rgba(54, 162, 235, 1)',
+                                        'rgba(255, 206, 86, 1)',
+                                        'rgba(75, 192, 192, 1)',
+                                        'rgba(153, 102, 255, 1)',
+                                        'rgba(255, 159, 64, 1)'
+                                    ],
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    y: {
+                                        beginAtZero: true
+                                    }
+                                }
+                            }
+                        });
+                    }
+                    actualizarGrafica2($(this).val());
+                    }
+                });
+
+                function actualizarGrafica2(columnaSeleccionada2) {
+                    // Obtén el índice basado en el valor seleccionado en lugar del índice en el select
+                    var indexColumna = $('option:selected', 'select[name="columnaEtiquetas2"]').index() - 1;
+                    var labels = [];
+                    var data = [];
+
+                    // Asegúrate de tener una instancia válida de myChart antes de intentar actualizarla
+                    if (myChart2 && indexColumna >= 0) {
+                        $('#miTabla tbody tr').each(function() {
+                            var cellValue = $(this).find('td').eq(indexColumna).text();
+                            if (data[cellValue]) {
+                                data[cellValue] += 1;
+                            } else {
+                                data[cellValue] = 1;
+                                labels.push(cellValue);
+                            }
+                        });
+
+                        var dataArray = Object.values(data);
+                        myChart2.data.labels = labels;
+                        myChart2.data.datasets.forEach((dataset) => {
+                            dataset.data = dataArray;
+                        });
+                        myChart2.update();
+                    }
+                }
     </script>
 
 @endsection
