@@ -58,6 +58,15 @@
         });
     </script>
 @endif
-
+@if(session('error'))
+    <script>
+        Swal.fire({
+            title: '¡Error!',
+            text: '{{ session("error") }}',
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+        });
+    </script>
+@endif
 
 @endsection

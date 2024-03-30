@@ -23,7 +23,9 @@ class ControllerDocuments extends Controller
     {
             if ($request->isMethod('post')){
                 if (!$request->hasFile('userfile')) {
-                    return response()->json(['error' => 'No se ha seleccionado ningún archivo para subir.'], 400);
+                    // return response()->json(['error' => 'No se ha seleccionado ningún archivo para subir.'], 400);
+                    return redirect()->to('/admin/files/')->with('error', 'No se ha seleccionado ningun archivo');
+
                 }
 
                 $archivo = $request->file('userfile');
@@ -43,14 +45,17 @@ class ControllerDocuments extends Controller
                 $ruta_destino = 'uploads/' . $nombre_archivo;
 
                 if (Documents::where('nombre_archivo', $nombre_archivo)->exists()) {
-                    return back()->withErrors(['error' => "El archivo $nombre_archivo ya existe en la base de datos."]);
+                    // return back()->withErrors(['error' => "El archivo $nombre_archivo ya existe en la base de datos."]);
+                    return redirect()->to('/admin/files/')->with('error', 'El archivo ' .$nombre_archivo. ' ya existe en la base de datos.');
 
                 }
 
                 try {
                     Storage::put($ruta_destino, file_get_contents($archivo->getRealPath()));
                 } catch (\Exception $e) {
-                    return back()->withErrors(['error' => 'No se ha seleccionado ningún archivo para subir.']);
+                    // return back()->withErrors(['error' => 'No se ha seleccionado ningún archivo para subir.']);
+                    return redirect()->to('/admin/files/')->with('error', 'No se ha seleccionado ningun archivo');
+
                 }
 
                 try {
@@ -62,8 +67,11 @@ class ControllerDocuments extends Controller
                         'user_id' => auth()->user()->id,
                     ]);
                     return redirect()->to('/admin/files/')->with('success', 'Se ha cargado el archivo '.$nombre_archivo.' correctamente');
+
                 } catch (\Exception $e) {
-                    return back()->withErrors(['error' => 'No se ha seleccionado ningún archivo para subir.']);
+                    // return back()->withErrors(['error' => 'No se ha seleccionado ningún archivo para subir.']);
+                    return redirect()->to('/admin/files/')->with('success', 'No se ha seleccionado ningun archivo');
+
                 }
             }
     }
