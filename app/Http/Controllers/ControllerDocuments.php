@@ -43,7 +43,7 @@ class ControllerDocuments extends Controller
                 $tamano_archivo = $archivo->getSize();
                 $tipo_archivo = $archivo->getClientMimeType();
                 $ruta_destino = 'uploads/' . $nombre_archivo;
-
+ 
                 if (Documents::where('nombre_archivo', $nombre_archivo)->exists()) {
                     // return back()->withErrors(['error' => "El archivo $nombre_archivo ya existe en la base de datos."]);
                     return redirect()->to('/admin/files/')->with('error', 'El archivo ' .$nombre_archivo. ' ya existe en la base de datos.');
