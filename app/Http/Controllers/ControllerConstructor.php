@@ -209,6 +209,7 @@ class ControllerConstructor extends Controller
         $collectionData->user_id = auth()->user()->id; // Asume que tienes la autenticación configurada
         $collectionData->name = $nombreArchivo; // Captura el nombre del informe
         $collectionData->informe = $htmlContent; // Guarda el informe tipo texto plano$collectionData->pdf_path = 'informes/' . $nombreArchivo; // Guardar el path del PDF en el servidor
+        $collectionData->pdf_path = 'informes/' . $nombreArchivo; // Guardar el path del PDF en el servidor
         $collectionData->save(); // Guarda el registro en la base de datos
         return redirect()->back()->with(['nombreArchivo' => $nombreArchivo]);
     }
