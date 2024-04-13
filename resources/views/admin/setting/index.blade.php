@@ -19,9 +19,6 @@
         <li class="nav-item">
           <button type="button" class="nav-link @if($errors->has('passwordLama') || $errors->has('passwordBaru') || session()->has('passwordLamaSalah')) active @endif" role="tab" data-bs-toggle="tab" data-bs-target="#navs-akun" aria-controls="navs-akun"><i class="tf-icons bx bxs-lock-alt fs-6 me-1" style="margin-bottom: 3px;"></i>&nbsp;Cuenta</button>
         </li>
-        <li class="nav-item">
-          <button type="button" class="nav-link @if($errors->has('logo') || $errors->has('name_app') || $errors->has('description_app') || session()->has('updateAppBerhasil')) active @endif" role="tab" data-bs-toggle="tab" data-bs-target="#navs-aplikasi" aria-controls="navs-aplikasi"><i class="tf-icons bx bxs-wrench fs-6 me-1" style="margin-bottom: 3px;"></i>&nbsp;Aplicación</button>
-        </li>
       </ul>
       <div class="tab-content">
         <div class="tab-pane fade @unless ($errors->has('passwordLama') || $errors->has('passwordBaru') || session()->has('passwordLamaSalah') || $errors->has('logo') || $errors->has('name_app') || $errors->has('description_app') || session()->has('updateAppBerhasil')) show active @endunless" id="navs-profil" role="tabpanel">
@@ -30,7 +27,7 @@
           </p>
           <!-- Perfil -->
           <div class="card-body">
-            <form id="formAccountSettings" action="/admin/pengaturan" method="POST" enctype="multipart/form-data">
+            <form id="formAccountSettings" action="/admin/setting" method="POST" enctype="multipart/form-data">
               @csrf
               <div class="d-flex align-items-start align-items-sm-center gap-4">
                 <img src="@if(Storage::disk('public')->exists('profil-images')) {{ asset('storage/'. auth()->user()->image) }} @else {{ asset('assets/img/profil-images-default/man.jpeg') }} @endif" alt="perfil" class="d-block rounded cursor-pointer fotoProfile" height="100" width="100" id="uploadedPhotoProfil" data-url-img="@if(Storage::disk('public')->exists('profil-images')) {{ asset('storage/'. auth()->user()->image) }} @else {{ asset('assets/img/profil-images-default/man.jpeg') }} @endif" />
@@ -68,7 +65,7 @@
           </p>
           <!-- Akun -->
           <div class="card-body">
-            <form id="formAccountSettingsPassword" action="/admin/pengaturan/ganti-password" method="POST">
+            <form id="formAccountSettingsPassword" action="/admin/setting/ganti-password" method="POST">
               @csrf
               <div class="mb-4">
                 <label for="passwordLama" class="form-label required-label">Contraseña Actual</label>
@@ -114,7 +111,7 @@
           </p>
           <!-- Aplikasi -->
           <div class="card-body">
-            <form id="formAccountSettingsApp" action="/admin/pengaturan/ganti-aplikasi" method="POST" enctype="multipart/form-data">
+            <form id="formAccountSettingsApp" action="/admin/setting/ganti-aplikasi" method="POST" enctype="multipart/form-data">
               @csrf
               <div class="mb-4">
                 <label for="logo" class="form-label required-label">Logo de la Aplicación</label>

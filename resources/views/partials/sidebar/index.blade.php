@@ -6,7 +6,7 @@
   </a>
 </li>
 <li class="menu-item {{ Request::is('admin/datamarts/*') ? 'active' : '' }}">
-  <a class="menu-link cursor-pointer" onclick="window.location.href='/admin/datamarts/'">
+  <a class="menu-link cursor-pointer" onclick="window.location.href='/admin/datamarts'">
     <i class="menu-icon tf-icons bx bx-data"></i>
     <div>DATA MARTS</div>
   </a>
@@ -36,8 +36,8 @@
   </a>
 </li>
 
-<li class="menu-item {{ Request::is('admin/pengaturan*') ? 'active' : '' }}">
-  <a class="menu-link cursor-pointer" onclick="window.location.href='/admin/pengaturan'">
+<li class="menu-item {{ Request::is('admin/setting*') ? 'active' : '' }}">
+  <a class="menu-link cursor-pointer" onclick="window.location.href='/admin/setting'">
     <i class="menu-icon tf-icons bx bx-cog"></i>
     <div>CONFIUGURACION DE PERFIL</div>
   </a>

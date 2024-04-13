@@ -67,19 +67,19 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
+}
 
-  .container {
+.container {
     padding: 10px;
-  }
+}
 
-  .fieldset-container {
+.fieldset-container {
     display: flex;
     gap: 10px;
     justify-content: center; /* Alineación centrada */
-  }
+}
 
-  fieldset {
+fieldset {
     flex: 0.5;
     border: 0.01px solid #ccc;
     border-radius: 8px;
@@ -92,44 +92,44 @@ body {
     position: relative;
     cursor: pointer;
     background-color: white;
-  }
+}
 
-  fieldset div {
+fieldset div {
     margin: 5px 0;
-  }
+}
 
-  svg {
+svg {
     margin-bottom: 5px;
-  }
+}
 
-  select {
+select {
     width: 100%;
     padding: 5px;
     margin-top: 5px;
-  }
+}
 
-  .p2 {
+.p2 {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-  }
+}
 
-  .Button {
+.Button {
     background-color: transparent;
     border: none;
     border-radius: 5px;
     padding: 1px 10px;
     cursor: pointer;
     position: relative;
-  }
+}
 
-  .Button:hover {
+.Button:hover {
     background-color: transparent;
-  }
+}
 
-  .options {
+.options {
     display: none;
     position: absolute;
     z-index: 1;
@@ -142,24 +142,24 @@ body {
     left: 50%;
     transform: translateX(-50%);
     transition: opacity 0.5s ease-in-out;
-  }
+}
 
-  .fieldset1 .options {
+.fieldset1 .options {
     width: 200%;
     left: -50%;
     transform: none;
     color: inherit;
     top: calc(120% + 5px); /* Ajustar según sea necesario */
-  }
+}
 
-  fieldset:hover .options {
+fieldset:hover .options {
     display: flex;
     flex-direction: column;
     position: absolute;
     opacity: 1;
-  }
+}
 
-  .options button {
+.options button {
     width: 100%;
     text-align: left;
     padding: 8px 12px;
@@ -168,21 +168,21 @@ body {
     cursor: pointer;
     position: relative;
     color: inherit;
-  }
+}
 
-  .options button:hover {
+.options button:hover {
     background-color: #f0f0f0;
-  }
+}
 
-  .divider {
+.divider {
     position: absolute;
     width: 80%;
     height: 1px;
     background-color: #ccc;
     left: 10%;
     top: calc(100% + 5px);
-  }
-  .panel {
+}
+.panel {
     background-color: transparent;
     border-radius: 10px;
     border-color: red;
@@ -209,9 +209,9 @@ body {
 }
 
 #lineChart {
-            width: 1400px;
-            height: 300px;
-            margin: 20px auto;
-            display: block;
-            margin-left: 0cm;
-        }
+    width: 1400px;
+    height: 300px;
+    margin: 20px auto;
+    display: block;
+    margin-left: 0cm;
+}

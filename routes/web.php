@@ -15,7 +15,6 @@ use App\Http\Controllers\ControllerDocuments;
 use App\Http\Controllers\ControllerCompras;
 use App\Http\Controllers\ControllerProducto;
 use App\Http\Controllers\ControllerEquipos;
-use App\Http\Controllers\PdfController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -79,84 +78,26 @@ Route::post('/admin/constructor/coleccion', [ControllerConstructor::class, 'cole
 Route::get('/informes/{nombreArchivo}', [ControllerConstructor::class, 'verPDF'])->name('verPDF');
 // Route::post('/admin/constructor/generatePDF', [ControllerConstructor::class, 'generatePDF'])->name('constructor.generatePDF');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Importacion de Archivos hacia la base de datos.
 Route::get('/admin/files/', [ControllerDocuments::class, 'showUploadForm'])->middleware('admin');
 Route::post('/admin/files/file', [ControllerDocuments::class, 'uploadFile'])->middleware(('admin'));
 
-// data pasien
-Route::get('/admin/pasien', [AdminDataPasienController::class, 'index'])->middleware('admin');
-Route::get('/admin/pasien/filter', [AdminDataPasienController::class, 'filter'])->middleware('admin');
-Route::post('/admin/pasien/delete', [AdminDataPasienController::class, 'deletePatient'])->middleware('admin');
-Route::get('/admin/pasien/delete', function () {
-    return redirect('/admin/pasien');
-})->middleware('admin');
-Route::post('/admin/pasien/edit', [AdminDataPasienController::class, 'editPatient'])->middleware('admin');
-Route::get('/admin/pasien/edit', function () {
-    return redirect('/admin/pasien');
-})->middleware('admin');
-Route::get('/admin/pasien/search', [AdminDataPasienController::class, 'search'])->middleware('admin');
-
-// daftar antrian
-Route::get('/admin/antrian', [AdminAntrianPasienController::class, 'index'])->middleware('admin');
-Route::post('/admin/antrian', [AdminAntrianPasienController::class, 'generateQueueNumber'])->middleware('admin');
-Route::post('/admin/antrian/confirm', [AdminAntrianPasienController::class, 'confirmPatient'])->middleware('admin');
-Route::get('/admin/antrian/confirm', function () {
-    return redirect('/admin/antrian');
-})->middleware('admin');
-Route::post('/admin/antrian/skip', [AdminAntrianPasienController::class, 'skipPatient'])->middleware('admin');
-Route::get('/admin/antrian/skip', function () {
-    return redirect('/admin/antrian');
-})->middleware('admin');
-Route::get('/admin/antrian/search', [AdminAntrianPasienController::class, 'search'])->middleware('admin');
-
-// pasien terlambat
-Route::get('/admin/daftar-antrian-terlambat', [AdminAntrianPasienController::class, 'daftarAntrianTerlambat'])->middleware('admin');//////////////////////////////////////////////////////
-Route::get('/admin/daftar-antrian-terlambat/search', [AdminAntrianPasienController::class, 'searchAntrianTerlambat'])->middleware('admin');//////////////////////////////////////////////////////
-Route::post('/admin/daftar-antrian-terlambat/confirm', [AdminAntrianPasienController::class, 'confirmPasienTerlambat'])->middleware('admin');//////////////////////////////////////////////////////
-Route::get('/admin/daftar-antrian-terlambat/confirm', function () {
-    return redirect('/admin/daftar-antrian-terlambat');
-})->middleware('admin');
-
 // Setting admin
-Route::get('/admin/pengaturan', [AdminSettingsController::class, 'index'])->middleware('admin');
-Route::post('/admin/pengaturan', [AdminSettingsController::class, 'store'])->middleware('admin');
-Route::post('/admin/pengaturan/verify', [AdminSettingsController::class, 'verify'])->middleware('admin');
-Route::post('/admin/pengaturan/setemail', [AdminSettingsController::class, 'setemail'])->middleware('admin');
-Route::get('/admin/pengaturan/setemail', function () {
+Route::get('/admin/setting', [AdminSettingsController::class, 'index'])->middleware('admin');
+Route::post('/admin/setting', [AdminSettingsController::class, 'store'])->middleware('admin');
+Route::post('/admin/setting/verify', [AdminSettingsController::class, 'verify'])->middleware('admin');
+Route::post('/admin/setting/setemail', [AdminSettingsController::class, 'setemail'])->middleware('admin');
+Route::get('/admin/setting/setemail', function () {
     return back();
 })->middleware('admin');
-Route::get('/admin/pengaturan/verify', function () {
+Route::get('/admin/setting/verify', function () {
     return back();
 })->middleware('admin');
-Route::post('/admin/pengaturan/changepassword', [AdminSettingsController::class, 'changepassword'])->middleware('admin');
-Route::get('/admin/pengaturan/changepassword', function () {
+Route::post('/admin/setting/changepassword', [AdminSettingsController::class, 'changepassword'])->middleware('admin');
+Route::get('/admin/setting/changepassword', function () {
     return back();
 })->middleware('admin');
-Route::post('/admin/pengaturan/app', [AdminSettingsController::class, 'updateapp'])->middleware('admin');
-Route::get('/admin/pengaturan/app', function () {
+Route::post('/admin/setting/app', [AdminSettingsController::class, 'updateapp'])->middleware('admin');
+Route::get('/admin/setting/app', function () {
     return back();
 })->middleware('admin');

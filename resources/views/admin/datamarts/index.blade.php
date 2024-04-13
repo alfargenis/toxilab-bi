@@ -1,16 +1,8 @@
 @extends('layouts.main.index')
 @section('container')
 
-<head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.29.0/dist/apexcharts.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.29.0/dist/apexcharts.min.js"></script>
-</head>
-
 <style>
-  .apexcharts-legend-series {
-    display: none;
-  }
-
+  
   .apexcharts-title-text {
     font-size: 1rem;
     font-weight: 700 !important;
