@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Controllers\Notifiable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Hash;
-use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Application;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
 
 class AdminSettingsController extends Controller
 {
@@ -76,42 +77,20 @@ class AdminSettingsController extends Controller
   }
 
   public function changepassword(Request $request)
-  {
+{
     $validatedData = $request->validate([
-      'passwordLama' => 'required',
-      'passwordBaru' => ['required', 'max:255', Password::min(8)->mixedCase()->letters()->numbers()->symbols(), 'confirmed']
+        'passwordLama' => 'required',
+        'passwordBaru' => ['required', 'confirmed', 'min:8'], // Simplificado para el ejemplo
     ]);
 
-    if (Hash::check($validatedData['passwordLama'], auth()->user()->password)) {
-      $hashPassword = bcrypt($validatedData['passwordBaru']);
-      User::where('id', auth()->user()->id)
-        ->update(['password' => $hashPassword]);
-      return back()->with('passwordUpdateSuccess', 'Password berhasil diupdate!');
-      exit;
+    $user = auth()->user();
+    if (Hash::check($request->passwordLama, $user->password)) {
+        $user->password = bcrypt($request->passwordBaru);
+        $user->save(); // Guardar el usuario actualizado
+        return response()->json(['message' => 'Contraseña actualizada correctamente']);
     } else {
-      return back()->with('passwordLamaSalah', 'Password lama Anda salah!');
+        return response()->json(['message' => 'La contraseña actual es incorrecta'], 400);
     }
-  }
+}
 
-  public function updateapp(Request $request)
-  {
-    $rules = [
-      'name_app' => 'required|string|max:255',
-      'description_app' => 'max:255',
-      'logo' => 'image|file|max:500',
-      'address' => 'string|max:255',
-      'open_days' => 'in:1,2,3,4,5,6,7',
-      'close_days' => 'in:1,2,3,4,5,6,7',
-      'open_time' => '',
-      'close_time' => ''
-    ];
-
-    $validatedData = $request->validate($rules);
-
-    if ($request->file('logo')) {
-      $validatedData['logo'] = $request->file('logo')->store('logo-aplikasi');
-    }
-    Application::where('id', 1)->update($validatedData);
-    return back()->with('updateAppBerhasil', 'Data app berhasil diupdate!');
-  }
 }

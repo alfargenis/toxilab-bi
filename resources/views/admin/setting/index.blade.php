@@ -65,43 +65,25 @@
           </p>
           <!-- Akun -->
           <div class="card-body">
-            <form id="formAccountSettingsPassword" action="/admin/setting/ganti-password" method="POST">
+            <form id="formAccountSettingsPassword" method="POST">
               @csrf
               <div class="mb-4">
-                <label for="passwordLama" class="form-label required-label">Contraseña Actual</label>
-                <input type="password" class="form-control" id="passwordLama" name="passwordLama" required />
-                @error('passwordLama')<div style="color: #ff1d00;">{{ $message }}</div>@enderror
+                  <label for="passwordLama" class="form-label required-label">Contraseña Actual</label>
+                  <input type="password" class="form-control" id="passwordLama" name="passwordLama" required />
+                  @error('passwordLama')<div style="color: #ff1d00;">{{ $message }}</div>@enderror
               </div>
               <div class="mb-4">
-                <label for="passwordBaru" class="form-label required-label">Contraseña Nueva</label>
-                <div class="input-group" id="show_hide_password">
+                  <label for="passwordBaru" class="form-label required-label">Contraseña Nueva</label>
                   <input type="password" class="form-control" id="passwordBaru" name="passwordBaru" required />
-                  <div class="input-group-text">
-                    <a href="javascript:;" class="text-dark">
-                      <i class="bx bx-hide"></i>
-                    </a>
-                  </div>
-                </div>
-                @error('passwordBaru')<div style="color: #ff1d00;">{{ $message }}</div>@enderror
+                  @error('passwordBaru')<div style="color: #ff1d00;">{{ $message }}</div>@enderror
               </div>
               <div class="mb-4">
-                <label for="konfirmasiPasswordBaru" class="form-label required-label">Confirme Contraseña Nueva</label>
-                <div class="input-group" id="show_hide_password_confirmation">
+                  <label for="konfirmasiPasswordBaru" class="form-label required-label">Confirme Contraseña Nueva</label>
                   <input type="password" class="form-control" id="konfirmasiPasswordBaru" name="konfirmasiPasswordBaru" required />
-                  <div class="input-group-text">
-                    <a href="javascript:;" class="text-dark">
-                      <i class="bx bx-hide"></i>
-                    </a>
-                  </div>
-                </div>
               </div>
-              @if(session()->has('passwordLamaSalah'))
-              <div class="mb-4">
-                <div style="color: #ff1d00;">{{ session('passwordLamaSalah') }}</div>
-              </div>
-              @endif
               <button type="submit" class="btn btn-success">Guardar Cambios</button>
-            </form>
+          </form>
+          <div id="responseMessage"></div>
           </div>
         </div>
 
@@ -136,4 +118,38 @@
     </div>
   </div>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#formAccountSettingsPassword').on('submit', function(e) {
+        e.preventDefault(); // Detiene el envío normal del formulario
+        var formData = $(this).serialize(); // Serializa los datos del formulario
+
+        $.ajax({
+            type: 'POST',
+            url: '/admin/setting/',
+            data: formData,
+            dataType: 'json', // Asegúrate de especificar que esperas una respuesta en formato JSON
+            success: function(response) {
+                // Asegúrate de que el mensaje exista en la respuesta
+                if(response.message) {
+                    $('#responseMessage').html('<div class="alert alert-success">' + response.message + '</div>');
+                } else {
+                    // Si no hay mensaje, puedes definir un mensaje genérico
+                    $('#responseMessage').html('<div class="alert alert-success">Operación realizada con éxito.</div>');
+                }
+            },
+            error: function(xhr) {
+                // Manejo de errores
+                var errorMessage = xhr.responseJSON && xhr.responseJSON.message ? xhr.responseJSON.message : 'Error desconocido al actualizar la contraseña.';
+                $('#responseMessage').html('<div class="alert alert-danger">' + errorMessage + '</div>');
+            }
+        });
+    });
+});
+
+</script>
+
+
 @stop
