@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\Application;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
+use App\Http\Controllers\UserController;
 
 class AdminSettingsController extends Controller
 {
@@ -46,7 +46,8 @@ class AdminSettingsController extends Controller
     $validatedData = $request->validate([
       'email' => 'required|email:dns|unique:users',
     ]);
-    User::where('id', auth()->user()->id)
+    $user = auth()->user()->id;
+    $user::where('id', auth()->user()->id)
       ->update($validatedData);
     return back()->with('updateEmailUser', 'Email berhasil diupdate!');
   }
@@ -72,7 +73,8 @@ class AdminSettingsController extends Controller
     if ($request->file('image')) {
       $validatedData['image'] = $request->file('image')->store('profil-images');
     }
-    User::where('id', auth()->user()->id)->update($validatedData);
+    $user = auth()->user()->id;
+    $user::where('id', auth()->user()->id)->update($validatedData);
     return back()->with('updateUserBerhasil', 'Data admin berhasil diupdate!');
   }
 
@@ -83,8 +85,8 @@ class AdminSettingsController extends Controller
         'passwordBaru' => ['required', 'confirmed', 'min:8'], // Simplificado para el ejemplo
     ]);
 
-    $user = auth()->user();
-    if (Hash::check($request->passwordLama, $user->password)) {
+    $user = auth()->user()->id;
+    if ($user::check($request->passwordLama, $user->password)) {
         $user->password = bcrypt($request->passwordBaru);
         $user->save(); // Guardar el usuario actualizado
         return response()->json(['message' => 'Contraseña actualizada correctamente']);
