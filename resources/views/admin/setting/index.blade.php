@@ -30,10 +30,10 @@
             <form id="formAccountSettings" action="/admin/setting" method="POST" enctype="multipart/form-data">
               @csrf
               <div class="d-flex align-items-start align-items-sm-center gap-4">
-                <img src="@if(auth()->user()->image) {{ asset('storage/'. auth()->user()->image) }} @else {{ asset('assets/img/profil-images-default/man.jpeg') }} @endif" alt="perfil" class="d-block rounded cursor-pointer fotoProfile" height="100" width="100" id="uploadedPhotoProfil" />
+                <img src="@if(auth()->user()->image) {{ asset('storage/'. auth()->user()->image) }} @endif" alt="perfil" class="d-block rounded cursor-pointer fotoProfile" height="100" width="100" id="uploadedPhotoProfil" />
                 <div class="button-wrapper">
                   <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
-                    <span class="btn-label"><i class="bx bx-upload"></i></span> Subir Nueva Foto
+                    <span class="btn-label"><i class="bx bx-upload"></i></span> Subir Foto
                     <input type="file" name="image" id="upload" class="account-file-input" hidden onchange="form.submit()">
                   </label>
                   @error('image')<div class="alert alert-danger">{{ $message }}</div>@enderror

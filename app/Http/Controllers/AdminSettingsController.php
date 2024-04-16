@@ -75,7 +75,7 @@ class AdminSettingsController extends Controller
         $validatedData['image'] = $request->file('image')->store('profile-images', 'public'); // Guarda en el disco 'public'
     }
 
-    $user = auth()->user();
+    $user = auth()->user()->id;
     $user->update($validatedData);
 
     return back()->with('updateUserBerhasil', 'Data admin berhasil diupdate!');
