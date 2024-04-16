@@ -25,26 +25,24 @@
           <h5 class="card-header" style="margin-top: -0.5rem;">Mi Perfil</h5>
           <p style="padding-left: 1.5rem; margin-top:-1.3rem; margin-bottom:-5px;">Administra la información de tu perfil para controlar, proteger y asegurar tu cuenta.
           </p>
-          <!-- Perfil -->
+           <!-- Perfil -->
           <div class="card-body">
             <form id="formAccountSettings" action="/admin/setting" method="POST" enctype="multipart/form-data">
               @csrf
               <div class="d-flex align-items-start align-items-sm-center gap-4">
-                <img src="@if(Storage::disk('public')->exists('profil-images')) {{ asset('storage/'. auth()->user()->image) }} @else {{ asset('assets/img/profil-images-default/man.jpeg') }} @endif" alt="perfil" class="d-block rounded cursor-pointer fotoProfile" height="100" width="100" id="uploadedPhotoProfil" data-url-img="@if(Storage::disk('public')->exists('profil-images')) {{ asset('storage/'. auth()->user()->image) }} @else {{ asset('assets/img/profil-images-default/man.jpeg') }} @endif" />
+                <img src="@if(auth()->user()->image) {{ asset('storage/'. auth()->user()->image) }} @else {{ asset('assets/img/profil-images-default/man.jpeg') }} @endif" alt="perfil" class="d-block rounded cursor-pointer fotoProfile" height="100" width="100" id="uploadedPhotoProfil" />
                 <div class="button-wrapper">
-                  <label for="upload" class="btn btn-outline-primary me-2 mb-4" tabindex="0">
-                    <span><i class="bx bx-image-alt fs-6" style="margin-bottom: 2px;"></i>&nbsp;Subir</span>
-                    <input type="file" name="image" id="upload" class="account-file-input" hidden />
+                  <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
+                    <span class="btn-label"><i class="bx bx-upload"></i></span> Subir Nueva Foto
+                    <input type="file" name="image" id="upload" class="account-file-input" hidden onchange="form.submit()">
                   </label>
-                  @error('image')<div style="color: #ff1d00;">{{ $message }}</div>@enderror
+                  @error('image')<div class="alert alert-danger">{{ $message }}</div>@enderror
                 </div>
                 <div class="flex-1">
                   <h5 class="card-title">Información Básica</h5>
-                  <p class="card-text">
-                    Controla tu información básica. El correo electrónico es el único campo que no se puede cambiar.
-                  </p>
+                  <p class="card-text">Controla tu información básica. El correo electrónico es el único campo que no se puede cambiar.</p>
                   <div class="mb-4">
-                    <label for="name" class="form-label required-label">Nombre</label>
+                    <label for="name" class="form-label required-label">Nombre</label
                     <input type="text" class="form-control" id="name" name="name" value="{{ auth()->user()->name }}" required />
                     @error('name')<div style="color: #ff1d00;">{{ $message }}</div>@enderror
                   </div>
@@ -153,3 +151,5 @@ $(document).ready(function() {
 
 
 @stop
+
+

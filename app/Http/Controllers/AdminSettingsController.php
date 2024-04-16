@@ -10,6 +10,7 @@ use App\Models\Application;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Http\Controllers\UserController;
 
+
 class AdminSettingsController extends Controller
 {
   public function index()
@@ -53,30 +54,33 @@ class AdminSettingsController extends Controller
   }
 
   public function store(Request $request)
-  {
+{
     $rules = [
-      'name' => 'required|string|max:100',
-      'alamat' => 'Max:255',
-      'gender' => 'in:Laki-Laki,Perempuan',
-      'tanggal_lahir' => '',
-      'image' => 'image|file|max:500|dimensions:ratio=1/1'
+        'name' => 'required|string|max:100',
+        'alamat' => 'Max:255',
+        'gender' => 'in:Laki-Laki,Perempuan',
+        'tanggal_lahir' => '',
+        'image' => 'image|file|max:5000|dimensions:ratio=1/1' // Ajuste el tamaño máximo de archivo a 5000 KB para permitir imágenes más grandes
     ];
 
     if ($request->username != auth()->user()->username) {
-      $rules['username'] = 'required|string|regex:/^[a-zA-Z0-9]+$/|min:5|max:50|unique:users';
+        $rules['username'] = 'required|string|regex:/^[a-zA-Z0-9]+$/|min:5|max:50|unique:users';
     }
 
     $validatedData = $request->validate($rules, [
-      'image.dimensions' => 'The :attribute must have a 1:1 aspect ratio.',
+        'image.dimensions' => 'The :attribute must have a 1:1 aspect ratio.',
     ]);
 
-    if ($request->file('image')) {
-      $validatedData['image'] = $request->file('image')->store('profil-images');
+    if ($request->hasFile('image')) {
+        $validatedData['image'] = $request->file('image')->store('profile-images', 'public'); // Guarda en el disco 'public'
     }
-    $user = auth()->user()->id;
-    $user::where('id', auth()->user()->id)->update($validatedData);
+
+    $user = auth()->user();
+    $user->update($validatedData);
+
     return back()->with('updateUserBerhasil', 'Data admin berhasil diupdate!');
-  }
+}
+
 
   public function changepassword(Request $request)
 {
