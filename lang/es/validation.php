@@ -139,5 +139,6 @@ return [
         'value'                    => 'valor',
         'year'                     => 'año',
         'passwordBaru'             => 'contraseña',
+        'passwordLama'             => 'contraseña',
     ],
 ];
