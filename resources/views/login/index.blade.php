@@ -43,7 +43,7 @@
               @csrf
               <div class="mb-3">
                 <label for="username" class="form-label">Usuario</label>
-                <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" value="{{ old('username') }}" placeholder="Enter your username" autocomplete="off" required />
+                <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" value="{{ old('username') }}" placeholder="Ingrese su username" autocomplete="off" required />
                 @error('username')
                 <div class="invalid-feedback">
                   {{ $message }}
