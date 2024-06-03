@@ -21,8 +21,7 @@ class PatientFactory extends Factory
     {
 
         // Obtener una instancia de Faker
-        $faker = Faker::create();
-
+        $faker = Faker::create('es_VE');
         // Definir los estados cercanos a Bolívar
         $estadosCercanos = ['Amazonas', 'Delta Amacuro', 'Anzoátegui', 'Monagas'];
 
@@ -32,9 +31,20 @@ class PatientFactory extends Factory
         // Obtener una fecha aleatoria dentro de los últimos 15 años
         $createdAt = $faker->dateTimeBetween('-15 years', 'now');
 
+        // Generar un nombre
+        $nombre = $faker->firstName;
+
+        // Generar un apellido
+        $apellido = $faker->lastName;
+
+        // Concatenar nombre y apellido
+        $nombreCompleto = $nombre . ' ' . $apellido;
+
+        $ci = rand(2000000, 35000000);
+        $Nacionalidad = 'V'. $ci;
         return [
-            'name' => fake()->name,
-            'ci' => fake()->nationalId(),
+            'name' => $nombreCompleto,
+            'ci' => $Nacionalidad,
             'address' => $address,
             'old' => fake()->numberBetween(15, 50),
             'gender' => fake()->randomElement(['Masculino', 'Femenino']),
