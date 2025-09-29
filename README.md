@@ -1,5 +1,7 @@
 ## About TOXILAB-BI
 
+<img src="mockup-toxilab-bi.png" alt="TOXILAB-BI Mockup" width="600">
+
 <b>TOXILAB-BI</b> is an application used for the decision making process of clinical laboratories. It includes integrated chat to generate informative reports by querying the database with the help of artificial intelligence through Google APIs.
 
 ## Installation
